@@ -1,0 +1,14 @@
+.box {
+    background-color: lightblue;
+    padding: 20px;
+    margin: 5px;
+}
+.container {
+    border: 2px solid blueviolet;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content:space-evenly;
+    height: 300px;
+    align-items: center;
+}
