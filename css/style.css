@@ -1,13 +1,15 @@
+*{
+    box-sizing: border-box;
+}
+body {
+    background-color: darkgreen;
+}
 p {
     background-color: pink;
     color:black;
 }
 p {
     color:blue;
-}
-* {
-    color:yellow;
-    background-color: rgb(23, 36, 82);
 }
 .basic {
     width: 200px;
@@ -17,7 +19,7 @@ p {
     border: 2px solid black;
 }
 #my-section {
-    width: 100px;
+    width: 50%;
     background-color: darkslateblue;
 }
 section.basic.basic2 {
@@ -27,4 +29,61 @@ body section {
     width: 50px;
     height: 50px;
     background-color: yellow;
+}
+p,div {
+    color:darkred;
+}
+div p {
+    color: blue;
+    font-size: 1.2rem;
+} 
+div > p {
+    color: firebrick;
+    font-size: 1.1rem;
+}
+p > span {
+    font-size: 2em;
+}
+h2 + p {
+    font-size: 2em;
+}
+h2 ~ p {
+    font-size: 2em;
+}
+tr:nth-child(4n+2) {
+    background-color: blueviolet;
+    border: 2px solid black;
+    color:red;
+    font-size: 2rem;
+}
+li:nth-child(4) {
+    color: gold;
+}
+li:nth-of-type(4) {
+    color: violet;
+}
+a {
+    color:deeppink;
+    text-decoration: none;
+}
+a:link {
+    color:midnightblue;
+}
+a:visited {
+    color:chartreuse;
+}
+a:hover {
+    color: yellow;
+    text-decoration: underline;
+}
+a:active {
+    color: fuchsia;
+}
+article {
+    border: 2px solid black;
+    padding: 1em 4em;
+    margin: -1em 1em -2em 5em;
+    width: 500px;
+    height: 300px;
+    background-color:hotpink;
 }
