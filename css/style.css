@@ -1,0 +1,30 @@
+p {
+    background-color: pink;
+    color:black;
+}
+p {
+    color:blue;
+}
+* {
+    color:yellow;
+    background-color: rgb(23, 36, 82);
+}
+.basic {
+    width: 200px;
+    height: 400px;
+    color:crimson;
+    background-color: darkorchid;
+    border: 2px solid black;
+}
+#my-section {
+    width: 100px;
+    background-color: darkslateblue;
+}
+section.basic.basic2 {
+    background-color: darkslategrey;
+}
+body section {
+    width: 50px;
+    height: 50px;
+    background-color: yellow;
+}
