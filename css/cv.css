@@ -1,0 +1,40 @@
+.box {
+    background-color: lightblue;
+    padding: 20px;
+    margin: 5px;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+}
+.box.header {
+    text-align: left;
+    grid-column: 1 / 4;
+}
+.nome{
+    font-size: 3em;
+    text-align: center;
+    margin-left: 300px;
+    margin-bottom: 100px;
+}
+.immagine{
+    text-align: left;
+    margin-top: -110px;
+}
+.box.sidebar {
+    grid-row: 2 / 74;
+}
+.titolo.contatti {
+    border-bottom: 2px solid black;
+}
+.info.contatti li{
+    margin-bottom: 20px;
+}
+.box.main-content {
+    grid-column: 2 / 4;
+    grid-row: 2 / 74;
+}
+.lavoro{
+    border-bottom: 2px solid black;
+}

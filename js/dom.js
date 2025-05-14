@@ -26,6 +26,5 @@ b.addEventListener("click", function(){
         newList.appendChild(newListItem);
     })
     document.querySelector("body").appendChild(newList);
-    
 });
 
