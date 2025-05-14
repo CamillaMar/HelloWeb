@@ -1,0 +1,9 @@
+li {
+    display: flex;
+    align-items: center;
+    column-gap: 2rem;
+}
+
+button {
+    height: 1.2rem;
+}
