@@ -1,0 +1,32 @@
+.box {
+    background-color: lightblue;
+    padding: 20px;
+    margin: 5px;
+}
+.container {
+    display: grid;
+    grid-template-columns: 1fr 4fr 12fr 1fr;
+    grid-template-rows: 100px 1200px 20px;
+    gap: 20px;
+}
+.box.header {
+    grid-column: 2 / 4;
+    grid-row: 1;
+    font-size: 28px;
+    justify-content: center;
+    text-align: center;
+}
+.box.sidebar {
+    grid-column: 2;
+    grid-row: 2;
+}
+.box.main-content {
+    grid-column: 3;
+    grid-row: 2;
+}
+.box.footer {
+    grid-column: 2 / 5;
+    grid-row: 3;
+    justify-content: center;
+    text-align: center;
+}
