@@ -1,15 +1,37 @@
 const obj = {
     name: "pippo",
-    sayHello: ()=>{
-        console.log("hello " + this.name); //prende il this di global, prende lo scope di ocnstant object
-    }
-}
-obj.sayHello(); //undefined
-
-const obj2 = {
-    name: "pippo",
+    languages:["Java","JavaScript"],
     sayHello: function(){
-        console.log("hello " + this.name);//
+        console.log(`Hello from ${this.name}`);
+    },
+    showLanguages: function(){
+        const THIS = this
+        this.languages.forEach(
+            (lan)=>{
+                console.log(lan);
+                console.log(this.name);
+            }
+        );
     }
 }
-obj2.sayHello();//funziona
+obj.sayHello();
+obj.showLanguages();
+// this 🔫👮
+function globalFunction(){
+    console.log(this);
+}
+globalFunction();
+obj.sayHello();
+const gHello= obj.sayHello;
+gHello();
+
+function makeGreetFunction(){
+    const name = "Filippo";
+    const lastname = "calugli";
+    return function(){
+        console.log("Hello "+ name);
+    }
+}
+const sayHello = makeGreetFunction();
+sayHello();
+
