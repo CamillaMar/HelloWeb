@@ -3,26 +3,26 @@ const p1 = {
     lastname: "de Pippis",
     age: 27,
     isMale: true,
-    doWork: function(h) {
+    doWork: function (h) {
         console.log(this.name + " lavora per " + h + " ore");
     }
 };
 const ps = [
     {
-    name: "Pippo",
-    lastname: "de Pippis",
-    age: 27,
-    isMale: true
+        name: "Pippo",
+        lastname: "de Pippis",
+        age: 27,
+        isMale: true
     },
     {
-    name: "Gibbo",
-    lastname: "Gibbis",
-    age: 27,
-    isMale: true
+        name: "Gibbo",
+        lastname: "Gibbis",
+        age: 27,
+        isMale: true
     }
 ];
 p1.doWork(10);
-p1.nickName="Turing";
+p1.nickName = "Turing";
 
 //creiamo dei costruttori
 function Developer(name, lastname, nickName, age, isMale) {
@@ -33,7 +33,7 @@ function Developer(name, lastname, nickName, age, isMale) {
     this.isMale = isMale;
 
 }
-Developer.prototype.doWork = function(h) {
+Developer.prototype.doWork = function (h) {
     console.log(`Lo sviluppatore ${this.name} lavora per ${h} ore`);
 }
 
@@ -45,10 +45,12 @@ const dev2 = Developer("Camilla", "Mila", "Cam", 103, false);
 console.log(global.name);
 dev.doWork(10);
 
+console.log("_____________");
 console.log(dev.__proto__);
 console.log(Object.getPrototypeOf(dev));
 console.log(dev.__proto__ == Object.getPrototypeOf(dev));
 console.log(dev.__proto__ == Developer.prototype);
+console.log("_____________");
 
 dev.doWork(10);
 const devVoid = new Developer("armando");
@@ -60,6 +62,6 @@ console.log(dev.laurea);
 const s = "";
 const d = 0;
 console.log(s == d);
-const myObject = {nome: "Pippolo", cognome: "de Pippoli"};
+const myObject = { nome: "Pippolo", cognome: "de Pippoli" };
 console.log(myObject == true);
 console.log(s === d);
