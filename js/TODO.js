@@ -7,8 +7,6 @@ b.addEventListener("click", () => {
     let value = document.querySelector("input").value;
     const newElement = document.createElement("li")
     newElement.textContent = value;
-    const newElementId = `toDoListElement-${++id}`;
-    newElement.id = newElementId;
 
     const button = document.createElement("button");
     button.textContent = "delete";
