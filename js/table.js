@@ -20,13 +20,22 @@ const products = [
 ];
 
 const b = document.querySelector("button");
+let isAdded = false;
+
 b.addEventListener("click", () => {
+    if(isAdded){
+        return;
+    }
+    isAdded = true;
+
 	const tbody = document.querySelector("tbody");
 	products.forEach((product) => {
-	/* console.log(product); */
+	    /* console.log(product); */
 		const tr = document.createElement("tr");
+        
 		Object.keys(product).forEach((key) => {
 			const td = document.createElement("td");
+            
 			if(key == "productId") {
 				td.classList.add("hide");
 				/* td.style = "display: none"; */ //implementato in CSS
