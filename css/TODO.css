@@ -1,3 +1,20 @@
+body {
+    background-color:plum;
+}
+ul {
+    margin: 10%;
+    padding: 5%;
+    background-color: purple;
+    color: plum;
+}
+li {
+    margin: 5%;
+}
+button {
+    border-color: blueviolet;
+    background-color: lavender;
+    margin-left: 5%;
+}
 li{
     margin: 15px 0;
     margin-bottom: 10px;
