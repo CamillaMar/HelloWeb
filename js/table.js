@@ -51,17 +51,31 @@ function renderTable(data, containerId){
 const btn = document.querySelector("button");
 btn.addEventListener("click", ()=>{
     //renderTable(products, "tablecontainer");
-    loadData();
+    loadData3();
 });
 
-function loadData(){
+function loadData(){  //AJAX
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "data/products.json", true);
+    xhr.open("GET", "data/products.json", true); //true = asincrono, false = sincrono
     xhr.onload = function(){
         if(xhr.status === 200){
             const jsonText = xhr.responseText;
             const productArray = JSON.parse(jsonText);
-            renderTable(productArray, "tablecontainer");
+            //renderTable(productArray, "tablecontainer");
+            if(productArray.length >= 3){
+                const xhr2 = new XMLHttpRequest();
+                xhr2.open("GET", "data/specificProduct3.json");
+                xhr2.onLoad = function(){
+                    if(xhr2.status === 200){
+                        const xhr3 = new XMLHttpRequest();
+                    }else {
+                        alert("Errore nel caricamento del prodotto specifico");
+                    }
+                };
+                xhr2.onerror = function(){
+                    alert("errore nella comunicazione network prodotto specifico");
+                }
+            }
         } else {
             alert("Errore nel caricamento dei dati "+ xhr.status);
         }
@@ -70,4 +84,47 @@ function loadData(){
         alert("Errore di comunicazione con il server");
     };
     xhr.send();
+    // try {
+    //     xhr.send();
+    //     if(xhr.status === 200){
+    //         const jsonText = xhr.responseText;
+    //         const productArray = JSON.parse(jsonText);
+    //         renderTable(productArray, "tablecontainer");
+    //     } else {
+    //         alert("Errore nel caricamento dei dati "+ xhr.status);
+    //     }
+    // } catch(e){
+    //     alert("network error "+ e);
+    // } 
+}
+function loadData2(){  //FETCH
+    const pr = fetch("data/products.json");
+    pr.then(response => {
+        console.log("vengo scritto per secondo");
+        if(!response.ok){
+            throw new Error("http error "+ response.status);
+        }
+        // const prData = response.json();
+        // return prData;
+        return response.json();
+    }).then(data => {
+        renderTable(data, "tablecontainer");
+    }).catch(error =>{
+        alert("errore di comunicazione con il server " + error);
+    });
+    console.log("vengo scritto per primo");
+}
+async function loadData3(){ //ASYNC AWAIT (riscritto dal compilatore)
+    try {
+        const response = await fetch("data/products.json");
+        console.log("vengo scritto per primo");
+        if(!response.ok){
+            throw new Error("http error "+ response.status);
+        }
+        const data = await response.json();
+        renderTable(data, "tablecontainer");
+    } catch(error){
+        alert("errore di comunicazione con il server " + error);
+    }
+    console.log("vengo scritto per secondo");
 }
