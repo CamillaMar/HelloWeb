@@ -7,6 +7,11 @@ const p1 = {
         console.log(this.name + " lavora per " + h + " ore");
     }
 };
+console.log(p1.name);
+console.log(p1["name"]);
+const propertyName = "name";
+console.log(p1[propertyName]);
+
 const ps = [
     {
     name: "Pippo",
