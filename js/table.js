@@ -41,6 +41,7 @@ b.addEventListener("click", () => {
 				/* td.style = "display: none"; */ //implementato in CSS
 			}
 			td.textContent = product[key];
+            td.classList.add("cell");
 			tr.appendChild(td);
 		});
 		tbody.appendChild(tr);

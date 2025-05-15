@@ -1,3 +1,9 @@
 .hide {
 	display: none;
 }
+th {
+	border: 2px solid black;
+}
+.cell {
+	border: 2px solid black;
+}
