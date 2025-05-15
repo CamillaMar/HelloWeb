@@ -20,43 +20,44 @@ const products = [
 ];
 
 const b = document.querySelector("button");
-//     table.replaceChildren();
 
-// const table = document.querySelector("table");
-// b.addEventListener("click", function(){
-//     if(products.length === 0){
-//         console.log("L'array dei prodotti è vuoto");
-//         return;
-//     }
+const table = document.querySelector("table");
+b.addEventListener("click", function(){
+    table.replaceChildren();
 
-//     const thead = document.createElement("thead");
-//     const headerRow = document.createElement("tr");
-//     Object.keys(products[0]).forEach(key => {
-//             const th = document.createElement("th");
-//             th.textContent= key;
-//             headerRow.appendChild(th);
-//     });
-//     thead.appendChild(headerRow);
+    if(products.length === 0){
+        console.log("L'array dei prodotti è vuoto");
+        return;
+    }
+
+    const thead = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+    Object.keys(products[0]).forEach(key => {
+            const th = document.createElement("th");
+            th.textContent= key;
+            headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
     
-//     const tbody = document.createElement("tbody");
-//     products.forEach(product => {
-//         const bodyRow = document.createElement("tr");
-//         // Object.keys(products[0]).forEach(key => {
-//         //     const td = document.createElement("td");
-//         //     td.textContent = product[key];
-//         //     bodyRow.appendChild(td);  
-//         // });
-//         Object.values(product).forEach(value => {
-//             const td = document.createElement("td");
-//             td.textContent = value;
-//             bodyRow.appendChild(td); 
-//         })
-//         tbody.appendChild(bodyRow);
-//     });
+    const tbody = document.createElement("tbody");
+    products.forEach(product => {
+        const bodyRow = document.createElement("tr");
+        // Object.keys(products[0]).forEach(key => {
+        //     const td = document.createElement("td");
+        //     td.textContent = product[key];
+        //     bodyRow.appendChild(td);  
+        // });
+        Object.values(product).forEach(value => {
+            const td = document.createElement("td");
+            td.textContent = value;
+            bodyRow.appendChild(td); 
+        })
+        tbody.appendChild(bodyRow);
+    });
 
-//     table.appendChild(thead);
-//     table.appendChild(tbody);
-// })
+    table.appendChild(thead);
+    table.appendChild(tbody);
+})
 
 function renderTable(data, containerId){
     const container = document.querySelector(`#${containerId}`);
@@ -97,9 +98,8 @@ function renderTable(data, containerId){
 }
 
 
-b.addEventListener("click", (evt) => {
-    evt.preventDefault();
-    renderTable(products, "tableContainer");
+b.addEventListener("click", () => {
+    fetchData();
 });
 
 function addSpace(character) {
@@ -110,4 +110,68 @@ function addSpace(character) {
     //     return character;
     // }
     return (/[A-Z]/.test(character)) ? ' ' + character : character;
+}
+
+function loadData(){
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "./data/products.json", true);
+    xhr.onload = function(){
+        if(xhr.status === 200){
+            const jsonText = xhr.responseText;
+            const productArray = JSON.parse(jsonText);
+            renderTable(products, "tableContainer");
+        } else {
+            alert("Errore nel caricamento dei dati " + xhr.status);
+            console.error("Errore nel caricamento dei dati " + xhr.status);
+        }
+    };
+    xhr.onerror = function(){
+        alert("Errore di comunicazione col server");
+    };
+    xhr.send();
+}
+
+// function loadDataSync(){
+//     const xhr = new XMLHttpRequest();
+//     xhr.open("GET", "./data/products.json", false);
+//     try{
+//         xhr.send();
+//         if(xhr.status === 200){ 
+//             const jsonText = xhr.responseText;
+//             const productArray = JSON.parse(jsonText);
+//             renderTable(products, "tableContainer");
+//         } else {
+//             alert("Errore nel caricamento dei dati " + xhr.status);
+//             console.error("Errore nel caricamento dei dati " + xhr.status);
+//         }
+//     }catch(e){
+//         alert("Errore di comunicazione col server");
+//     }
+// }
+
+function fetchData(){
+    const pr = fetch("./data/products.json");
+    pr.then(response => {
+        if(!response.ok){
+            throw new Error("http error " + response.status);
+        }
+        return response.json();;
+    }).then(data => {
+        renderTable(products, "tableContainer");
+    }).catch(error => {
+        alert("errore di comunicazionr con il server " + error);
+    });
+}
+
+async function awaitLoadData(){
+    try{
+        const response = await fetch("./data/products.json");
+        if(!response.ok){
+            throw new Error("http error " + response.status);
+        }
+        const data = await response.json();
+        renderTable(data, "tableContainer");
+    } catch(error){
+        alert("errore di comunicazionr con il server " + error);
+    }
 }
