@@ -116,7 +116,7 @@ function loadData2(){  //FETCH
 }
 async function loadData3(){ //ASYNC AWAIT (riscritto dal compilatore)
     try {
-        const response = await fetch("data/products.json");
+        const response = await fetch("http://localhost:8080/api/product");
         console.log("vengo scritto per primo");
         if(!response.ok){
             throw new Error("http error "+ response.status);
