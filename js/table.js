@@ -16,6 +16,13 @@ const products = [
         productName: "Tavola da Surf",
         itemPrice: 300.00,
         categoryName: "Sport"
+    }  
+];
+function renderTable(data, containerId){
+    const container = document.querySelector(`#${containerId}`);
+    if(!container){
+        console.log("l'elemento contenitore non esiste");
+        return;
     }
 ];
 
