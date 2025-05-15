@@ -1,10 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
-	loadData(10);
+	const b1 = document.querySelector("#esercizio-1");
+	const b2 = document.querySelector("#esercizio-2")
+	const b3 = document.querySelector("#esercizio-3");
+
+	b1.addEventListener("click", () => {
+		loadData("topN", 10);
+	});
+
+	b2.addEventListener("click", () => {
+		const input = document.querySelector("input");
+		loadData("categoryId", input.value);
+	});
+
+	b3.addEventListener("click", () => {
+		//loadData();
+	});
 });
 
-async function loadData(numOfRows){
+async function loadData(parameter, value){
     try {
-		let url = `http://localhost:8080/api/product?topN=${numOfRows}`;
+		let url = "http://localhost:8080/api/product";
+		const queryString = `?${parameter}=${value}`;
+		url += queryString; //VERIFICA += !
         const response = await fetch(url);
         if(!response.ok){
             throw new Error("http error "+ response.status);
@@ -26,7 +43,7 @@ function renderTable(data, containerId){
         console.log("L'array di dati è vuoto");
         return;
     }
-    /* container.innerHTML = ""; */
+    container.innerHTML = "";
     const table = document.createElement("table");
     const tHead = table.createTHead();
     const headerRow = tHead.insertRow();
