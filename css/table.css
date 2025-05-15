@@ -1,0 +1,26 @@
+tr,td{
+    background-color: rgb(238, 214, 197);
+    height: 50px;
+    width: 100px;
+    padding: 15px;
+    border-radius: 10px;
+   
+}
+table{
+    border: 2px solid black ;
+    border-radius: 10px;
+}
+thead{
+ background-color: rgb(166, 97, 13);
+ font-size: large;
+ font-style: italic;
+ font-weight: 1;
+}
+
+th{
+ color:aliceblue;
+ background-color: rgb(149, 139, 127);
+ font-size: large;
+ font-style: italic;
+ font-weight: 1;
+}
