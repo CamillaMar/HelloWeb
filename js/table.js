@@ -18,3 +18,30 @@ const products = [
         categoryName: "Sport"
     }
 ];
+
+const b = document.querySelector("button");
+const table = document.querySelector("table");
+b.addEventListener("click", function(){
+    const headerContainer = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+    Object.keys(products[0]).forEach(key => {
+        let th = document.createElement("th");
+        th.textContent = key;
+        headerRow.appendChild(th);
+    }); 
+    headerContainer.appendChild(headerRow);
+    
+    const bodyContainer = document.createElement("tbody");
+    products.forEach(function(product) {
+        let bodyRow = document.createElement("tr");
+        Object.keys(product).forEach(key => {
+            const td = document.createElement("td");
+            td.textContent = product[key];
+            bodyRow.appendChild(td);
+        });
+        bodyContainer.appendChild(bodyRow);
+    });
+    
+    table.appendChild(headerContainer);
+    table.appendChild(bodyContainer);
+});
