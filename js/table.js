@@ -16,7 +16,7 @@ const products = [
         productName: "Tavola da Surf",
         itemPrice: 300.00,
         categoryName: "Sport"
-    }
+    }  
 ];
 const button = document.querySelector("button");
 button.addEventListener("click", ()=>{
