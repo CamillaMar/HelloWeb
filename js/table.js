@@ -172,6 +172,6 @@ async function awaitLoadData(){
         const data = await response.json();
         renderTable(data, "tableContainer");
     } catch(error){
-        alert("errore di comunicazionr con il server " + error);
+        alert("errore di comunicazione con il server " + error);
     }
 }
