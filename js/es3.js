@@ -30,6 +30,10 @@ function renderTable(data, containerId) {
     container.appendChild(table);
 }
 
+const btn = document.querySelector("button");
+btn.addEventListener("click", () => {
+loadData();
+});
 
 async function loadData() {
     try {
@@ -44,8 +48,6 @@ async function loadData() {
         console.error("Errore di comunicazione col server" + e);
     }
 }
-const btn = document.querySelector("button");
-btn.addEventListener("click", () => {
-loadData();
-});
+
+
 
