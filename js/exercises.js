@@ -35,9 +35,8 @@ custEmpBtn.addEventListener('click', async () => {
     const customer = [await loadCustomerWithMostOrders()];
     const employee = [await loadEmployeeWithMostOrders()];
 
-    // PUT per impostare l'address di employee = a quello di customer
-    if(customer[0].address !== employee[0].address) {
-        
+    if(employee[0].address !== customer[0].address) {
+        await updateEmployeeAddress(employee[0], customer[0].address);
     }
 
     renderTable(customer, 'customerTable');
@@ -90,6 +89,28 @@ async function sendPostRequest(url, bodyObj) {
             },
             body: JSON.stringify(bodyObj)
         });
+
+        if (!response.ok) {
+            throw new Error("http error "+ response.status);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.log("Errore nella connessione al server");
+        console.log(error);
+    }
+}
+
+async function sendPutRequest(url, bodyObj) {
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+            body: JSON.stringify(bodyObj)
+        });
+        
         if (!response.ok) {
             throw new Error("http error "+ response.status);
         }
@@ -149,6 +170,11 @@ function renderTable(data, containerId) {
             td.textContent = element[key];
         }); 
     });
+}
+
+async function updateEmployeeAddress(employee, newAddress) {
+    employee.address = newAddress;
+    await sendPutRequest(`http://localhost:8080/api/employees/${employee.empId}`, employee);
 }
 
 function Product(productName, supplierId, categoryId, unitPrice, discontinued) {
