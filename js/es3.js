@@ -1,4 +1,3 @@
-
 function renderTable(data, containerId) {
     const container = document.querySelector(`#${containerId}`);
     if (!container) {
@@ -30,8 +29,12 @@ function renderTable(data, containerId) {
     container.appendChild(table);
 }
 
+const btn = document.querySelector("button");
+btn.addEventListener("click", () => {
+    switchEmployeeAddress();
+});
 
-async function loadData() {
+async function loadCustomer() {
     try {
         const response = await fetch("http://localhost:8080/api/customers?limite=1");
         if (!response.ok) {
@@ -39,13 +42,71 @@ async function loadData() {
         }
         const data = await response.json();
         console.log(data);
-        renderTable(data, "container");
+        return data;
     } catch (e) {
         console.error("Errore di comunicazione col server" + e);
     }
 }
-const btn = document.querySelector("button");
-btn.addEventListener("click", () => {
-loadData();
-});
+
+async function loadEmployee() {
+    try {
+        const response = await fetch("http://localhost:8080/api/employee?limite=1");
+        if (!response.ok) {
+            throw new Error("HTTP error" + response.status);
+        }
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (e) {
+        console.error("Errore di comunicazione col server" + e);
+    }
+}
+
+async function switchEmployeeAddress(){
+    const cust = await loadCustomer();
+    const emp = await loadEmployee();
+        
+    console.log(emp[0].empId);
+    console.log("STAMPA");
+    console.log(`http://localhost:8080/api/employee/${emp[0].empId}`);
+
+    if (!cust || !emp) {
+        console.error("Errore nel recupero dei dati di customer o employee");
+        return;
+    }
+    try{
+        const response = await fetch(`http://localhost:8080/api/employee/${emp[0].empId}`, {
+            method:'PUT',
+            body: JSON.stringify({
+                empId: emp[0].empId,
+                lastName: emp[0].lastName,
+                firstName: emp[0].firstName,
+                title: emp[0].title,
+                titleOfCourtesy: emp[0].titleOfCourtesy,
+                birthDate: emp[0].birthDate,
+                hireDate: emp[0].hireDate,
+                address: cust[0].address,
+                city: emp[0].city,
+                region: emp[0].region,
+                postalCode: emp[0].postalCode,
+                country: emp[0].country,
+                phone: emp[0].phone,
+                mgrId: emp[0].mgrId
+            }), 
+            headers:  {
+                   'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error("HTTP error" + response.status + response.statusText);
+        }
+        const data = await response.json();
+        console.log(data);
+        const arr = [data];
+        renderTable(arr, "container");
+    } catch (e) {
+        console.error("Errore di comunicazione col server" + e);
+    }
+}
+
 
