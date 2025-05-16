@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const b1 = document.querySelector("#esercizio-1");
 	const b2 = document.querySelector("#esercizio-2");
-	const b3 = document.querySelector("#esercizio-3");
 
 	b1.addEventListener("click", () => {
 		loadData("topN", 10, "GET");
@@ -12,9 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		loadData2("categoryId", input.value, "POST");
 	});
 
-	b3.addEventListener("click", () => {
-		//loadData();
-	});
 });
 
 async function loadData(parameter, value, requestType){
