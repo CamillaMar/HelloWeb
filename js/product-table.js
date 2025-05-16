@@ -10,6 +10,12 @@ function renderTable(data, tableid) {
     table.innerHTML = "";
     const tHead = table.createTHead();
     const tr = tHead.insertRow();
+    //sto volandoooooo da 13 a 17 cat killer
+    if(!Array.isArray(data)){
+        let arr = [];
+        arr.push(data);
+        data = arr;
+    }
     const headers = Object.keys(data[0]);
     headers.forEach(header => {
         const th = document.createElement("th");
@@ -24,7 +30,7 @@ function renderTable(data, tableid) {
             td.textContent = product[key];
         });
         tBody.appendChild(tr);
-    });
+    }); 
 };
 async function loadExpensiveProducts() {
     try {
@@ -50,7 +56,7 @@ function renderCategorySelect(data) {
         console.log("L'array è vuoto");
         return
     }
-    const select = document.querySelector("select");
+    const select = document.querySelector("#category");
     data.forEach(category => {
         const opt = document.createElement("option");
         //console.log(category.categoryId);
@@ -133,4 +139,76 @@ button2.addEventListener("click", function(){
     const idValue = select.value;
     loadProductByCategoryId(idValue);
     
-}) //lasciamo qui un attimo 
+}) //esercizio 3
+async function loadMostLoyalCustomer() {
+    try {
+        const response = await fetch("http://localhost:8080/api/customer/most-orders");
+        if(!response.ok) {
+            throw new Error("Http Error");
+        } 
+        const data = await response.json();      
+        renderTable(data, "customer");
+        return data;
+    } catch (error) {
+        alert("Errore Server" + error);
+    }
+};
+
+async function loadMostHardWorkingEmployee() {
+    try {
+        const response = await fetch("http://localhost:8080/api/employee/most-orders");
+        if(!response.ok) {
+            throw new Error("Http Error");
+        } 
+        const data = await response.json();      
+        renderTable(data, "employee");
+        return data;
+    } catch (error) {
+        alert("Errore Server" + error);
+    }
+};
+
+loadMostLoyalCustomer();
+loadMostHardWorkingEmployee();
+
+async function setNewResidence(){
+    const dataCust = await loadMostLoyalCustomer();
+    const dataEmp = await loadMostHardWorkingEmployee();
+    dataEmp.country = dataCust.country;
+    dataEmp.city = dataCust.city;
+    dataEmp.region = dataCust.region;
+    dataEmp.address = dataCust.address;
+    return dataEmp;
+}
+
+async function sendEmpToDatabase(dataEmp){
+    try {
+        const config = {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataEmp)
+        };
+        const response = await fetch(`http://localhost:8080/api/employee/${dataEmp.empId}`, config);
+        //const json = await response.json()
+        if (response.ok) {
+            //return json
+            return response;
+        } else {
+            console.log("Http Error");
+        }
+    } catch (error) {
+            console.log("Erroe nel collegamento con il server: " + error);
+    }
+};
+
+const bttn= document.querySelector("#buttonGift");
+bttn.addEventListener("click",async function (){
+    const test= await setNewResidence();
+    await sendEmpToDatabase(test);
+})
+
+
+
