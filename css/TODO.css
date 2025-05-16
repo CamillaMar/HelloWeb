@@ -28,3 +28,30 @@ li > button {
     box-shadow: none;
     border: none;
 }
+li{
+    margin: 15px 0;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    list-style: none;
+    border: 3px solid black;
+    border-radius: 5px;
+    width: 250px;
+    background-color: rgb(195, 236, 207);
+    display: flex;
+    justify-content: space-between;
+    height: fit-content;
+}
+
+li > div{
+    width: 250px;
+    height: fit-content;
+}
+
+li > button {
+    margin-left: 15px;
+    background-color: rgb(237, 118, 142);
+    border-radius: 3px;
+    padding: 7px;
+    box-shadow: none;
+    border: none;
+}
