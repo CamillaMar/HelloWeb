@@ -114,6 +114,8 @@ function loadData2(){  //FETCH
     });
     console.log("vengo scritto per primo");
 }
+
+
 async function loadData3(){ //ASYNC AWAIT (riscritto dal compilatore)
     try {
         const response = await fetch("http://localhost:8080/api/product");
