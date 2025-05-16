@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	b2.addEventListener("click", () => {
 		const input = document.querySelector("input");
-		loadData("categoryId", input.value, "POST");
+		loadData2("categoryId", input.value, "POST");
 	});
 
 	b3.addEventListener("click", () => {
@@ -33,14 +33,70 @@ async function loadData(parameter, value, requestType){
     }
 }
 
+
+async function loadData2(parameter, value, requestType){
+    try {
+        const url = "http://localhost:8080/api/product";
+        const queryString = `?${parameter}=${value}`;
+		const urlGet = url + queryString;
+        const response = await fetch(urlGet);
+        if(!response.ok){
+            throw new Error("http error "+ response.status);
+        }
+        const data = await response.json();
+
+        if(data.length === 0){ 
+            data.push(await createStandardProduct(url, value, requestType));
+            renderTable(data, "tablecontainer");
+            return;
+        }
+
+        debugger;
+
+        let totCost = 0;
+        data.forEach(product => {
+            totCost += product.cost;
+        });
+        if(data.length > 2  && totCost >= 200){
+            renderTable(data, "tablecontainer");
+        }
+        data.push(await createStandardProduct(url, value, requestType));
+        renderTable(data, "tablecontainer");
+    } catch(error){
+        alert("errore di comunicazione con il server " + error);
+    }
+}
+async function createStandardProduct(url, value, requestType){
+    const requestBody = {
+        productName: "Standard_Product",
+        supplierId: 1,
+        categoryId: value,
+        unitPrice: 100,
+        discontinued: false
+    };
+
+    const fetchOptions = {
+        method: requestType,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+    };
+    response = await fetch(url, fetchOptions);
+                
+    if(!response.ok){
+        throw new Error("http error "+ response.status);
+    }
+    
+    return await response.json();
+}
+
 function getCorrectUrl(parameter, value, requestType){
     let url = "http://localhost:8080/api/product";
     if(requestType === "GET"){
         const queryString = `?${parameter}=${value}`;
 		url += queryString;
-    }
-    if(requestType === "POST"){
-        url += "/category";
     }
     return url;
 }
@@ -78,6 +134,11 @@ function renderTable(data, containerId){
     container.innerHTML = "";
     const table = document.createElement("table");
     const tHead = table.createTHead();
+
+    // table.classList.add("table");
+    // table.classList.add("table-striped");
+    // table.classList.add("table-dark");
+
     const headerRow = tHead.insertRow();
     const headers = Object.keys(data[0]);
     headers.forEach(header => {
