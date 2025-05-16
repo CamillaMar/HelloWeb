@@ -19,22 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadData(parameter, value, requestType){
     try {
-        let url = "http://localhost:8080/api/product";
-        if(requestType === "GET"){
-            const queryString = `?${parameter}=${value}`;
-		    url += queryString;
-        }
-        if(requestType === "POST"){
-            url += "/category";
-        }
-        const response = await fetch(url, {
-            method: requestType,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({parameter:value})//getJSONBody(requestType, value)
-        });
+        const url = getCorrectUrl(parameter, value, requestType);
+        const fetchOptions = getFetchOptions(parameter, value, requestType);
+
+        const response = await fetch(url, fetchOptions);
         if(!response.ok){
             throw new Error("http error "+ response.status);
         }
@@ -45,11 +33,36 @@ async function loadData(parameter, value, requestType){
     }
 }
 
-function getJSONBody(requestType, value){
+function getCorrectUrl(parameter, value, requestType){
+    let url = "http://localhost:8080/api/product";
     if(requestType === "GET"){
-        return null;
+        const queryString = `?${parameter}=${value}`;
+		url += queryString;
     }
-    return JSON.stringify(value);
+    if(requestType === "POST"){
+        url += "/category";
+    }
+    return url;
+}
+
+function getFetchOptions(parameter, value, requestType){
+    const fetchOptions = {
+        method: "GET"
+    };
+
+    if (requestType === "POST") {
+        fetchOptions.method = "POST";
+        fetchOptions.headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
+
+        const requestBody = {
+            [parameter]: value
+        };
+        fetchOptions.body = JSON.stringify(requestBody);
+    }
+    return fetchOptions;
 }
 
 function renderTable(data, containerId){
