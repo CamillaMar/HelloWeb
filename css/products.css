@@ -1,6 +1,18 @@
-td {
-    border: 2px solid black;
+table {
+	width: 100%;
+	background-color: lightblue;
 }
 th {
     border: 2px solid black;
+	font-weight: bold;
+	background-color: rgb(25, 163, 209);
 }
+td {
+    border: 2px solid black;
+	text-align: left;
+}
+td:hover,
+th:hover {
+	color: brown;
+}
+
