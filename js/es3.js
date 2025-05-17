@@ -102,8 +102,8 @@ async function switchEmployeeAddress(){
         }
         const data = await response.json();
         console.log(data);
-        const arr = [data];
-        renderTable(arr, "container2");
+        // const arr = [data];
+        renderTable([data], "container2");
     } catch (e) {
         console.error("Errore di comunicazione col server" + e);
     }
