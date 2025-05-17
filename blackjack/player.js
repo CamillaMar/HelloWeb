@@ -56,7 +56,7 @@ class Player{
     }
 
     reset(){
-        this.hand.lenght = 0;
+        this.hand.length = 0;
         this.handContainer.innerText = "";
         this.handValueContainer.innerText = "";
     }
