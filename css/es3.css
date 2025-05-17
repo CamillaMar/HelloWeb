@@ -40,7 +40,7 @@ button:hover {
     background-color: #185abc;
 }
 
-#container {
+.container {
     width: 100%;
     max-width: 1200px;
     background-color: white;
@@ -48,6 +48,7 @@ button:hover {
     padding: 2rem;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     overflow-x: auto;
+    margin-bottom: 30px;
 }
 
 
