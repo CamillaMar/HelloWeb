@@ -51,13 +51,13 @@ start.addEventListener("click", () => {
     computer.drawCard();
     computer.drawCard();
     console.log("cpu", computer.hand);
+    computer.hand[1].hide();
+    computer.renderHand();
 
     player.drawCard();
     player.drawCard();
     console.log("player", player.hand);
 
-    computer.hand[1].hide();
-    computer.renderHand();
 })
 
 const suits = ['♠', '♥', '♦', '♣'];
