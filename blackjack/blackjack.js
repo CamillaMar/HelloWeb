@@ -6,6 +6,7 @@ const hitBtn = document.createElement("button");
 const standBtn = document.createElement("button");
 const resultContainer = document.createElement("div");
 const endGame = document.createElement("div");
+board.appendChild(resultContainer);
 
 player.playerContainer.addEventListener("bust", () =>{
     endGame.textContent = "You Busted LOSER BUUUUUUUUUUUUU";
@@ -15,6 +16,8 @@ player.playerContainer.addEventListener("bust", () =>{
 player.playerContainer.addEventListener("blackjack", () =>{
     endGame.textContent = "bella per te";
     endPlayerTurn();
+    console.log("DEBUG BLACKJACK");
+    console.log(computer.hand[1]); 
     playDealerTurn();
 });
 
@@ -24,29 +27,34 @@ player.playerContainer.addEventListener("21", () =>{
     playDealerTurn();
 });
 
+hitBtn.classList.add("hit-button");
+hitBtn.textContent = "hit";
+hitBtn.addEventListener("click", () =>{
+    console.log("il giocatore sta pescando");
+    console.log(player.hand);
+    player.drawCard();
+});
+
+standBtn.classList.add("stand-button");
+standBtn.textContent = "stand";
+standBtn.addEventListener("click", () =>{
+    endPlayerTurn();
+    playDealerTurn();
+})
+
 start.addEventListener("click", () => {
     reset();
+    resultContainer.classList.remove("result-board");
     
-    hitBtn.classList.add("hit-button");
-    hitBtn.textContent = "hit";
-    hitBtn.addEventListener("click", () =>{
-        player.drawCard();
-    });
-
-    standBtn.classList.add("stand-button");
-    standBtn.textContent = "stand";
-    standBtn.addEventListener("click", () =>{
-        endPlayerTurn();
-        playDealerTurn();
-    })
-
     board.append(computer.playerContainer, player.playerContainer, hitBtn, standBtn, endGame);
 
-    player.drawCard();
-    player.drawCard();
+    computer.drawCard();
+    computer.drawCard();
+    console.log("cpu", computer.hand);
 
-    computer.drawCard();
-    computer.drawCard();
+    player.drawCard();
+    player.drawCard();
+    console.log("player", player.hand);
 
     computer.hand[1].hide();
     computer.renderHand();
@@ -59,6 +67,9 @@ function createCard(){
     const randSuit = suits[Math.floor(Math.random() * suits.length)];
     const randValue = cardValues[Math.floor(Math.random() * cardValues.length)];
     const card = new Card(randSuit, randValue);
+    if(randSuit == '♥' || randSuit == '♦'){
+        card.makeRed();
+    }
     console.log(card);    
     return card;
 }
@@ -66,10 +77,12 @@ function createCard(){
 function playDealerTurn(){
     computer.hand[1].show();
     computer.renderHand();
-    while(computer.getHandValue() < 17){
+    while (computer.getHandValue() < 17) {
         computer.drawCard();
     }
-    checkWin();
+    setTimeout(() => {
+        checkWin();
+    }, 1000);
 }
 
 function endPlayerTurn(){
@@ -104,6 +117,7 @@ function checkWin(){
     }
 
     resultContainer.textContent = result;
+    resultContainer.classList.add("result-board");
     board.appendChild(resultContainer);
 }
 

@@ -56,7 +56,9 @@ class Player{
     }
 
     reset(){
-        this.hand.lenght = 0;
+        this.hand = [];
+        console.log("mano del giocatore");
+        console.log(this.hand);
         this.handContainer.innerText = "";
         this.handValueContainer.innerText = "";
     }
