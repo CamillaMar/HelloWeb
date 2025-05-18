@@ -1,25 +1,24 @@
-function Card(sign, number, value){
+function Card(sign, number){
     this.sign = sign;
     this.number = number;
-    this.value = value;
 }
 
 const player = {
     hand: [],
     score: 0,
     limit: 21,
-    state
+    state: "play-turn"
 };
 
 const cpu = {
     hand: [],
     score: 0,
     limit: 17,
-    state
+    state: "wait-turn"
 };
 
 
-card.prototype.getValue = function(){
+Card.prototype.getValue = function(){
     if (['J', 'Q', 'K'].includes(this.number)) {
         return 10;
     }
@@ -32,12 +31,12 @@ card.prototype.getValue = function(){
 let signs = ['♠', '♥', '♦', '♣'];
 let numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 let deck = [];
-let turn = false;
-const ventuno = 21;
 
 function start(){
     player.score = 0;
     cpu.score= 0;
+    player.state = "play-turn";
+    cpu.state = "wait-turn";
 
     if(deck.length === 0){
         createDeck();
@@ -46,14 +45,12 @@ function start(){
     dealStartingHands();
     calculateScore(player);
     calculateScore(cpu);
-    if(cpuScore === 21){
+    if(cpu.score === 21){
         return alert("Il banco vince sempre!");
     }
-    if(playerScore === 21){
+    if(player.score === 21){
         return alert("Hai vinto!");
     }
-    
-
 }
 
 function createDeck(){
@@ -106,7 +103,47 @@ function calculateScore(gambler){
     if(aces > 0){
         gambler.score += (gambler.score + aces-1) < 11 ? 11 + aces-1 : aces;
     }
-    if(gambler.score > ventuno){
+    if(gambler.score > 21 ){
         gambler.state = "bust";
+        calculateWinner();
     }
+}
+
+function stand(){
+    if(player.state === "play-turn"){
+        player.state = "stand";
+        playCpu();
+    }
+    return;
+}
+
+function hit(){
+    if(player.state === "play-turn"){
+        dealCard(player);
+        if(player.score === player.limit){
+           stand();
+        }
+    }
+    return;
+}
+
+function playCpu(){
+    cpu.state = "play-turn";
+    while(cpu.score < cpu.limit){
+        dealCard(cpu);
+    }
+    calculateWinner();
+}
+
+function calculateWinner(){
+    if(player.state === "bust"){
+        return alert("Hai sballato! Hai perso");
+    }
+    if(cpu.state === "bust"){
+        return alert("Il banco ha sballato! Hai vinto!");
+    }
+    if(player.score < cpu.score){
+        return alert("Il banco vince sempre!");
+    }
+    return alert("hai vinto!");
 }
