@@ -8,6 +8,8 @@ console.log(obj.__proto__ == Object.prototype);
 console.log(obj.toString());
 console.log(obj.__proto__.toString());
 
+console.log("_______________________");
+
 function Developer(firstName, lastName, favouriteLanguage) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -21,11 +23,11 @@ console.log(Developer.prototype.constructor == Developer);
 console.log(d1.__proto__.__proto__ == Object.prototype);
 console.log(d1.toString());
 
-Developer.prototype.writeCode = function() {
+Developer.prototype.writeCode = function () {
     console.log(`${this.firstName} sta scrivendo codice`);
 }
 
-Developer.prototype.toString = function() {
+Developer.prototype.toString = function () {
     return `${this.firstName} ${this.lastName} ${this.favouriteLanguage}`;
 }
 

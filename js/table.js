@@ -48,6 +48,8 @@ function renderTable(data, containerId) {
     });
     container.appendChild(table);
 }
+
+
 const btn = document.querySelector("button");
 btn.addEventListener("click", () => {
     //renderTable(products, "tablecontainer");

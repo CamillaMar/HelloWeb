@@ -1,0 +1,10 @@
+esercizio 1
+fare una pagina html che carica I dati dei 10 prodotti più costosi del db.
+e farli vedere in una tabella
+
+esercizio 2
+caricare tutti I prodotti di una data categoria e se scopriamo che sono meno di 3 o che il loro Prezzo totale sommato è minore di 100, inserire un nuovo prodotto all'interno del db (post)
+chiamato standard product supplierId 1, costerà 100 euro e non sarà discontinued.
+
+esercizio 3
+farci dare I dati del cliente che ha fatto più oridini in assoluto, poi farmi dare i dati dell employee che ha seguito piu ordini, e cambiare l indirizzo dell'employee in modo che faccia match con quello del customer.
