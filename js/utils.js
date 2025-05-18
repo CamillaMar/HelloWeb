@@ -26,15 +26,13 @@ async function callService(config) {
     throw error;
   }
 }
-function getUrl({ controller, method = "GET", pathSegments = [], params = {} }) {
+function getUrl({ controller, method = "GET", pathVariables = [], params = {} }) {
   let url = `http://localhost:8080/api/${controller}`;
 
-  // Add path segments if provided
-  if (pathSegments.length > 0) {
-    url += "/" + pathSegments.map(encodeURIComponent).join("/");
+  if (pathVariables.length > 0) {
+    url += "/" + pathVariables.map(encodeURIComponent).join("/");
   }
 
-  // Append query string only for GET
   if (method === "GET" && Object.keys(params).length > 0) {
     const queryString = new URLSearchParams(params).toString();
     url += "?" + queryString;

@@ -13,9 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	b2.addEventListener("click", () => {
 		const input = document.querySelector("input");
-		esercizio2("tablecontainer", {
-            pathSegments: [input.value]
-        });
+		esercizio2("tablecontainer", {pathVariables: [input.value]});
 	});
 
 	b3.addEventListener("click", () => {
@@ -27,18 +25,16 @@ async function esercizio2(idContainer, config){
   const {
     controller,
     method = "GET",
-    pathSegments = [],
+    pathVariables = [],
     params = {},
   } = config;
 
   const standardProductKeys = ["productName", "supplierId", "categoryId", "unitPrice", "discontinued"];
-  const standardProductvalues = ["Standard_Product", 1, pathSegments[0], 100 , false];
+  const standardProductvalues = ["Standard_Product", 1, pathVariables[0], 100 , false];
 
   const category = await loadData({
     controller: "category", 
-    method: method, 
-    pathSegments: pathSegments, 
-    params: params
+    pathVariables: pathVariables, 
   });
 
   if(!category){
@@ -47,9 +43,7 @@ async function esercizio2(idContainer, config){
   
   const products = await loadData({
     controller: "product", 
-    method: method, 
-    pathSegments: [], 
-    params: {categoryId: pathSegments[0]}
+    params: {categoryId: pathVariables[0]}
   });
 
   const standardProduct = buildObject(standardProductKeys, standardProductvalues);
@@ -58,7 +52,7 @@ async function esercizio2(idContainer, config){
       products.push(await loadData({
         controller: "product", 
         method: "POST", 
-        pathSegments: [], params: standardProduct
+        params: standardProduct
       }));
       renderTable(products, idContainer);
       return;
@@ -72,7 +66,7 @@ async function esercizio2(idContainer, config){
     products.push(await loadData({
       controller: "product", 
       method: "POST", 
-      pathSegments: [], params: standardProduct
+      params: standardProduct
     }));
   }
   renderTable(products, idContainer);
@@ -81,15 +75,11 @@ async function esercizio2(idContainer, config){
 async function employeeInOmaggio(){
   const customer = await loadData({
     controller: "customer",
-    method: "GET",
-    pathSegments: ["findByMostOrders"],
-    params: {}
+    pathVariables: ["findByMostOrders"],
   });
   const employee = await loadData({
     controller: "employee",
-    method: "GET",
-    pathSegments: ["findByMostOrders"],
-    params: {}
+    pathVariables: ["findByMostOrders"],
   });
   
   employee.address = customer.address;
@@ -101,7 +91,7 @@ async function employeeInOmaggio(){
   await callService({
     controller: "employee",
     method: "PUT",
-    pathSegments: [employee.empId],
+    pathVariables: [employee.empId],
     params: employee
   });
 }
