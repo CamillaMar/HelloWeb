@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Casino</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <header>
+            <h1>Welcome to <span class="royal-casino">ROYAL CASINO</span></h1>
+            <h2>Let's play <em>Casertexas Hold'em</em>!</h2>
+        </header>
+        <main>
+            <div class="game-board">
+                <div class="dealer">
+                    <h3>DEALER</h3>
+                    <div class="hand dealer-hand"></div>
+                    <div class="hand-value">
+                        <p>Current hand: <span>0</span></p>
+                    </div>    
+                </div>
+                <div class="player">
+                    <h3>PLAYER</h3>
+                    <div class="hand player-hand">
+                        <div class="hand-deck"></div>
+                    </div>
+                    <div class="hand-value">
+                        <p>Current hand: <span>0</span></p>
+                    </div>      
+                    <div class="bet">
+                        <span>0</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
+                            <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z"/>
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                            <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
+                        </svg>
+                    </div>
+                    <div class="total-fiches">
+                        <p>Total fiches</p>
+                        <span>0</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
+                            <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z"/>
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                            <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <section class="bet-fiches">
+            <button class="fiche one hidden clickable" value="1">1</button>
+            <button class="fiche ten hidden clickable" value="10">10</button>
+            <button class="fiche twenty hidden clickable" value="20">20</button>
+            <button class="fiche fifty hidden clickable" value="50">50</button>
+            <button class="fiche five-hundred hidden clickable" value="500">500</button>
+        </section>
+        <section class="buttons">
+            <button class="play visible clickable">PLAY</button>
+            <button class="double-bet hidden not-clickable">DOUBLE BET</button>
+            <button class="deal hidden not-clickable">DEAL</button>
+            <button class="clear-bets hidden not-clickable">CLEAR BETS</button>
+            <button class="hit hidden not-clickable">HIT</button>
+            <button class="stand hidden not-clickable">STAND</button>
+            <button class="reset hidden">RESET</button>
+        </section>
+        <footer>
+            <div class="deck">
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="hA"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="h2"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="h3"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="h4"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="h5"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="h6"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="h7"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="h8"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="h9"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="h10"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="hJ"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="hQ"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="hK"></u>
+                    <b class="red"></b>
+                </div>
+            </div>
+            <div class="deck">
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="cA"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="c2"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="c3"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="c4"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="c5"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="c6"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="c7"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="c8"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="c9"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="c10"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="cJ"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="cQ"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="cK"></u>
+                    <b class="blue"></b>
+                </div>
+            </div>
+            <div class="deck">
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="dA"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="d2"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="d3"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="d4"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="d5"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="d6"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="d7"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="d8"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="d9"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="d10"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="dJ"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="dQ"></u>
+                    <b class="red"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="dK"></u>
+                    <b class="red"></b>
+                </div>
+            </div>
+            <div class="deck">
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="sA"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="s2"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="s3"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="s4"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="s5"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="s6"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="s7"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="s8"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="s9"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="s10"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="sJ"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="sQ"></u>
+                    <b class="blue"></b>
+                </div>
+                <div class="card">
+                    <input type="checkbox" checked>
+                    <u class="sK"></u>
+                    <b class="blue"></b>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

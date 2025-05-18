@@ -1,0 +1,848 @@
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Bungee+Tint&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Tinos", serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.dealer-won,
+.player-won {
+    position: absolute;
+    font-size: 5rem;
+    top: 19.5rem;
+    transform: rotate(-35deg);
+    box-shadow: 0 0 3rem black;
+}
+
+.dealer-won {
+    color: red;
+    border: .5rem dashed red;
+    padding: .5rem;
+    animation: stamp forwards .5s linear; 
+}
+.player-won {
+    color: gold;
+    border: .5rem dashed gold;
+    padding: .5rem;
+    animation: stamp forwards .5s linear;
+}
+@keyframes stamp {
+    0% {
+        opacity: 0;
+        font-size: 12rem;
+    }
+    100% {
+        opacity: 1;
+        font-size: 5rem;
+    }
+}
+
+body {
+    height: 100vh;
+    background-color: cadetblue;
+}
+
+.main-container {
+    display: grid;
+    justify-content: center;
+}
+
+.visible {
+    display: block;
+}
+.hidden {
+    display: none;
+}
+
+.clickable {
+    opacity: 1;
+    cursor: pointer;
+}
+.not-clickable {
+    opacity: .5;
+    pointer-events: none;
+}
+
+.error-message {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    color: darkred;
+}
+
+/* === HEADER === */
+
+header {
+    grid-row: 1 / 3;
+    text-align: center;
+    line-height: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h1 .royal-casino {
+        font-size: 2.5rem;
+        color: gold;
+        font-family: "Bungee Tint", sans-serif;
+        font-weight: 400;
+    }
+}
+
+/* === MAIN SECTION - GAME BOARD ===*/
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.game-board {
+    border-radius: 1rem 1rem 50% 50%;
+    background-color: green;
+    outline: .2rem solid black;
+    box-shadow: 0 1rem 2rem black;
+    width: 40rem;
+    height: 27rem;
+    text-align: center;
+    margin-bottom: 1rem;
+
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+}
+
+.dealer {
+    margin-top: .8rem;
+    display: grid;
+    justify-content: center;
+
+    h3 {
+        grid-column: 1 / 4;
+        margin-bottom: 1rem;
+    }
+
+    .hand {
+        grid-column: 2 / 3;
+        margin-bottom: .5rem;
+    }
+}
+
+.player {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: .5fr 2.5fr;
+    margin-bottom: 2rem;
+    align-items: center;
+
+    h3 {
+        grid-column: 1 / 4;
+    }
+
+    .hand, .bet {
+        margin: 0 auto;
+        grid-column: 2 / 3;
+    }
+}
+
+.player .hand-deck {
+    display: flex;
+}
+.hand-deck.glow {
+    animation: glow infinite 2s ease-in-out;
+}
+@keyframes glow {
+    0% {
+        box-shadow: none;
+    }
+    50% {
+        box-shadow: 0 0 1rem .1rem gold;
+    }
+    100% {
+        box-shadow: none;
+    }
+}
+
+.total-fiches {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    text-align: center;
+    margin: 2rem 0;
+
+    p {
+        font-size: .8rem;
+    }
+}
+
+.hand {
+    width: 20rem;
+    height: 5.5rem;
+    border-radius: 3px;
+    background-color: darkgreen;
+    box-shadow: inset .1rem .1rem .5rem black;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: .5rem;
+    padding: 0 .5rem;
+}
+
+.hand > *:not(:first-child) {
+    margin-left: -2.7rem;
+}
+.hand-deck > *:not(:first-child) {
+    margin-left: -2.2rem;
+}
+
+.hand .card > input {
+    pointer-events: none;
+    cursor: default;
+}
+
+.hand-value {
+    grid-column: 2 / 3;
+    margin-bottom: 1.5rem;
+
+    p {
+        font-weight: 400;
+    }
+
+    span{
+        font-weight: 400;
+        font-size: 1.12rem;
+    }
+}
+
+/* === BET FICHES SECTION === */
+
+section.bet-fiches {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    column-gap: 1.5rem;
+}
+
+button.fiche {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 3px dashed black;
+    box-shadow: .2rem .3rem .6rem black;
+    cursor: pointer;
+}
+
+.fiche.one {
+    background-color: goldenrod;
+}
+.fiche.ten {
+    background-color: darkolivegreen;
+}
+.fiche.twenty {
+    background-color: gold;
+}
+.fiche.fifty {
+    background-color: dodgerblue;
+}
+.fiche.five-hundred {
+    background-color: blueviolet;
+}
+
+/* === BUTTONS === */
+
+section.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+    column-gap: 2rem;
+}
+
+.buttons button {
+    width: 6rem;
+    height: 2.5rem;
+    border-radius: .5rem;
+    font-size: .8rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: .1rem;
+}
+
+button.double-bet,
+button.clear-bets {
+    width: 7.2rem;
+}
+
+/* === FOOTER === */
+
+footer {
+    background-color: darkcyan;
+    box-shadow: inset .2rem .2rem 1.2rem black;
+    padding: 2rem;
+    margin: 5rem;
+}
+footer :nth-child(-n+3) {
+    margin-bottom: 1rem;
+}
+
+.deck {
+    display: flex;
+    column-gap: 1rem;
+}
+
+/* === CARDS LAYOUT ===*/
+
+.card {
+    position: relative;
+    background: #f8fff9;
+    border: 1px solid black;
+    box-shadow: .1rem .1rem .1rem black;
+    text-decoration: none;
+    height: 4.5rem;
+    width: 3.2rem;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.card > input[type="checkbox"] {
+    z-index: 999;
+    cursor: pointer;
+    appearance: none;
+    height: 100%;
+    width: 100%;
+}
+
+.card > input,
+.card > u,
+.card > b {
+    position: absolute;
+    left: 0;
+    height: 100%;
+}
+
+.card > b {
+    border-radius: 3px;
+    width: 100%;
+    background-color: green;
+}
+.card > b[class="red"] {
+    background: url('images/red.jpg');
+    background-size: contain;
+}
+.card > b[class="blue"] {
+    background: url('images/blue.jpg');
+    background-size: contain;
+}
+
+.card > u {
+    opacity: 0;
+    font-size: .7rem;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+}
+.card > u::before {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 14px;
+}
+.card > u::after {
+    width: 1.8rem;
+    height: 3.2rem;
+    position: absolute;
+    right: 5px;
+    top: 14px;
+
+    border-radius: 3px;
+    white-space: pre;
+    padding: 2% 3%;
+}
+
+.card > [class^=h],
+.card > [class^=d] {
+    color: #f21;
+}
+.card > [class^=c], 
+.card > [class^=s] {
+    color: #123;
+}
+
+.card > u[class^=h]::after,
+.card > u[class^=d]::after {
+    border: 1px solid #f21;
+}
+.card > u[class^=c]::after, 
+.card > u[class^=s]::after {
+    border: 1px solid #123;
+}
+
+/* === HEARTS LAYOUT ===*/
+
+.card > .hA::before{
+    content: 'A \2665';
+}
+.card > .hA::after{
+    content: '\2665';
+    font-size: 2.5rem;
+}
+.card > .h2::before{
+    content: '2 \2665';
+}
+.card > .h2::after{
+    content: '\2665\a\2665';
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+}
+.card > .h3::before{
+    content: '3 \2665';
+}
+.card > .h3::after{
+    content: '\2665\a\2665\a\2665';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+.card > .h4::before{
+    content: '4 \2665';
+}
+.card > .h4::after{
+    content: '\2665   \2665\a\a\2665   \2665';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+.card > .h5::before{
+    content: '5 \2665';
+}
+.card > .h5::after{
+    content: '\2665   \2665\a\2665\a\2665   \2665';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+.card > .h6::before{
+    content: '6 \2665';
+}
+.card > .h6::after{
+    content: '\2665   \2665\a\2665   \2665\a\2665   \2665';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+.card > .h7::before{
+    content: '7 \2665';
+}
+.card > .h7::after{
+    content: '\2665   \2665\a\2665\a\2665  \2665\a\2665   \2665';
+    font-size: .9rem;
+    line-height: .75rem;
+}
+.card > .h8::before{
+    content: '8 \2665';
+}
+.card > .h8::after{
+    content: '\2665   \2665\a\2665   \2665\a\2665   \2665\a\2665   \2665';
+    font-size: .9rem;
+    line-height: .75rem;
+}
+.card > .h9::before{
+    content: '9 \2665';
+}
+.card > .h9::after{
+    content: '\2665    \2665\a\2665\a\2665    \2665\a\2665    \2665\a\2665    \2665';
+    font-size: .82rem;
+    line-height: .62rem;
+}
+.card > .h10::before{
+    content: '10 \2665';
+}
+.card > .h10::after{
+    content: '\2665    \2665\a\2665\a\2665    \2665\a\2665    \2665\a\2665\a\2665    \2665';
+    font-size: .75rem;
+    line-height: .52rem;
+}
+.card > .hJ::before{
+    content: 'J \2665';
+}
+.card > .hJ::after{
+    content: 'J\a\2665';
+    font-size: 1.4rem;
+}
+.card > .hQ::before{
+    content: 'Q \2665';
+}
+.card > .hQ::after{
+    content: 'Q\a\2665';
+    font-size: 1.4rem;
+}
+.card > .hK::before{
+    content: 'K \2665';
+}
+.card > .hK::after{
+    content: 'K\a\2665';
+    font-size: 1.4rem;
+}
+
+/* === DIAMONDS LAYOUT ===*/
+
+.card > .dA::before {
+    content: 'A \2666';
+}
+.card > .dA::after {
+    content: '\2666';
+    font-size: 2.5rem;
+}
+
+.card > .d2::before {
+    content: '2 \2666';
+}
+.card > .d2::after {
+    content: '\2666\a\2666';
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+}
+
+.card > .d3::before {
+    content: '3 \2666';
+}
+.card > .d3::after {
+    content: '\2666\a\2666\a\2666';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .d4::before {
+    content: '4 \2666';
+}
+.card > .d4::after {
+    content: '\2666   \2666\a\a\2666   \2666';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .d5::before {
+    content: '5 \2666';
+}
+.card > .d5::after {
+    content: '\2666   \2666\a\2666\a\2666   \2666';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .d6::before {
+    content: '6 \2666';
+}
+.card > .d6::after {
+    content: '\2666   \2666\a\2666   \2666\a\2666   \2666';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .d7::before {
+    content: '7 \2666';
+}
+.card > .d7::after {
+    content: '\2666   \2666\a\2666\a\2666  \2666\a\2666   \2666';
+    font-size: .9rem;
+    line-height: .75rem;
+}
+
+.card > .d8::before {
+    content: '8 \2666';
+}
+.card > .d8::after {
+    content: '\2666   \2666\a\2666   \2666\a\2666   \2666\a\2666   \2666';
+    font-size: .9rem;
+    line-height: .75rem;
+}
+
+.card > .d9::before {
+    content: '9 \2666';
+}
+.card > .d9::after {
+    content: '\2666    \2666\a\2666\a\2666    \2666\a\2666    \2666\a\2666    \2666';
+    font-size: .82rem;
+    line-height: .62rem;
+}
+
+.card > .d10::before {
+    content: '10 \2666';
+}
+.card > .d10::after {
+    content: '\2666    \2666\a\2666\a\2666    \2666\a\2666    \2666\a\2666\a\2666    \2666';
+    font-size: .75rem;
+    line-height: .52rem;
+}
+
+.card > .dJ::before {
+    content: 'J \2666';
+}
+.card > .dJ::after {
+    content: 'J\a\2666';
+    font-size: 1.4rem;
+}
+
+.card > .dQ::before {
+    content: 'Q \2666';
+}
+.card > .dQ::after {
+    content: 'Q\a\2666';
+    font-size: 1.4rem;
+}
+
+.card > .dK::before {
+    content: 'K \2666';
+}
+.card > .dK::after {
+    content: 'K\a\2666';
+    font-size: 1.4rem;
+}
+
+/* === SPADES LAYOUT ===*/
+
+.card > .sA::before {
+    content: 'A \2660';
+}
+.card > .sA::after {
+    content: '\2660';
+    font-size: 2.5rem;
+}
+
+.card > .s2::before {
+    content: '2 \2660';
+}
+.card > .s2::after {
+    content: '\2660\a\2660';
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+}
+
+.card > .s3::before {
+    content: '3 \2660';
+}
+.card > .s3::after {
+    content: '\2660\a\2660\a\2660';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .s4::before {
+    content: '4 \2660';
+}
+.card > .s4::after {
+    content: '\2660   \2660\a\a\2660   \2660';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .s5::before {
+    content: '5 \2660';
+}
+.card > .s5::after {
+    content: '\2660   \2660\a\2660\a\2660   \2660';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .s6::before {
+    content: '6 \2660';
+}
+.card > .s6::after {
+    content: '\2660   \2660\a\2660   \2660\a\2660   \2660';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .s7::before {
+    content: '7 \2660';
+}
+.card > .s7::after {
+    content: '\2660   \2660\a\2660\a\2660  \2660\a\2660   \2660';
+    font-size: .9rem;
+    line-height: .75rem;
+}
+
+.card > .s8::before {
+    content: '8 \2660';
+}
+.card > .s8::after {
+    content: '\2660   \2660\a\2660   \2660\a\2660   \2660\a\2660   \2660';
+    font-size: .9rem;
+    line-height: .75rem;
+}
+
+.card > .s9::before {
+    content: '9 \2660';
+}
+.card > .s9::after {
+    content: '\2660    \2660\a\2660\a\2660    \2660\a\2660    \2660\a\2660    \2660';
+    font-size: .82rem;
+    line-height: .62rem;
+}
+
+.card > .s10::before {
+    content: '10 \2660';
+}
+.card > .s10::after {
+    content: '\2660    \2660\a\2660\a\2660    \2660\a\2660    \2660\a\2660\a\2660    \2660';
+    font-size: .75rem;
+    line-height: .52rem;
+}
+
+.card > .sJ::before {
+    content: 'J \2660';
+}
+.card > .sJ::after {
+    content: 'J\a\2660';
+    font-size: 1.4rem;
+}
+
+.card > .sQ::before {
+    content: 'Q \2660';
+}
+.card > .sQ::after {
+    content: 'Q\a\2660';
+    font-size: 1.4rem;
+}
+
+.card > .sK::before {
+    content: 'K \2660';
+}
+.card > .sK::after {
+    content: 'K\a\2660';
+    font-size: 1.4rem;
+}
+
+/* === CLUBS LAYOUT ===*/
+
+.card > .cA::before {
+    content: 'A \2663';
+}
+.card > .cA::after {
+    content: '\2663';
+    font-size: 2.5rem;
+}
+
+.card > .c2::before {
+    content: '2 \2663';
+}
+.card > .c2::after {
+    content: '\2663\a\2663';
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+}
+
+.card > .c3::before {
+    content: '3 \2663';
+}
+.card > .c3::after {
+    content: '\2663\a\2663\a\2663';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .c4::before {
+    content: '4 \2663';
+}
+.card > .c4::after {
+    content: '\2663   \2663\a\a\2663   \2663';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .c5::before {
+    content: '5 \2663';
+}
+.card > .c5::after {
+    content: '\2663   \2663\a\2663\a\2663   \2663';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .c6::before {
+    content: '6 \2663';
+}
+.card > .c6::after {
+    content: '\2663   \2663\a\2663   \2663\a\2663   \2663';
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.card > .c7::before {
+    content: '7 \2663';
+}
+.card > .c7::after {
+    content: '\2663   \2663\a\2663\a\2663  \2663\a\2663   \2663';
+    font-size: .9rem;
+    line-height: .75rem;
+}
+
+.card > .c8::before {
+    content: '8 \2663';
+}
+.card > .c8::after {
+    content: '\2663   \2663\a\2663   \2663\a\2663   \2663\a\2663   \2663';
+    font-size: .9rem;
+    line-height: .75rem;
+}
+
+.card > .c9::before {
+    content: '9 \2663';
+}
+.card > .c9::after {
+    content: '\2663    \2663\a\2663\a\2663    \2663\a\2663    \2663\a\2663    \2663';
+    font-size: .82rem;
+    line-height: .62rem;
+}
+
+.card > .c10::before {
+    content: '10 \2663';
+}
+.card > .c10::after {
+    content: '\2663    \2663\a\2663\a\2663    \2663\a\2663    \2663\a\2663\a\2663    \2663';
+    font-size: .75rem;
+    line-height: .52rem;
+}
+
+.card > .cJ::before {
+    content: 'J \2663';
+}
+.card > .cJ::after {
+    content: 'J\a\2663';
+    font-size: 1.4rem;
+}
+
+.card > .cQ::before {
+    content: 'Q \2663';
+}
+.card > .cQ::after {
+    content: 'Q\a\2663';
+    font-size: 1.4rem;
+}
+
+.card > .cK::before {
+    content: 'K \2663';
+}
+.card > .cK::after {
+    content: 'K\a\2663';
+    font-size: 1.4rem;
+}
+
+/* === FRONT to BACK === */
+
+.card > input:checked ~ u {
+  opacity: 1;
+}
+
+.card > input:checked ~ b {
+  opacity: 0;
+}
+
+.card > input ~ u {
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.card > input ~ b {
+  opacity: 1;
+  transition: opacity .3s ease;
+}
