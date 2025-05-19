@@ -6,19 +6,14 @@ const hitBtn = document.createElement("button");
 const standBtn = document.createElement("button");
 const resultContainer = document.createElement("div");
 const endGame = document.createElement("div");
-<<<<<<< HEAD
-const suits = ['♠', '♥', '♦', '♣'];
-const cardValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-=======
 board.appendChild(resultContainer);
->>>>>>> 352238363ddf8c2df800301e6ad94b1126e79412
 
-player.playerContainer.addEventListener("bust", () => {
+player.playerContainer.addEventListener("bust", () =>{
     endGame.textContent = "You Busted LOSER BUUUUUUUUUUUUU";
     endPlayerTurn();
 });
 
-player.playerContainer.addEventListener("blackjack", () => {
+player.playerContainer.addEventListener("blackjack", () =>{
     endGame.textContent = "bella per te";
     endPlayerTurn();
     console.log("DEBUG BLACKJACK");
@@ -26,26 +21,12 @@ player.playerContainer.addEventListener("blackjack", () => {
     playDealerTurn();
 });
 
-player.playerContainer.addEventListener("21", () => {
+player.playerContainer.addEventListener("21", () =>{
     endGame.textContent = "hai fatto 21, mo aspetta di vedere cosa fa il computer mica è finita eh";
     endPlayerTurn();
     playDealerTurn();
 });
 
-<<<<<<< HEAD
-
-hitBtn.classList.add("hit-button");
-hitBtn.textContent = "hit";
-hitBtn.addEventListener("click", () => {
-    player.drawCard();
-});
-
-standBtn.classList.add("stand-button");
-standBtn.textContent = "stand";
-standBtn.addEventListener("click", () => {
-    endPlayerTurn();
-    playDealerTurn();
-=======
 hitBtn.classList.add("hit-button");
 hitBtn.textContent = "hit";
 hitBtn.addEventListener("click", () =>{
@@ -77,39 +58,23 @@ start.addEventListener("click", () => {
     player.drawCard();
     console.log("player", player.hand);
 
->>>>>>> 352238363ddf8c2df800301e6ad94b1126e79412
 })
 
-start.addEventListener("click", () => {
-    reset();
-    board.append(computer.playerContainer, player.playerContainer, hitBtn, standBtn, endGame);
+const suits = ['♠', '♥', '♦', '♣'];
+const cardValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 
-    computer.drawCard();
-    computer.drawCard();
-    
-    computer.hand[1].hide();
-    computer.renderHand();
-
-    player.drawCard();
-    player.drawCard();
-})
-
-
-function createCard() {
+function createCard(){
     const randSuit = suits[Math.floor(Math.random() * suits.length)];
     const randValue = cardValues[Math.floor(Math.random() * cardValues.length)];
     const card = new Card(randSuit, randValue);
-<<<<<<< HEAD
-=======
     if(randSuit == '♥' || randSuit == '♦'){
         card.makeRed();
     }
     console.log(card);    
->>>>>>> 352238363ddf8c2df800301e6ad94b1126e79412
     return card;
 }
 
-function playDealerTurn() {
+function playDealerTurn(){
     computer.hand[1].show();
     computer.renderHand();
     while (computer.getHandValue() < 17) {
@@ -120,35 +85,35 @@ function playDealerTurn() {
     }, 1000);
 }
 
-function endPlayerTurn() {
+function endPlayerTurn(){
     hitBtn.disabled = true;
     standBtn.disabled = true;
 }
 
-function checkWin() {
+function checkWin(){
     const plHandValue = player.getHandValue();
     const cpuHandValue = computer.getHandValue();
     let result;
-    if (cpuHandValue > 21) {
+    if(cpuHandValue > 21){
         result = "win";
     }
-    else if (computer.hasNaturalBlackjack() && player.hasNaturalBlackjack()) {
+    else if(computer.hasNaturalBlackjack() && player.hasNaturalBlackjack()){
         result = "push";
     }
-    else if (!computer.hasNaturalBlackjack() && player.hasNaturalBlackjack()) {
+    else if(!computer.hasNaturalBlackjack() && player.hasNaturalBlackjack()){
         result = "win";
     }
-    else if (computer.hasNaturalBlackjack() && !player.hasNaturalBlackjack()) {
+    else if(computer.hasNaturalBlackjack() && !player.hasNaturalBlackjack()){
         result = "loss";
     }
-    else if (cpuHandValue > plHandValue) {
+    else if(cpuHandValue > plHandValue){
         result = "loss";
     }
-    else if (cpuHandValue == plHandValue) {
+    else if(cpuHandValue == plHandValue){
         result = "push";
     }
     else {
-        result = "win";
+        result ="win";
     }
 
     resultContainer.textContent = result;
@@ -156,7 +121,7 @@ function checkWin() {
     board.appendChild(resultContainer);
 }
 
-function reset() {
+function reset(){
     computer.reset();
     player.reset();
     hitBtn.disabled = false;
