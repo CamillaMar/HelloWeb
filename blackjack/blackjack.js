@@ -6,8 +6,12 @@ const hitBtn = document.createElement("button");
 const standBtn = document.createElement("button");
 const resultContainer = document.createElement("div");
 const endGame = document.createElement("div");
+<<<<<<< HEAD
 const suits = ['♠', '♥', '♦', '♣'];
 const cardValues = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+=======
+board.appendChild(resultContainer);
+>>>>>>> 352238363ddf8c2df800301e6ad94b1126e79412
 
 player.playerContainer.addEventListener("bust", () => {
     endGame.textContent = "You Busted LOSER BUUUUUUUUUUUUU";
@@ -17,6 +21,8 @@ player.playerContainer.addEventListener("bust", () => {
 player.playerContainer.addEventListener("blackjack", () => {
     endGame.textContent = "bella per te";
     endPlayerTurn();
+    console.log("DEBUG BLACKJACK");
+    console.log(computer.hand[1]); 
     playDealerTurn();
 });
 
@@ -26,6 +32,7 @@ player.playerContainer.addEventListener("21", () => {
     playDealerTurn();
 });
 
+<<<<<<< HEAD
 
 hitBtn.classList.add("hit-button");
 hitBtn.textContent = "hit";
@@ -38,6 +45,39 @@ standBtn.textContent = "stand";
 standBtn.addEventListener("click", () => {
     endPlayerTurn();
     playDealerTurn();
+=======
+hitBtn.classList.add("hit-button");
+hitBtn.textContent = "hit";
+hitBtn.addEventListener("click", () =>{
+    console.log("il giocatore sta pescando");
+    console.log(player.hand);
+    player.drawCard();
+});
+
+standBtn.classList.add("stand-button");
+standBtn.textContent = "stand";
+standBtn.addEventListener("click", () =>{
+    endPlayerTurn();
+    playDealerTurn();
+})
+
+start.addEventListener("click", () => {
+    reset();
+    resultContainer.classList.remove("result-board");
+    
+    board.append(computer.playerContainer, player.playerContainer, hitBtn, standBtn, endGame);
+
+    computer.drawCard();
+    computer.drawCard();
+    console.log("cpu", computer.hand);
+    computer.hand[1].hide();
+    computer.renderHand();
+
+    player.drawCard();
+    player.drawCard();
+    console.log("player", player.hand);
+
+>>>>>>> 352238363ddf8c2df800301e6ad94b1126e79412
 })
 
 start.addEventListener("click", () => {
@@ -59,6 +99,13 @@ function createCard() {
     const randSuit = suits[Math.floor(Math.random() * suits.length)];
     const randValue = cardValues[Math.floor(Math.random() * cardValues.length)];
     const card = new Card(randSuit, randValue);
+<<<<<<< HEAD
+=======
+    if(randSuit == '♥' || randSuit == '♦'){
+        card.makeRed();
+    }
+    console.log(card);    
+>>>>>>> 352238363ddf8c2df800301e6ad94b1126e79412
     return card;
 }
 
@@ -68,7 +115,9 @@ function playDealerTurn() {
     while (computer.getHandValue() < 17) {
         computer.drawCard();
     }
-    checkWin();
+    setTimeout(() => {
+        checkWin();
+    }, 1000);
 }
 
 function endPlayerTurn() {
@@ -103,6 +152,7 @@ function checkWin() {
     }
 
     resultContainer.textContent = result;
+    resultContainer.classList.add("result-board");
     board.appendChild(resultContainer);
 }
 
