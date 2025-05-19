@@ -1,3 +1,18 @@
+const b1 = document.querySelector("#start");
+b1.addEventListener("click", () =>{
+    start();
+});
+
+const b2 = document.querySelector("#hit");
+b2.addEventListener("click", () =>{
+    hit();
+});
+
+const b3 = document.querySelector("#stand");
+b3.addEventListener("click", () =>{
+    stand();
+});
+
 function Card(sign, number){
     this.sign = sign;
     this.number = number;
@@ -105,7 +120,9 @@ function calculateScore(gambler){
     }
     if(gambler.score > 21 ){
         gambler.state = "bust";
-        calculateWinner();
+        if(player.state === "bust"){
+            calculateWinner();
+        }
     }
 }
 
