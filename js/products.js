@@ -22,6 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function esercizio2(idContainer, config){
+  if(!config.pathVariables[0]){
+    alert("devi scegliere un valore per l'id della categoria")
+    return;
+  }
+
   const {
     controller,
     method = "GET",
