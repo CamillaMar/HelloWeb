@@ -1,0 +1,236 @@
+body { 
+  font-family: sans-serif; 
+  background-image: url(../back2.jpg);
+  background-size: cover;
+}
+
+.table-container{
+  display:flex;
+  justify-content: center;
+}
+
+.table{
+  transform: perspective(370px) rotateX(17deg);
+  width: 700px;
+  height: 400px;
+  background-color: rgb(78, 89, 111);
+  padding: 10px;
+  margin: 10px;
+  border-top-left-radius: 15%;
+  border-top-right-radius: 15%;
+  border-bottom-left-radius: 50% ;
+  border-bottom-right-radius: 50%;
+  box-shadow:  0px 5px 5px 5px rgb(0, 0, 0);  
+}
+
+.end-message{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 5;
+  position: absolute;
+  margin-top: 120px;
+  font-size: 2rem;
+  background-color: rgb(177, 179, 146);
+  padding:10px 16px;
+  border-radius: 10%;
+  border: 3px solid rgb(93, 120, 93);
+  visibility: hidden;
+}
+.points{
+  margin-left:120px;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  font-size: 2rem;
+  color: antiquewhite;
+}
+.player-points {
+  margin-top: 240px;
+}
+.card-space{
+    margin-left: 180px;
+    margin-right: 200px;
+    height: 100%;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.choices{
+  margin-bottom: 40px;
+  margin-right: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+button {
+  background-color: #3e4567;
+  border-radius: 50%;
+  color: white;
+  padding: 3px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.5s;
+  transform: translateY(-6px);
+  box-shadow: 10px 5px 5px rgb(61, 55, 55);
+}
+.button-face{
+  display: block;
+  padding: 12px 22px;
+  border-radius: 50%;
+  background: hsl(264, 22%, 45%);
+  color: white;
+  transform: translateY(-6px);
+  transition-duration: 0.5s;
+}
+button:active{
+  transform: translateY(-2px);
+}
+.button-face:hover{
+  filter: brightness(1.3);
+}
+.play-button{
+  margin-right: 35px;
+  font-size: 35px;
+
+}
+
+.hand {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+h1 {
+  font-size: 1rem;
+  position: absolute;
+}
+
+.card-container {
+  position: relative;
+  width: 70px;
+  height: 100px;
+  perspective: 800px;
+}
+
+.card {
+  box-shadow: 10px 5px 5px rgb(61, 55, 55);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform-origin: center right;
+  transition: transform 1.4s;
+  width: var(--card-width);
+  aspect-ratio: 2/3;
+  border-radius: 1rem;
+}
+
+.card.is-flipped {
+  transform: translateX(-100%) rotateY(180deg);
+  animation-delay: 3s;
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-align: center;
+  backface-visibility: hidden;
+  border-radius: 5%;
+  border: 2px solid black;
+}
+
+.card-front {
+  background-color: lightgray;
+  display: flex;
+  align-items: center;
+}
+.card-front:hover {
+  filter: brightness(1.3);
+}
+
+.back {
+  background-image: url(../cardback.jpg);
+  background-size: cover;
+  transform: rotateY(180deg);
+}
+
+/*red cards*/
+
+.black {
+
+}
+
+/*black cards*/
+
+/*diamonds*/
+.card-front span {
+  flex: 1;
+}
+
+.card-front[data-card^="J"],
+.card-front[data-card^="A"],
+.card-front[data-card^="K"],
+.card-front[data-card^="Q"] {
+  font-size: 50px;
+}
+
+.card-front[data-card^="2"] {
+  font-size: 28px;  
+}
+
+.card-front[data-card^="3"],
+.card-front[data-card^="4"] {
+  font-size: 22px;
+}
+
+.card-front[data-card^="5"],
+.card-front[data-card^="6"] {
+  font-size: 20px;
+}
+
+.card-front[data-card^="7"],
+.card-front[data-card^="8"],
+.card-front[data-card^="9"] {
+  font-size: 16px;
+}
+.card-front::before,
+.card-front::after {
+  content: attr(data-card);
+  font-size: 15px;
+  position: absolute;
+  padding: 5px;
+  letter-spacing: 0.2em;
+}
+
+.card-front::before {
+  top: 0;
+  left: 0;
+}
+.card-front::after {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+.card-front.clubs,
+.card-front.spades{
+  color:black;
+}
+.card-front.hearts,
+.card-front.diams {
+  color: firebrick;
+}
+.card-front > span {
+  font-size: 50px;
+}
+.card-front.hearts > span {
+  font-size: 40px;
+}

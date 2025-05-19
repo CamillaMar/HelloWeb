@@ -1,0 +1,88 @@
+body{
+    background-color: rgb(137, 89, 60);
+}
+.contenitore-tavolo{
+  display:flex;
+  justify-content: center;
+}
+
+.tavolo {
+    width: 700px;
+    height: 400px;
+    background-color: darkolivegreen;
+    padding: 10px;
+    margin: 10px;
+    border-color: rgb(179, 141, 27);
+    border-width: 5px;
+    border-radius: 5%;
+    border-bottom-left-radius: 50% ;
+    border-bottom-right-radius: 50%;
+    box-shadow:  0px 5px 5px 5px rgb(0, 0, 0);
+}
+
+.scelte{
+    position: absolute;
+    width: 180px;
+    height: 355px;
+    align-content:center;
+    justify-content: center;
+    margin-left: 220px;
+}
+button{
+    background-color: rgb(129, 129, 204);
+
+}
+.spazio-carte{
+    margin-left: 150px;
+    margin-right: 200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+.mano {
+    margin-top: 10%;
+    height: 100%;
+    display: flex;
+    justify-content:left;
+}
+.carta{
+    border: 2px solid black;
+    width: 70px;
+    height: 90px;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 5%;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform-origin: center right;
+    transition: transform 1s;
+}
+
+.carta.is-flipped {
+  transform: translateX(-100%) rotateY(180deg);
+}
+.faccia {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+.carta1{
+    background-color: crimson;
+}
+.carta2{
+    background-color: rgb(52, 52, 132);
+    margin-left: -15%;
+}
+.fronte {
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
+}
+.retro {
+    background-color: beige;
+    transform: rotateY(180deg);
+}
