@@ -70,6 +70,12 @@ async function switchEmployeeAddress(){
     console.log("STAMPA");
     console.log(`http://localhost:8080/api/employee/${emp[0].empId}`);
 
+    // const customer = cust[0];
+    // const employee = emp[0];
+    // const address = customer.address;
+    // employee.address = customer.address;
+    const {address, city, region, postalCode, country} = cust[0]; 
+
     if (!cust || !emp) {
         console.error("Errore nel recupero dei dati di customer o employee");
         return;
@@ -77,26 +83,29 @@ async function switchEmployeeAddress(){
     try{
         const response = await fetch(`http://localhost:8080/api/employee/${emp[0].empId}`, {
             method:'PUT',
-            body: JSON.stringify({
-                empId: emp[0].empId,
-                lastName: emp[0].lastName,
-                firstName: emp[0].firstName,
-                title: emp[0].title,
-                titleOfCourtesy: emp[0].titleOfCourtesy,
-                birthDate: emp[0].birthDate,
-                hireDate: emp[0].hireDate,
-                address: cust[0].address,
-                city: emp[0].city,
-                region: emp[0].region,
-                postalCode: emp[0].postalCode,
-                country: emp[0].country,
-                phone: emp[0].phone,
-                mgrId: emp[0].mgrId
-            }), 
+            // body: JSON.stringify({
+            //     empId: emp[0].empId,
+            //     lastName: emp[0].lastName,
+            //     firstName: emp[0].firstName,
+            //     title: emp[0].title,
+            //     titleOfCourtesy: emp[0].titleOfCourtesy,
+            //     birthDate: emp[0].birthDate,
+            //     hireDate: emp[0].hireDate,
+            //     address: cust[0].address,
+            //     city: emp[0].city,
+            //     region: emp[0].region,
+            //     postalCode: emp[0].postalCode,
+            //     country: emp[0].country,
+            //     phone: emp[0].phone,
+            //     mgrId: emp[0].mgrId
+            // }), 
+            body: JSON.stringify({...emp[0], address:cust[0].address}),
+            // body: JSON.stringify(employee),
             headers:  {
                    'Content-Type': 'application/json'
             }
         });
+        
         if (!response.ok) {
             throw new Error("HTTP error" + response.status + response.statusText);
         }
