@@ -1,0 +1,101 @@
+.red{
+    color: red;
+}
+.card{
+    width: 30px;
+    height: 40px;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid black;
+    margin: 3px;
+    text-align: center;
+    padding: 2px;
+}
+.cover{
+    color: white;
+    background-color: rgb(22, 22, 39);
+}
+.result-board{
+    position: fixed;
+    top: 25%;
+    width: 50%;
+    z-index: 2;
+    width: 250px;
+    height: 200px;
+    padding: 150px 150px 0 150px;
+    text-align: center;
+    background-color: rgb(235, 207, 83);
+    border-radius: 10px;
+    border: 3px solid black;
+}
+
+main{
+    background-color: #174D1A;
+    background-image: linear-gradient(to right,rgba(23, 77, 26, 1), rgba(29, 91, 34, 1), rgba(23, 77, 26, 1));
+    position: relative;
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body{    
+    margin: 0;
+    background-color: #174D1A;
+    background-image: linear-gradient(to right,rgba(23, 77, 26, 1), rgba(29, 91, 34, 1), rgba(23, 77, 26, 1));
+}
+
+
+.hand-container {
+    display: flex;
+    margin: 20px;
+}
+
+.game-container{
+    background-image: url(bj-board.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 50px;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: 30px;
+    text-align: center;
+}
+
+#start{
+    top: 50vh;
+}
+
+button {
+    padding: 10px 15px;
+    width: 100px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    background-color: rgb(252, 85, 85);
+    border-radius: 4px;
+    border: 0;
+    text-transform: uppercase;
+}
+
+.button-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hand-value-container{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 1000;
+    background-color: rgb(215, 236, 255, 0.4);
+    padding: 10px;
+    border-radius: 5px;;
+
+}
