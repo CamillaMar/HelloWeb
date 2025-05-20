@@ -58,6 +58,8 @@ player.playerContainer.addEventListener("21", () => {
 });
 
 start.addEventListener("click", () => {
+    let betAmount = 0; 
+    
     gameManagement.resetGame();
     console.log(deck.cards.length);
     deck.createDeck();

@@ -2,6 +2,8 @@ class Player {
     constructor() {
         this.hand = new Array();
         this.wallet = 100;
+        this.betAmount = 0; 
+        this.lastBet = 0; 
         this.playerContainer = document.createElement("div");
         this.playerContainer.classList.add("player-container");
         this.handContainer = document.createElement("div");
@@ -59,12 +61,14 @@ class Player {
 
     resetPlayer() {
         this.hand = [];
+        this.betAmount = 0; 
         this.handContainer.innerText = "";
         this.handValueContainer.innerText = "";
     }
 
     bet(amount) {
         if (this.wallet >= amount) {
+            this.betAmount += amount; 
             this.wallet -= amount;
             return this.wallet;
         }

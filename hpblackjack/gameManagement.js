@@ -15,7 +15,7 @@ class GameManagement {
         const dealerValue = dealer.getHandValue();
         let result;
         if(dealerValue > 21){
-            result = "You won 😍";
+            result = "You won 😍"; 
         }
         else if (playerValue > 21){
             result = "You Busted";
@@ -43,6 +43,7 @@ class GameManagement {
         this.resultContainer.textContent = result; 
         this.resultContainer.classList.add("result");
         board.appendChild(this.resultContainer); 
+        return result; 
     } 
 
     playDealerTurn(deck) {
@@ -54,6 +55,7 @@ class GameManagement {
             dealer.drawCard(deck);
         };
         this.checkWin();
+        
     }
 
     endPlayerTurn() {
@@ -61,5 +63,5 @@ class GameManagement {
         standButton.disabled = true;
     }
 
-    
+
 }
