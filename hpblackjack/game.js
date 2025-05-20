@@ -22,12 +22,14 @@ betBoard.addEventListener("click", event => {
         const amount = parseInt(event.target.dataset.value);
         player.bet(amount);
         const buttons = betBoard.querySelectorAll("button");
-        [10, 20, 50, 100].forEach(val => {
-            if(player.wallet < val){
-                event.target.disabled = true; 
+        buttons.forEach(button => {
+            const value = parseInt(button.dataset.value);
+            if (player.wallet < value) {
+                button.disabled = true;
+            } else {
+                button.disabled = false;
             }
-        })
-        console.log(player.wallet);
+        });
     }
 });
 

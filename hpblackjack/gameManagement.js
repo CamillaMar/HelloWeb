@@ -60,4 +60,6 @@ class GameManagement {
         hitButton.disabled = true;
         standButton.disabled = true;
     }
+
+    
 }
