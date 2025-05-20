@@ -4,11 +4,13 @@ b1.addEventListener("click", () =>{
 });
 
 const b2 = document.querySelector("#hit");
+b2.disabled = true;
 b2.addEventListener("click", () =>{
     hit();
 });
 
 const b3 = document.querySelector("#stand");
+b3.disabled = true;
 b3.addEventListener("click", () =>{
     stand();
 });
@@ -17,14 +19,14 @@ const player = {
     hand: [],
     score: 0,
     limit: 21,
-    state: "play-turn"
+    idTable: "tablePlayer"
 };
 
 const cpu = {
     hand: [],
     score: 0,
     limit: 17,
-    state: "wait-turn"
+    idTable: "tableCpu"
 };
 
 function Card(sign, number){
@@ -47,10 +49,11 @@ let numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 let deck = [];
 
 function start(){
+    b2.disabled = false;
+    b3.disabled = false;
+
     player.score = 0;
     cpu.score= 0;
-    player.state = "play-turn";
-    cpu.state = "wait-turn";
 
     if(deck.length === 0){
         createDeck();
@@ -60,10 +63,10 @@ function start(){
     calculateScore(player);
     calculateScore(cpu);
     if(cpu.score === 21){
-        return alert("Il banco vince sempre!");
+        return calculateWinner();
     }
     if(player.score === 21){
-        return alert("Hai vinto!");
+        return calculateWinner();
     }
 }
 
@@ -103,6 +106,8 @@ function dealCard(gambler){
     }
     gambler.hand.push(deck.pop());
     calculateScore(gambler);
+    renderHand(gambler);
+    renderScore(gambler);
 }
 
 function calculateScore(gambler){
@@ -118,48 +123,57 @@ function calculateScore(gambler){
         gambler.score += 10;
     }
     if(gambler.score > 21 ){
-        gambler.state = "bust";
-        if(player.state === "bust"){
-            calculateWinner();
-        }
+        calculateWinner();
+        return;
+    }
+    if(gambler.score >= gambler.limit){
+        stand();
     }
 }
 
 function stand(){
-    if(player.state === "play-turn"){
-        player.state = "stand";
-        playCpu();
-    }
+    playCpu();
     return;
 }
 
-function hit(){
-    if(player.state === "play-turn"){
-        dealCard(player);
-        if(player.score === player.limit){
-           stand();
-        }
+function hit(gambler){
+    dealCard(gambler);
+    if(gambler.score >= gambler.limit){
+        stand();
     }
     return;
 }
 
 function playCpu(){
-    cpu.state = "play-turn";
     while(cpu.score < cpu.limit){
-        dealCard(cpu);
+        hit(cpu);
     }
     calculateWinner();
 }
 
 function calculateWinner(){
-    if(player.state === "bust"){
+    b2.disabled = false;
+    b3.disabled = false;
+    if(player.score > 21){
         return alert("Hai sballato! Hai perso");
     }
-    if(cpu.state === "bust"){
+    if(cpu.score > 21){
         return alert("Il banco ha sballato! Hai vinto!");
     }
-    if(player.score < cpu.score){
-        return alert("Il banco vince sempre!");
+    if(player.score > cpu.score){
+        return alert("hai vinto!");
     }
-    return alert("hai vinto!");
+    return alert("Il banco vince sempre!");
+}
+
+function renderHand(gambler){
+    const handSpace = document.querySelector(`#${gambler.idTable} [name="hand"]`);
+    handSpace.textContent = "";
+    gambler.hand.forEach(card => {
+        handSpace.textContent += card.sign + card.number + "  ";
+    })
+}
+function renderScore(gambler){
+    const scoreSpace = document.querySelector(`#${gambler.idTable} [name="score"]`);
+    scoreSpace.textContent = gambler.score;
 }
