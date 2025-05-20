@@ -1,19 +1,20 @@
-body {
+body{
     background: radial-gradient(circle at center, #064f2e, #022e1c);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+    margin: auto;
     padding: 50px;
     color: white;
     overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #board {
     max-width: 900px;
-    margin: 3rem auto;
     background: #145c3b;
     border-radius: 50px;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
-    padding: 3rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,24 +22,76 @@ body {
     position: relative;
 }
 
-button {
+button{
     font-size: 1.2rem;
     font-weight: bold;
     padding: 0.6rem 1.4rem;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    transition: transform 0.2s ease, background 0.3s ease;
-    margin: 0.3rem;
-    background: linear-gradient(to bottom, #ffcc00, #cc9900);
-    color: #222;
     box-shadow: 0 4px #996600;
     text-transform: uppercase;
 }
 
+.bet-btn{
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+}
+
+.bet-board{
+    margin: 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 2px solid #888;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.btn-container{
+    margin: 50px;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-container > button{
+    background: linear-gradient(to bottom, #ffcc00, #cc9900);
+    box-shadow: 0 4px #996600;
+    margin: 10px;
+}
+
+.bet-board > button:nth-of-type(1):not(:disabled){
+    background: linear-gradient(to bottom, #127c24, #0b5718);
+    box-shadow: 0 4px #073d10;
+}
+
+.bet-board > button:nth-of-type(2):not(:disabled){
+    background: linear-gradient(to bottom, #ffcc00, #cc9900);
+    box-shadow: 0 4px #996600;
+}
+
+.bet-board > button:nth-of-type(3):not(:disabled){
+    background: linear-gradient(to bottom, rgb(17, 65, 197), rgb(8, 37, 117));
+    box-shadow: 0 4px #0a0b44;
+}
+
+.bet-board > button:nth-of-type(4):not(:disabled){
+    background: linear-gradient(to bottom, rgb(197, 17, 47), rgb(124, 10, 29));
+    background-color: rgb(197, 17, 47);
+    box-shadow: 0 4px #610f0f;
+}
+
 button:hover:not(:disabled) {
     transform: scale(1.08);
-    background: linear-gradient(to bottom, #ffe066, #cc9900);
+    filter: brightness(1.1);
 }
 
 button:disabled {
@@ -48,13 +101,18 @@ button:disabled {
     box-shadow: none;
 }
 
-#start {
+#start{
     background: linear-gradient(to bottom, #00ccff, #0066cc);
     box-shadow: 0 4px #004080;
     color: white;
     padding: 1rem 2rem;
     border-radius: 15px;
     font-size: 1.4rem;
+    margin-top: 30px;
+}
+
+.hand-container{
+    display: flex;
 }
 
 .card {
@@ -71,10 +129,10 @@ button:disabled {
     color: #000;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
     margin: 0.3rem;
-    transition: transform 0.3s;
+    /* transition: transform 0.3s; */
 }
 
-.card.cover {
+.cover{
     background: repeating-linear-gradient(
         45deg,
         #333,
@@ -85,51 +143,14 @@ button:disabled {
     color: transparent;
 }
 
-.player-hand,
-.dealer-hand {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+.player-container {
+    text-align: center;
 }
-
-#betBoard {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    border: 2px solid #888;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-}
-
-#betBoard button {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    font-size: 1.1rem;
+.player-container p{
+    margin: 25px;
+    text-transform: uppercase;
+    font-size: 1.2rem;
     font-weight: bold;
-    color: white;
-    border: 3px solid white;
-    box-shadow: 0 4px rgba(0, 0, 0, 0.4);
-}
-
-#betBoard button:nth-child(1) {
-    background: radial-gradient(circle at top left, #ff4444, #990000); /* Red */
-}
-
-#betBoard button:nth-child(2) {
-    background: radial-gradient(circle at top left, #448aff, #003399); /* Blue */
-}
-
-#betBoard button:nth-child(3) {
-    background: radial-gradient(circle at top left, #33cc33, #006600); /* Green */
-}
-
-#betBoard button:nth-child(4) {
-    background: radial-gradient(circle at top left, #ff66cc, #660044); /* Pink */
 }
 
 .result {
@@ -145,23 +166,11 @@ button:disabled {
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: fadeInScale 0.5s ease-out forwards;
     z-index: 10;
     text-shadow: 2px 2px 4px #000;
 }
 
-@keyframes fadeInScale {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.7);
-    }
-    100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-}
-
-#walletDisplay {
+#wallet{
     font-size: 1.4rem;
     background: rgba(255,255,255,0.1);
     padding: 0.5rem 1rem;

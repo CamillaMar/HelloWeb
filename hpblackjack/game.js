@@ -2,6 +2,8 @@ const board = document.getElementById("board");
 const start = document.getElementById("start");
 const player = new Player();
 const dealer = new Player();
+const btnContainer = document.createElement("div");
+btnContainer.classList.add("btn-container");
 const hitButton = document.createElement("button");
 const standButton = document.createElement("button");
 hitButton.textContent = "HIT";
@@ -10,12 +12,15 @@ const gameManagement = new GameManagement();
 const deck = new Deck();
 
 const betBoard = document.createElement("div");
+betBoard.classList.add("bet-board");
 ["10", "20", "50", "100"].forEach(val => {
     const btn = document.createElement("button");
+    btn.classList.add("bet-btn");
     btn.textContent = val;
     btn.dataset.value = val;
     betBoard.appendChild(btn);
 });
+betBoard.appendChild(player.walletContainer);
 
 betBoard.addEventListener("click", event => {
     if (event.target.tagName === "BUTTON") {
@@ -74,7 +79,8 @@ start.addEventListener("click", () => {
     deck.createDeck();
     deck.shuffleDeck();
     board.appendChild(betBoard);
-    board.append(dealer.playerContainer, player.playerContainer, hitButton, standButton);
+    btnContainer.append(hitButton, standButton);
+    board.append(dealer.playerContainer, player.playerContainer, btnContainer);
     dealer.drawCard(deck);
     dealer.drawCard(deck);
     dealer.hand[1].hide();

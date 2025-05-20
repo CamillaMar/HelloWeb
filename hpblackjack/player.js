@@ -3,15 +3,16 @@ class Player {
         this.hand = new Array();
         this.wallet = 100;
         this.betAmount = 0; 
-        this.lastBet = 0; 
+        // this.lastBet = 0; 
         this.playerContainer = document.createElement("div");
         this.playerContainer.classList.add("player-container");
         this.handContainer = document.createElement("div");
         this.handContainer.classList.add("hand-container");
-        this.handValueContainer = document.createElement("div");
+        this.handValueContainer = document.createElement("p");
         this.walletContainer = document.createElement("div");
+        this.walletContainer.id ="wallet";
+        this.walletContainer.textContent = this.wallet;
         this.playerContainer.appendChild(this.handContainer);
-        
     }
 
     drawCard(deck) {
@@ -72,6 +73,7 @@ class Player {
         if (this.wallet >= amount) {
             this.betAmount += amount; 
             this.wallet -= amount;
+            this.walletContainer.textContent = this.wallet;
             return this.wallet;
         }
     }
@@ -83,5 +85,6 @@ class Player {
         else {
             this.wallet += (amount * 2);
         }
+        this.walletContainer.textContent = this.wallet;
     }
 }
