@@ -24,4 +24,9 @@ class Deck{
             console.log(i, j);
         }
     }
+
+    removeCard(){
+        console.log(this.cards[this.cards.length - 1]);
+        return this.cards.pop();
+    }
 }
