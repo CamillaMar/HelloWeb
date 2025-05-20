@@ -13,28 +13,33 @@ class Actor {
     }
     
     calculateScore(){
-    this.#score = 0;
-    let aces = 0;
-    gambler.hand.forEach(card =>{
-        if(card.number === 'A'){
-            aces++;
+        this.#score = 0;
+        let aces = 0;
+        this.#hand.forEach(card =>{
+            console.log(card);
+            if(card.getNumber() === 'A'){
+                aces++;
+            }
+            this.#score += card.getValue();
+        });
+        if(aces > 0 && (this.#score + 10) <= 21){
+            this.#score += 10;
         }
-        gambler.score += card.getValue();
-    });
-    if(aces > 0 && (gambler.score + 10) <= 21){
-        gambler.score += 10;
     }
-    if(gambler.score > 21 ){
-        calculateWinner();
-        return;
+
+    resetHand(){
+        this.#hand = [];
     }
-    if(gambler.score >= gambler.limit){
-        stand();
+
+    addCard(card){
+        this.#hand.push(card);
+        this.calculateScore();
     }
-}
-
-
-
+    
+    isLimitReached(){
+        return this.#score >= this.#limit;
+    }
+    
     getHand(){
         return this.#hand;
     }
@@ -42,12 +47,12 @@ class Actor {
         return this.#score;
     }
     setScore(score){
-       this.score = new Score();
+       this.#score = score;
     }
     getLimit(){
         return this.#limit;
     }
-    idTable(){
+    getIdTable(){
         return this.#idTable;
     }
 }
