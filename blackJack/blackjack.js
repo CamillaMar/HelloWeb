@@ -7,8 +7,9 @@ hitButton.textContent = "hit";
 let stayButton = document.createElement("button");
 stayButton.textContent = "stay";
 
-document.body.appendChild(hitButton);
-document.body.appendChild(stayButton);
+document.querySelector("main section.buttons").appendChild(hitButton);
+document.querySelector("main section.buttons").appendChild(stayButton);
+
 
 hitButton.addEventListener("click", () => {
     game.onHit();

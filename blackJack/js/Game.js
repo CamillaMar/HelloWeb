@@ -10,10 +10,22 @@ class Game {
     }
 
     start() {
-        this.player.addCardToHand(this.deck.drawCard());
-        this.player.addCardToHand(this.deck.drawCard());
-        this.dealer.addCardToHand(this.deck.drawCard());
-        this.dealer.addCardToHand(this.deck.drawCard());
+        let card = this.deck.drawCard();
+        this.player.addCardToHand(card);
+        card.render(true);
+
+        card = this.deck.drawCard();
+        this.player.addCardToHand(card);
+        card.render(true);
+
+        card = this.deck.drawCard();
+        this.dealer.addCardToHand(card);
+        card.render(false);
+
+        card = this.deck.drawCard();
+        this.dealer.addCardToHand(card);
+        card.render(false);
+        
 
     }
 
@@ -28,11 +40,11 @@ class Game {
             this.dealer.addCardToHand(this.deck.drawCard());
             console.log("Dealers hand: "+this.dealer.getHandValue());
         }
-        this.checkFinalScores();
+        this.checkFinalValues();
         
     }
 
-    checkFinalScores() {
+    checkFinalValues() {
         if (this.player.getHandValue() === this.dealer.getHandValue()) {
             console.log("Hai pareggiato");
         } else if (this.dealer.getHandValue() > 21 || this.player.getHandValue() > this.dealer.getHandValue()) {
