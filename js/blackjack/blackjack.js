@@ -15,26 +15,6 @@ b3.addEventListener("click", () =>{
     stand();
 });
 
-const player = {
-    hand: [],
-    score: 0,
-    limit: 21,
-    idTable: "tablePlayer"
-};
-
-const cpu = {
-    hand: [],
-    score: 0,
-    limit: 17,
-    idTable: "tableCpu"
-};
-
-
-
-let signs = ['♠', '♥', '♦', '♣'];
-let numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
-let deck = [];
-
 function start(){
     b2.disabled = false;
     b3.disabled = false;
@@ -57,26 +37,6 @@ function start(){
     }
 }
 
-function createDeck(){
-    deck = [];
-    signs.forEach(sign =>{
-        numbers.forEach(number =>{
-            deck.push(new Card(sign, number))
-        })
-    });
-    return deck;
-}
-
-function shuffleDeck(){
-    for(let i = 0; i < 1000 && deck.length > 1; i++){
-        const r1 = Math.floor(Math.random() * deck.length);
-        const r2 = Math.floor(Math.random() * deck.length);
-        const temp = deck[r1];
-        deck[r1] = deck[r2];
-        deck[r2] = temp;
-    } 
-}
-
 function dealStartingHands(){
     player.hand = [];
     cpu.hand = [];
@@ -85,13 +45,13 @@ function dealStartingHands(){
     dealCard(player);
     dealCard(cpu);
 }
-
+const deck = new Deck();
 function dealCard(gambler){
-    if(deck.length === 0){
-        createDeck();
-        shuffleDeck();
+    if(deck.getCards().length === 0){
+        deck = new Deck();
+        deck.shuffleDeck();
     }
-    gambler.hand.push(deck.pop());
+    gambler.hand.push(deck.draw());
     calculateScore(gambler);
     renderHand(gambler);
     renderScore(gambler);
