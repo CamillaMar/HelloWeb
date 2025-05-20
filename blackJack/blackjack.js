@@ -12,7 +12,10 @@ document.body.appendChild(stayButton);
 
 hitButton.addEventListener("click", () => {
     game.onHit();
-    console.log(game);
+    if (game.hasPlayerBusted()) {
+        hitButton.disabled = true;
+        stayButton.disabled = true;
+    }
 });
 
 stayButton.addEventListener("click", () => {

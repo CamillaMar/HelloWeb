@@ -17,9 +17,12 @@ class Player {
         if (handValue > 21 && containsAce) {
             handValue -= 10; 
         }
+        return handValue;
     }
 
     addCardToHand(card) {
         this.hand.push(card);
     }
+
+    
 }
