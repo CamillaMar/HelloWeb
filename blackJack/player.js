@@ -35,7 +35,7 @@ export class Player{
         return this.#canPlay;
     };
     set canPlay(newStatus){
-        if( !typeof newStatus === "Boolean"){
+        if( typeof newStatus !== "boolean"){
             console.log("Ma svegliati e passa un boolean")
             return;
         }

@@ -1,5 +1,6 @@
 import { Player } from "./player.js";
-class Game{
+import { Deck } from "./deck.js"
+export class Game{
     #player;
     #dealer;
     #deck;
@@ -11,7 +12,7 @@ class Game{
         this.#deck = new Deck();
     };
     initialize(){
-        if(!this.#player.canPlay){
+        if(!this.#player.canPlay){                
             return ; //segnalare che deve bettare 
         }
         this.gameDraw(this.#player);
@@ -54,7 +55,7 @@ class Game{
         }
         this.#player.changeMoney(-fishValue);
         this.#plate += fishValue*2;
-        this.#player.canPlay(true);
+        this.#player.canPlay = true;
     };
     checkForBlackJack(){
         if( this.#dealer.handPoints === 21 ){
@@ -87,6 +88,19 @@ class Game{
         this.#dealer.resetHand();
         this.#player.resetHand();
         this.#plate = 0;
-        this.#player.canPlay(false);
+        this.#player.canPlay = false;
     };
+
+    get player(){
+        return this.#player;
+    }
+    get dealer(){
+        return this.#dealer;
+    }
+    get plate(){
+        return this.#plate;
+    }
+    get deck(){
+        return this.#deck;
+    }
 }
