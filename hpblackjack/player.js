@@ -12,14 +12,28 @@ class Player {
     drawCard(deck){
         this.hand.push(deck.removeCard());
         this.renderHand();
+        if(this.getHandValue() > 21){
+            this.playerContainer.dispatchEvent(new CustomEvent("bust"))
+        }
+        if(this.hasNaturalBlackJack()){
+            this.playerContainer.dispatchEvent(new CustomEvent("blackjack"))
+        }
+        else if(this.getHandValue() == 21){
+            this.playerContainer.dispatchEvent(new CustomEvent("21"))
+        }
     }
+
     renderHand(){
         this.handContainer.textContent = "";
+        let isTotalHidden = false;
         this.hand.forEach(card => {
+            if(card.isHidden){
+                isTotalHidden = true;
+            }
             this.handContainer.appendChild(card.cardContainer);
         });
 
-        this.handValueContainer.textContent = `total: ${this.getHandValue()}`;
+        this.handValueContainer.textContent = `total: ${(isTotalHidden ? "??" : this.getHandValue())}`;
         this.playerContainer.appendChild(this.handValueContainer);
     }
 
@@ -40,5 +54,11 @@ class Player {
 
     hasNaturalBlackJack(){
         return this.getHandValue() == 21 && this.hand.length == 2;
+    }
+    
+    resetPlayer(){
+        this.hand = [];
+        this.handContainer.innerText = "";
+        this.handValueContainer.innerText = "";
     }
 }

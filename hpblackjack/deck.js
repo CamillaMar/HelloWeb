@@ -6,6 +6,7 @@ class Deck{
     }
     
     createDeck(){
+        this.cards = [];
         for(let suit of Deck.suits) {
             for(let value of Deck.cardValues){
                 this.cards.push(new Card(suit, value));
@@ -19,14 +20,11 @@ class Deck{
     shuffleDeck(){
         for(let i = this.cards.length - 1; i>0; i--){
             const j = Math.floor(Math.random() * (i + 1));
-            console.log(i, j);
             [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
-            console.log(i, j);
         }
     }
 
-    removeCard(){
-        console.log(this.cards[this.cards.length - 1]);
+    removeCard(){;
         return this.cards.pop();
     }
 }
