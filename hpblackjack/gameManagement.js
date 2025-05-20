@@ -1,10 +1,13 @@
 class GameManagement {
-    constructor() { }
+    constructor() { 
+        this.resultContainer = document.createElement("div");
+    }
     resetGame() {
         dealer.resetPlayer();
         player.resetPlayer();
         hitButton.disabled = false;
         standButton.disabled = false;
+        this.resultContainer.textContent = "";
     }
 
     checkWin() {
@@ -35,8 +38,12 @@ class GameManagement {
         else if (playerValue < dealerValue){
             result = "You lost";
         }
-        console.log(result);  
-    }
+        console.log(result); 
+       
+        this.resultContainer.textContent = result; 
+        this.resultContainer.classList.add("result");
+        board.appendChild(this.resultContainer); 
+    } 
 
     playDealerTurn(deck) {
         console.log("turno del dealer");

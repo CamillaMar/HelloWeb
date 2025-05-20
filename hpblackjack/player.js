@@ -1,6 +1,7 @@
 class Player {
-    constructor(){
+    constructor() {
         this.hand = new Array();
+        this.wallet = 100;
         this.playerContainer = document.createElement("div");
         this.playerContainer.classList.add("player-container");
         this.handContainer = document.createElement("div");
@@ -9,25 +10,25 @@ class Player {
         this.playerContainer.appendChild(this.handContainer);
     }
 
-    drawCard(deck){
+    drawCard(deck) {
         this.hand.push(deck.removeCard());
         this.renderHand();
-        if(this.getHandValue() > 21){
+        if (this.getHandValue() > 21) {
             this.playerContainer.dispatchEvent(new CustomEvent("bust"))
         }
-        if(this.hasNaturalBlackJack()){
+        if (this.hasNaturalBlackJack()) {
             this.playerContainer.dispatchEvent(new CustomEvent("blackjack"))
         }
-        else if(this.getHandValue() == 21){
+        else if (this.getHandValue() == 21) {
             this.playerContainer.dispatchEvent(new CustomEvent("21"))
         }
     }
 
-    renderHand(){
+    renderHand() {
         this.handContainer.textContent = "";
         let isTotalHidden = false;
         this.hand.forEach(card => {
-            if(card.isHidden){
+            if (card.isHidden) {
                 isTotalHidden = true;
             }
             this.handContainer.appendChild(card.cardContainer);
@@ -37,28 +38,44 @@ class Player {
         this.playerContainer.appendChild(this.handValueContainer);
     }
 
-    getHandValue(){
+    getHandValue() {
         let sum = 0;
         let hasA = false;
         this.hand.forEach(card => {
-            if(card.value == 'A'){
+            if (card.value == 'A') {
                 hasA = true;
             }
             sum += card.getNumericValue();
         });
-        if(sum > 21 && hasA){
+        if (sum > 21 && hasA) {
             sum -= 10;
         }
         return sum;
     }
 
-    hasNaturalBlackJack(){
+    hasNaturalBlackJack() {
         return this.getHandValue() == 21 && this.hand.length == 2;
     }
-    
-    resetPlayer(){
+
+    resetPlayer() {
         this.hand = [];
         this.handContainer.innerText = "";
         this.handValueContainer.innerText = "";
+    }
+
+    bet(amount) {
+        if (this.wallet >= amount) {
+            this.wallet -= amount;
+            return this.wallet;
+        }
+    }
+
+    addWin(amount) {
+        if (this.hasNaturalBlackJack()) {
+            this.wallet += (amount * 3);
+        }
+        else {
+            this.wallet += (amout * 2);
+        }
     }
 }
