@@ -1,0 +1,796 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    background-image: url(https://www.telegraph.co.uk/multimedia/archive/01578/general-carpet-10_1578715i.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#rulesbutton{
+    background-color: rgb(196, 48, 48);
+    border: 5px solid black;
+    border-left: transparent 0;
+    height: 6em;
+    width: 7em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-top: 5%;
+
+}
+#rulesbutton img{
+    height: 100%;
+    width: 90%;
+}
+
+.closed{
+    width: 0px;
+    opacity: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.sideBar{
+    flex-direction: row;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 1%;
+    width: max-content;
+    z-index: 1000;
+    display: flex;
+    
+}
+
+nav{
+    float: left;
+    border: 5px solid rgb(134, 69, 15);
+    border-left:transparent;
+    background-color: rgb(239, 240, 168);
+    margin-top: 0.5%;
+    height: 98%;
+    width: 50%;
+    padding: 5%;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    z-index: 1100;
+
+}
+
+main {
+    width: 60%;
+    height: 60%;
+}
+
+
+#dealerSide {
+    background-color: rgb(8, 62, 10);
+    width: 100%;
+    height: 50%;
+    border-top-left-radius: 65%;
+    border-top-right-radius: 65%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1.5fr 2fr 1fr;
+    padding: 5% 10%;
+    padding-bottom: 0;
+    border: solid rgb(88, 49, 0) 10px;
+    border-bottom: transparent;
+}
+
+#dealerSide .deck{
+    grid-row: 1;
+}
+#dealerSide .deck:not(:first-child){
+    z-index: 1000;
+    grid-row: 1;
+}
+
+#playerSide {
+    background-color: rgb(17, 99, 21);
+    width: 100%;
+    height: 50%;
+    border-bottom-left-radius: 65%;
+    border-bottom-right-radius: 65%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 2fr 1.5fr;
+    padding: 5% 10%;
+    padding-top: 0;
+    border: solid rgb(88, 49, 0) 10px;
+    border-top: transparent;
+}
+
+#resetZone{
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#resetZone button{
+    padding: 1%;
+    background-color: rgb(77, 167, 228);
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.bettingCalcZone{
+    grid-column: 3;
+    grid-row: 1;
+    display: flex;
+    gap: 10%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mazzo{
+    display: flex;
+    grid-row: 2;
+    align-items: center;
+    justify-content: center;
+}
+
+.deck >*:not(:first-child){
+    margin-left: -1.6em;
+}
+
+.mazzo button{
+    height:5em;
+    width: 4em;
+    background-color: rgb(105, 22, 22);
+    border-radius: 5px;
+    box-shadow: none;
+    border: none;
+    box-shadow: 0px 0px 1em black;
+}
+
+.mazzo button:hover{
+    height:6em;
+    width: 5em;
+}
+
+#messagePrompt{
+    border: 5px solid rgb(22, 22, 22);
+    border-radius: 50px;
+    font-size: larger;
+    background-color:rgb(13, 75, 15) ;
+    margin: 5%;
+    grid-row: 2;
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.betZone{
+    grid-row: 2;
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+.betZone button{
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 100%;
+    box-shadow: none;
+    border: none;
+    font-weight: bolder;
+    color: white;
+    border: white dotted 0.2em;
+    box-shadow: 0px 0px 1em black;
+    
+}
+.betZone button:hover{
+    width: 3em;
+    height: 3em;
+}
+.betZone #fish10{
+    background-color: rgb(238, 238, 238);
+    border-color:rgb(2, 61, 100);
+    color: black;
+    
+}
+.betZone #fish20{
+    background-color: rgb(129, 9, 9);
+}
+.betZone #fish50{
+    background-color: rgb(57, 194, 53);
+    color: black;
+}
+.betZone #fish100{
+    background-color: rgb(53, 62, 194);
+    color: black;
+}
+
+#stay{
+    grid-row: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#stay button{
+    padding: 5% 7%;
+    font-weight: bold;
+    background-color:rgb(49, 161, 105);
+    border: solid black 2px;
+    border-radius: 5px;
+}
+#stay button:hover{
+    background-color:rgb(60, 197, 128);
+    border: solid rgb(255, 52, 52) 2px;
+    
+}
+
+#stay button:active{
+    background-color:rgb(204, 49, 44);
+    border: solid rgb(0, 0, 0) 2px;
+    
+}
+
+.BetInventory{
+    grid-column: 3;
+    grid-row: 3;
+    display: flex;
+    gap: 10%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.deck {
+    grid-column: 2;
+    grid-row: 3;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background-color: rgb(190, 199, 159);
+    width: 3em;
+    height: 4em;
+    border-radius: 5%;
+    position: relative;
+    box-shadow: 0px 0px 1em black  ;
+}
+.card:hover {
+    background-color: rgb(190, 199, 159);
+    width: 3.5em;
+    height: 4.5em;
+    border-radius: 5%;
+    position: relative;
+}
+
+
+.card[type="checkbox"]:checked {
+    opacity: 100;
+    appearance: none;
+    background-color: rgb(104, 24, 24);
+}
+
+
+.card>input,
+.card>u,
+.card>b {
+    position: absolute;
+    height: 100%;
+}
+
+.card>u,
+.card>b {
+    position: relative;
+    z-index: 0;
+}
+
+.card>input {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.card>input:hover {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+}
+
+.card>u {
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+}
+
+.card>u::before,
+.card>u::after {
+    display: block;
+    font-family: Marvel, "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.card>u::before {
+    width: 1px;
+    display: block;
+    margin-left: 5%;
+    text-decoration: none;
+}
+
+.card>u::after {
+    position: absolute;
+    top: 25%;
+    right: 9%;
+    width: 50%;
+    height: 120%;
+    padding-top: 1%;
+    font-size: 2em;
+    white-space: pre;
+    border: 1px solid;
+    border-radius: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+    text-align: center;
+
+}
+
+
+.deck [class^=h],
+.deck [class^=d] {
+    color: rgb(163, 23, 13);
+    border-color: rgb(163, 23, 13);
+}
+
+.deck [class^=c],
+.deck [class^=s] {
+    color: #123;
+    border-color: #123;
+}
+
+
+
+
+/* Hearts */
+.deck .hA::before {
+    content: 'A \2665';
+}
+
+.deck .hA::after {
+    content: '\2665';
+}
+
+.deck .h2::before {
+    content: '2 \2665';
+}
+
+.deck .h2::after {
+    content: '\2665 \a\a\a\a \2665';
+}
+
+.deck .h3::before {
+    content: '3 \2665';
+}
+
+.deck .h3::after {
+    content: '\2665\a\a\2665\a\a\2665';
+}
+
+.deck .h4::before {
+    content: '4 \2665';
+}
+
+.deck .h4::after {
+    content: '\2665    \2665\a\a\a\a\2665    \2665';
+}
+
+.deck .h5::before {
+    content: '5 \2665';
+}
+
+.deck .h5::after {
+    content: '\2665    \2665\a\a\2665\a\a\2665    \2665';
+}
+
+.deck .h6::before {
+    content: '6 \2665';
+}
+
+.deck .h6::after {
+    content: '\2665    \2665\a\a\2665    \2665\a\a\2665    \2665';
+}
+
+.deck .h7::before {
+    content: '7 \2665';
+}
+
+.deck .h7::after {
+    content: '\2665    \2665\a\2665\a\2665    \2665\a\a\2665    \2665';
+}
+
+.deck .h8::before {
+    content: '8 \2665';
+}
+
+.deck .h8::after {
+    content: '\a\2665    \2665\a\a\a\a\2665    \2665\a\a\a\a\2665    \2665\a\a\a\a\2665    \2665';
+}
+
+.deck .h9::before {
+    content: '9 \2665';
+}
+
+.deck .h9::after {
+    content: '\a\2665    \2665\a\a\2665\a\a\2665    \2665\a\a\a\a\2665    \2665\a\a\a\a\2665    \2665';
+}
+
+.deck .h10::before {
+    content: '10 \2665';
+}
+
+.deck .h10::after {
+    content: '\a\2665    \2665\a\a\2665\a\a\2665    \2665\a\a\a\a\2665    \2665\a\a\2665\a\a\2665    \2665';
+}
+
+.deck .hJ::before {
+    content: 'J \2665';
+}
+
+.deck .hJ::after {
+    content: 'J\a\2665';
+}
+
+.deck .hQ::before {
+    content: 'Q \2665';
+}
+
+.deck .hQ::after {
+    content: 'Q\a\2665';
+}
+
+.deck .hK::before {
+    content: 'K \2665';
+}
+
+.deck .hK::after {
+    content: 'K\a\2665';
+}
+
+/* Clubs */
+.deck .cA::before {
+    content: 'A \2663';
+}
+
+.deck .cA::after {
+    content: '\2663';
+}
+
+.deck .c2::before {
+    content: '2 \2663';
+}
+
+.deck .c2::after {
+    content: '\2663\a\a\a\a\2663';
+}
+
+.deck .c3::before {
+    content: '3 \2663';
+}
+
+.deck .c3::after {
+    content: '\2663\a\a\2663\a\a\2663';
+}
+
+.deck .c4::before {
+    content: '4 \2663';
+}
+
+.deck .c4::after {
+    content: '\2663    \2663\a\a\a\a\2663    \2663';
+}
+
+.deck .c5::before {
+    content: '5 \2663';
+}
+
+.deck .c5::after {
+    content: '\2663    \2663\a\a\2663\a\a\2663    \2663';
+}
+
+.deck .c6::before {
+    content: '6 \2663';
+}
+
+.deck .c6::after {
+    content: '\2663    \2663\a\a\2663    \2663\a\a\2663    \2663';
+}
+
+.deck .c7::before {
+    content: '7 \2663';
+}
+
+.deck .c7::after {
+    content: '\2663    \2663\a\2663\a\2663    \2663\a\a\2663    \2663';
+}
+
+.deck .c8::before {
+    content: '8 \2663';
+}
+
+.deck .c8::after {
+    content: '\a\2663    \2663\a\a\a\a\2663    \2663\a\a\a\a\2663    \2663\a\a\a\a\2663    \2663';
+}
+
+.deck .c9::before {
+    content: '9 \2663';
+}
+
+.deck .c9::after {
+    content: '\a\2663    \2663\a\a\2663\a\a\2663    \2663\a\a\a\a\2663    \2663\a\a\a\a\2663    \2663';
+}
+
+.deck .c10::before {
+    content: '10 \2663';
+}
+
+.deck .c10::after {
+    content: '\a\2663    \2663\a\a\2663\a\a\2663    \2663\a\a\a\a\2663    \2663\a\a\2663\a\a\2663    \2663';
+}
+
+.deck .cJ::before {
+    content: 'J \2663';
+}
+
+.deck .cJ::after {
+    content: 'J\a\2663';
+}
+
+.deck .cQ::before {
+    content: 'Q \2663';
+}
+
+.deck .cQ::after {
+    content: 'Q\a\2663';
+}
+
+.deck .cK::before {
+    content: 'K \2663';
+}
+
+.deck .cK::after {
+    content: 'K\a\2663';
+}
+
+/* Diamonds */
+.deck .dA::before {
+    content: 'A \2666';
+}
+
+.deck .dA::after {
+    content: '\2666';
+}
+
+.deck .d2::before {
+    content: '2 \2666';
+}
+
+.deck .d2::after {
+    content: '\2666\a\a\a\a\2666';
+}
+
+.deck .d3::before {
+    content: '3 \2666';
+}
+
+.deck .d3::after {
+    content: '\2666\a\a\2666\a\a\2666';
+}
+
+.deck .d4::before {
+    content: '4 \2666';
+}
+
+.deck .d4::after {
+    content: '\2666    \2666\a\a\a\a\2666    \2666';
+}
+
+.deck .d5::before {
+    content: '5 \2666';
+}
+
+.deck .d5::after {
+    content: '\2666    \2666\a\a\2666\a\a\2666    \2666';
+}
+
+.deck .d6::before {
+    content: '6 \2666';
+}
+
+.deck .d6::after {
+    content: '\2666    \2666\a\a\2666    \2666\a\a\2666    \2666';
+}
+
+.deck .d7::before {
+    content: '7 \2666';
+}
+
+.deck .d7::after {
+    content: '\2666    \2666\a\2666\a\2666    \2666\a\a\2666    \2666';
+}
+
+.deck .d8::before {
+    content: '8 \2666';
+}
+
+.deck .d8::after {
+    content: '\a\2666    \2666\a\a\a\a\2666    \2666\a\a\a\a\2666    \2666\a\a\a\a\2666    \2666';
+}
+
+.deck .d9::before {
+    content: '9 \2666';
+}
+
+.deck .d9::after {
+    content: '\a\2666    \2666\a\a\2666\a\a\2666    \2666\a\a\a\a\2666    \2666\a\a\a\a\2666    \2666';
+}
+
+.deck .d10::before {
+    content: '10 \2666';
+}
+
+.deck .d10::after {
+    content: '\a\2666    \2666\a\a\2666\a\a\2666    \2666\a\a\a\a\2666    \2666\a\a\2666\a\a\2666    \2666';
+}
+
+.deck .dJ::before {
+    content: 'J \2666';
+}
+
+.deck .dJ::after {
+    content: 'J\a\2666';
+}
+
+.deck .dQ::before {
+    content: 'Q \2666';
+}
+
+.deck .dQ::after {
+    content: 'Q\a\2666';
+}
+
+.deck .dK::before {
+    content: 'K \2666';
+}
+
+.deck .dK::after {
+    content: 'K\a\2666';
+}
+
+/* Spades */
+.deck .sA::before {
+    content: 'A \2660';
+}
+
+.deck .sA::after {
+    content: '\2660';
+}
+
+.deck .s2::before {
+    content: '2 \2660';
+}
+
+.deck .s2::after {
+    content: '\2660\a\a\a\a\2660';
+}
+
+.deck .s3::before {
+    content: '3 \2660';
+}
+
+.deck .s3::after {
+    content: '\2660\a\a\2660\a\a\2660';
+}
+
+.deck .s4::before {
+    content: '4 \2660';
+}
+
+.deck .s4::after {
+    content: '\2660    \2660\a\a\a\a\2660    \2660';
+}
+
+.deck .s5::before {
+    content: '5 \2660';
+}
+
+.deck .s5::after {
+    content: '\2660    \2660\a\a\2660\a\a\2660    \2660';
+}
+
+.deck .s6::before {
+    content: '6 \2660';
+}
+
+.deck .s6::after {
+    content: '\2660    \2660\a\a\2660    \2660\a\a\2660    \2660';
+}
+
+.deck .s7::before {
+    content: '7 \2660';
+}
+
+.deck .s7::after {
+    content: '\2660    \2660\a\2660\a\2660    \2660\a\a\2660    \2660';
+}
+
+.deck .s8::before {
+    content: '8 \2660';
+}
+
+.deck .s8::after {
+    content: '\a\2660    \2660\a\a\a\a\2660    \2660\a\a\a\a\2660    \2660\a\a\a\a\2660    \2660';
+}
+
+.deck .s9::before {
+    content: '9 \2660';
+}
+
+.deck .s9::after {
+    content: '\a\2660    \2660\a\a\2660\a\a\2660    \2660\a\a\a\a\2660    \2660\a\a\a\a\2660    \2660';
+}
+
+.deck .s10::before {
+    content: '10 \2660';
+}
+
+.deck .s10::after {
+    content: '\a\2660    \2660\a\a\2660\a\a\2660    \2660\a\a\a\a\2660    \2660\a\a\2660\a\a\2660    \2660';
+}
+
+.deck .sJ::before {
+    content: 'J \2660';
+}
+
+.deck .sJ::after {
+    content: 'J\a\2660';
+}
+
+.deck .sQ::before {
+    content: 'Q \2660';
+}
+
+.deck .sQ::after {
+    content: 'Q\a\2660';
+}
+
+.deck .sK::before {
+    content: 'K \2660';
+}
+
+.deck .sK::after {
+    content: 'K\a\2660';
+}

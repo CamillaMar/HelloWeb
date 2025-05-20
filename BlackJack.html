@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/Blackjack.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="sideBar">
+        <nav class="closed">
+            <article>
+                <header>
+                    <h2 class="centerText">Come si Gioca a Blackjack</h2>
+                    <br>
+                    <br>
+                    <p>Il gioco di carte definitivo del 21. Facile da imparare, difficile da
+                        padroneggiare.</p>
+                </header>
+                <br>
+                <br>
+                <section>
+                    <h2>Obiettivo</h2>
+                    <p>
+                        Ottieni una mano il più vicino possibile a <strong>21</strong> senza superarlo.
+                        Batti la mano del banco per vincere.
+                    </p>
+                </section>
+                <br>
+                <br>
+                <section>
+                    <h2>Valore delle Carte</h2>
+                    <ul>
+                        <li>Dal 2 al 10: Valore nominale</li>
+                        <li>J, Q, K: 10 punti ciascuna</li>
+                        <li>Asso: 1 o 11 punti (a seconda di cosa ti conviene di più)</li>
+                    </ul>
+                </section>
+                <br>
+                <br>
+                <section>
+                    <h2>Come si Gioca</h2>
+                    <ol>
+                        <li>Ogni giocatore riceve 2 carte. Il banco ne riceve 1 scoperta e 1 coperta.</li>
+                        <li>Puoi scegliere di:
+                            <ul>
+                                <li><strong>Chiedere carta (Hit)</strong>: Prendere un’altra carta. <br>
+                                    <u>Cliccando sul mazzo a sinistra nella tua plancia</u></li>
+                                <li><strong>Stare (Stand)</strong>: Tenere la mano attuale. <br> <u>Cliccando sul
+                                        tasto stay</u></li>
+                            </ul>
+                        </li>
+                        <li>Continua a chiedere finché sei soddisfatto o "sfori" (superi 21).</li>
+                        <li>Chi è più vicino a 21 senza sforare vince. In caso di parità vince il Banco.</li>
+                    </ol>
+                </section>
+                <br>
+                <br>
+                <section>
+                    <h2>Blackjack!</h2>
+                    <p>
+                        Se le tue prime due carte sono un <strong>Asso</strong> e una <strong>carta da 10
+                            punti</strong>, hai fatto
+                        <strong>Blackjack</strong>!
+                        Di solito vinci subito (a meno che anche il banco non abbia un Blackjack — in quel caso è
+                        pareggio).
+                    </p>
+                </section>
+            </article>
+        </nav>
+        <button id="rulesbutton">
+            <img src="https://icons.veryicon.com/png/o/business/colorful-office-icons/book-52.png" alt="Rules">
+        </button>
+
+    </div>
+
+    <main>
+        <div id="dealerSide">
+            <div id="messagePrompt">
+                <p></p>
+            </div>
+            <div class="deck">
+
+            </div>
+        </div>
+        <div id="playerSide">
+            <div id="resetZone">
+
+            </div>
+            <div class="bettingCalcZone">
+                <p>BET AMOUNT:</p>
+                <p>0€$£</p>
+            </div>
+
+            <div class="mazzo">
+                <button>
+                </button>
+            </div>
+
+            <div id="messagePrompt">
+                <p></p>
+            </div>
+
+            <div class="betZone">
+                <button id="fish10" value="10">
+                    10
+                </button>
+                <button id="fish20" value="20">
+                    20
+                </button>
+                <button id="fish50" value="50">
+                    50
+                </button>
+                <button id="fish100" value="100">
+                    100
+                </button>
+            </div>
+
+            <div id="stay">
+                <button>
+                    STAY
+                </button>
+            </div>
+
+            <div class="deck">
+
+            </div>
+
+            <div class="BetInventory">
+                <p>YOUR MONEY:</p>
+                <p>€$£</p>
+            </div>
+        </div>
+    </main>
+    <script src="js/Balckjack.js"></script>
+</body>
+
+</html>
