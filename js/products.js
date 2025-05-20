@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	b2.addEventListener("click", () => {
 		const input = document.querySelector("input");
-		esercizio2("tablecontainer", {pathVariables: [input.value]});
+		esercizio2("tablecontainer", {pathVariables: input.value});
 	});
 
 	b3.addEventListener("click", () => {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function esercizio2(idContainer, config){
-  if(!config.pathVariables[0]){
+  if(!config.pathVariables && config.pathVariables !== 0){
     alert("devi scegliere un valore per l'id della categoria")
     return;
   }
@@ -96,7 +96,7 @@ async function employeeInOmaggio(){
   await callService({
     controller: "employee",
     method: "PUT",
-    pathVariables: [employee.empId],
+    pathVariables: employee.empId,
     params: employee
   });
 }

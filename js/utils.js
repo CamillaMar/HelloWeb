@@ -28,6 +28,7 @@ async function callService(config) {
 }
 function getUrl({ controller, method = "GET", pathVariables = [], params = {} }) {
   let url = `http://localhost:8080/api/${controller}`;
+  pathVariables = toArray(pathVariables);
 
   if (pathVariables.length > 0) {
     url += "/" + pathVariables.map(encodeURIComponent).join("/");

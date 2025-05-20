@@ -13,11 +13,6 @@ b3.addEventListener("click", () =>{
     stand();
 });
 
-function Card(sign, number){
-    this.sign = sign;
-    this.number = number;
-}
-
 const player = {
     hand: [],
     score: 0,
@@ -32,13 +27,17 @@ const cpu = {
     state: "wait-turn"
 };
 
+function Card(sign, number){
+    this.sign = sign;
+    this.number = number;
+}
 
 Card.prototype.getValue = function(){
     if (['J', 'Q', 'K'].includes(this.number)) {
         return 10;
     }
     if(this.number === 'A'){
-        return 0;
+        return 1;
     }
     return parseInt(this.number);
 }
@@ -115,8 +114,8 @@ function calculateScore(gambler){
         }
         gambler.score += card.getValue();
     });
-    if(aces > 0){
-        gambler.score += (gambler.score + aces-1) < 11 ? 11 + aces-1 : aces;
+    if(aces > 0 && (gambler.score + 10) <= 21){
+        gambler.score += 10;
     }
     if(gambler.score > 21 ){
         gambler.state = "bust";
