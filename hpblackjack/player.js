@@ -9,7 +9,9 @@ class Player {
         this.handContainer = document.createElement("div");
         this.handContainer.classList.add("hand-container");
         this.handValueContainer = document.createElement("div");
+        this.walletContainer = document.createElement("div");
         this.playerContainer.appendChild(this.handContainer);
+        
     }
 
     drawCard(deck) {
@@ -18,7 +20,7 @@ class Player {
         if (this.getHandValue() > 21) {
             this.playerContainer.dispatchEvent(new CustomEvent("bust"))
         }
-        if (this.hasNaturalBlackJack()) {
+        if (this.hasNaturalBlackJack() && this.betAmount > 0) {
             this.playerContainer.dispatchEvent(new CustomEvent("blackjack"))
         }
         else if (this.getHandValue() == 21) {
@@ -79,7 +81,7 @@ class Player {
             this.wallet += (amount * 3);
         }
         else {
-            this.wallet += (amout * 2);
+            this.wallet += (amount * 2);
         }
     }
 }

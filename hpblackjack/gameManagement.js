@@ -8,32 +8,38 @@ class GameManagement {
         hitButton.disabled = false;
         standButton.disabled = false;
         this.resultContainer.textContent = "";
+        this.checkAvailableButton();
     }
 
     checkWin() {
         const playerValue = player.getHandValue();
         const dealerValue = dealer.getHandValue();
         let result;
-        if(dealerValue > 21){
-            result = "You won 😍"; 
-        }
-        else if (playerValue > 21){
+         if (playerValue > 21){
             result = "You Busted";
         } 
         else if(player.hasNaturalBlackJack() && dealer.hasNaturalBlackJack()){
-            result = "Push";        
+            result = "Push";      
+            player.wallet += player.betAmount;  
         }
         else if(!player.hasNaturalBlackJack() && dealer.hasNaturalBlackJack()){
             result = "You Lost 😢";        
         }
         else if(player.hasNaturalBlackJack() && !dealer.hasNaturalBlackJack()){
-            result = "You made BlackJack, You won 🏆";        
+            result = "You made BlackJack, You won 🏆"; 
+            player.addWin(player.betAmount);       
         }
         else if(playerValue === dealerValue){
             result = "Push";
+            player.wallet += player.betAmount;
         } 
+        else if(dealerValue > 21){
+            result = "You won 😍"; 
+            player.addWin(player.betAmount);
+        }
         else if (playerValue > dealerValue){
             result = "You won";
+            player.addWin(player.betAmount);
         } 
         else if (playerValue < dealerValue){
             result = "You lost";
@@ -43,7 +49,9 @@ class GameManagement {
         this.resultContainer.textContent = result; 
         this.resultContainer.classList.add("result");
         board.appendChild(this.resultContainer); 
+        console.log(player.wallet);
         return result; 
+        
     } 
 
     playDealerTurn(deck) {
@@ -61,7 +69,21 @@ class GameManagement {
     endPlayerTurn() {
         hitButton.disabled = true;
         standButton.disabled = true;
+        const buttons = betBoard.querySelectorAll("button");
+        buttons.forEach(button => {
+        button.disabled = true;
+        });
     }
 
-
+    checkAvailableButton(){
+        const buttons = betBoard.querySelectorAll("button");
+        buttons.forEach(button => {
+            const value = parseInt(button.dataset.value);
+            if (player.wallet < value) {
+                button.disabled = true;
+            } else {
+                button.disabled = false;
+            }
+        });
+    }
 }

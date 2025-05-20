@@ -21,25 +21,27 @@ betBoard.addEventListener("click", event => {
     if (event.target.tagName === "BUTTON") {
         const amount = parseInt(event.target.dataset.value);
         player.bet(amount);
-        const buttons = betBoard.querySelectorAll("button");
-        buttons.forEach(button => {
-            const value = parseInt(button.dataset.value);
-            if (player.wallet < value) {
-                button.disabled = true;
-            } else {
-                button.disabled = false;
-            }
-        });
+        gameManagement.checkAvailableButton();
+        console.log(player.wallet);
     }
 });
 
 hitButton.addEventListener("click", () => {
-    player.drawCard(deck);
+    if(player.betAmount == 0){
+        alert("Devi puntare, prima di giocare")
+    } else{
+        player.drawCard(deck);
+    }
+    
 });
 
 standButton.addEventListener("click", () => {
-    gameManagement.endPlayerTurn();
-    gameManagement.playDealerTurn(deck);
+    if(player.betAmount == 0){
+        alert("Devi puntare, prima di giocare")
+    } else{
+        gameManagement.endPlayerTurn();
+        gameManagement.playDealerTurn(deck);
+    }
 });
 
 player.playerContainer.addEventListener("bust", () => {
@@ -48,18 +50,25 @@ player.playerContainer.addEventListener("bust", () => {
 });
 
 player.playerContainer.addEventListener("blackjack", () => {
-    gameManagement.endPlayerTurn();
-    gameManagement.playDealerTurn(deck);
+     if(player.betAmount == 0){
+        alert("Devi puntare, prima di giocare")
+    } else{
+        gameManagement.endPlayerTurn();
+        gameManagement.playDealerTurn(deck);
+    }
 });
 
 player.playerContainer.addEventListener("21", () => {
-    gameManagement.endPlayerTurn();
-    gameManagement.playDealerTurn(deck);
+   if(player.betAmount == 0){
+        alert("Devi puntare, prima di giocare")
+    } else{
+        gameManagement.endPlayerTurn();
+        gameManagement.playDealerTurn(deck);
+    }
 });
 
 start.addEventListener("click", () => {
-    let betAmount = 0; 
-    
+
     gameManagement.resetGame();
     console.log(deck.cards.length);
     deck.createDeck();
@@ -72,6 +81,7 @@ start.addEventListener("click", () => {
     dealer.renderHand();
     player.drawCard(deck);
     player.drawCard(deck);
+
     console.log(deck.cards.length);
 });
 
