@@ -9,12 +9,12 @@ const endGame = document.createElement("div");
 board.appendChild(resultContainer);
 
 player.playerContainer.addEventListener("bust", () =>{
-    endGame.textContent = "You Busted LOSER BUUUUUUUUUUUUU";
+    endGame.textContent = "You Busted LOSER BUUUUUUUUUUUUU"; //esaurimento
     endPlayerTurn();
 });
 
 player.playerContainer.addEventListener("blackjack", () =>{
-    endGame.textContent = "bella per te";
+    endGame.textContent = "bella per te"; //daje
     endPlayerTurn();
     console.log("DEBUG BLACKJACK");
     console.log(computer.hand[1]); 
@@ -22,7 +22,7 @@ player.playerContainer.addEventListener("blackjack", () =>{
 });
 
 player.playerContainer.addEventListener("21", () =>{
-    endGame.textContent = "hai fatto 21, mo aspetta di vedere cosa fa il computer mica è finita eh";
+    endGame.textContent = "hai fatto 21, mo aspetta di vedere cosa fa il computer mica è finita eh"; //ok capo
     endPlayerTurn();
     playDealerTurn();
 });
