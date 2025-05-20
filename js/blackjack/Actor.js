@@ -39,6 +39,9 @@ class Actor {
     isLimitReached(){
         return this.#score >= this.#limit;
     }
+    hasBusted(){
+        return this.#score > this.#limit;
+    }
     
     getHand(){
         return this.#hand;

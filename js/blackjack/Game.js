@@ -1,5 +1,4 @@
 class Game{
-    #isAlreadyCreated;
     #UI;
     #player;
     #house;
@@ -40,7 +39,7 @@ class Game{
 
         cloneStandButton.disabled = true;
         cloneStandButton.addEventListener("click", () =>{
-            gameObject.stand();
+            gameObject.stand(gameObject.getPlayer());
         });
     }
 
@@ -79,14 +78,22 @@ class Game{
         this.#UI.renderScore(actor);
     }
 
-    stand(){
-        this.playCpu();
+    stand(actor){
+        if(actor === this.#player){
+            this.playCpu();
+        }else{
+            this.calculateWinner();
+        }
     }
 
     hit(actor){
         this.dealCard(actor);
         if(actor.isLimitReached()){
-            this.stand();
+            if(actor.hasBusted()){
+                this.calculateWinner();
+                return;
+            }
+            this.stand(actor);
         }
     }
 
@@ -94,12 +101,12 @@ class Game{
         while(!this.#house.isLimitReached()){
             this.hit(this.#house);
         }
-        this.calculateWinner();
     }
 
     calculateWinner(){
-        document.querySelector("#hit").disabled = false;
-        document.querySelector("#stand").disabled = false;
+        document.querySelector("#hit").disabled = true;
+        document.querySelector("#stand").disabled = true;
+
         if(this.#player.getScore() > 21){
             return this.triggerAlert("Hai sballato! Hai perso");
         }

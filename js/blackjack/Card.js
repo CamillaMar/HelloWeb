@@ -19,7 +19,6 @@ class Card {
         }
         return parseInt(this.#number);
     }
-
     
     getSign() {
         return this.#sign;
