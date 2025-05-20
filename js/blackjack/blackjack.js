@@ -29,20 +29,7 @@ const cpu = {
     idTable: "tableCpu"
 };
 
-function Card(sign, number){
-    this.sign = sign;
-    this.number = number;
-}
 
-Card.prototype.getValue = function(){
-    if (['J', 'Q', 'K'].includes(this.number)) {
-        return 10;
-    }
-    if(this.number === 'A'){
-        return 1;
-    }
-    return parseInt(this.number);
-}
 
 let signs = ['♠', '♥', '♦', '♣'];
 let numbers = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
