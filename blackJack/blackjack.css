@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: rgb(35, 35, 38);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    display: grid;
+    grid-template-rows: 2fr 1fr 2fr;
+    background: radial-gradient(circle, rgb(47, 130, 87) 0%, rgb(13, 89, 48) 60%);
+    height: 35rem;
+    width: 55rem;
+    border: 10px solid black;
+}
+
+section.buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+section.buttons button:nth-of-type(n) {
+    height: 3rem;
+    width: 6rem;
+    border-radius: 1rem;
+    /*background-image: linear-gradient(to right, #1b4607 0%, #a8e063  51%, #56ab2f  100%);
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;*/
+}
+
+.hand {
+    display: flex;
+    column-gap: 1rem;
+    justify-content: center;
+    margin-top: 25px;
+    font-family: Georgia;
+}
+
+.hand-value {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 25px;
+    font-family: Georgia;
+
+}
+
+.card {
+    width: 5.5rem;
+    height: 8rem;
+    border-radius: .5rem;
+    transform-origin: 50% 50%;
+    transform: rotateY(0deg);
+    transition: transform 0.55s;
+    transform-style: preserve-3d;
+    display: flex;
+    backface-visibility: hidden;
+}
+
+.card.hidden {
+    transform: rotateY(180deg);
+}
+
+.card-front {
+    width: 5.5rem;
+    height: 8rem;
+    border-radius: .5rem;
+    background-color: blanchedalmond;
+    font-family: Georgia;
+    transform-origin: 50% 50%;
+    transform: rotateY(0deg);
+    display: flex;
+    backface-visibility: hidden;
+}
+
+.card-back {
+    width: 5.5rem;
+    height: 8rem;
+    border-radius: .5rem;
+    background-color: rgb(207, 135, 28);
+    transform: rotateY(180deg);
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.result {
+    text-align: center;
+    align-content: center;
+    margin-bottom: 5px;
+}
+
+.value-suit {
+    text-align: center;
+    width: 1.4rem;
+    margin: .2rem 0 0 .2rem;
+}
+
+.big-suit {
+    font-size: 4rem;
+    display: flex;
+    transform: translate(-27%, 30%)
+}
