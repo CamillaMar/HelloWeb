@@ -6,36 +6,36 @@ export class Game{
     #deck;
     #plate = 0;
 
-    constructor(){
-        this.#dealer = new Player();
-        this.#player = new Player();
+    constructor(player,delaer){
+        this.#dealer = delaer;
+        this.#player = player;
         this.#deck = new Deck();
     };
     initialize(){
         if(!this.#player.canPlay){                
-            return ; //segnalare che deve bettare 
+            return ;
         }
         this.gameDraw(this.#player);
         this.gameDraw(this.#dealer);
         this.gameDraw(this.#player);
         this.gameDraw(this.#dealer);
-        this.checkForBlackJack();
-        return ;
+        const blackJackMaker = this.checkForBlackJack()
+        if(blackJackMaker === this.#player){return true};
+        if(blackJackMaker === this.#dealer){return false};
     };
     gameDraw(user){
-        if(!user instanceof Player){
+        if(!(user instanceof Player)){
             console.log("Me devi passa un Player chicco");
             return;
         }
         if(user.handPoints < 21){
-            user.playerDraw(this.#deck);
+            return user.playerDraw(this.#deck);
         } else if(user.handPoints > 21){
             this.checkForAces(user);
             if(this.checkBusted(user)){
-                //segnalare che ha bustato
-                return ;
+                return false;
             }
-            user.playerDraw(this.#deck);
+            return user.playerDraw(this.#deck);
         }
     }
     checkForAces(user){
@@ -54,28 +54,29 @@ export class Game{
             return; //segnalare che non ha abbastanza soldi
         }
         this.#player.changeMoney(-fishValue);
-        this.#plate += fishValue*2;
+        this.#plate += fishValue;
         this.#player.canPlay = true;
     };
     checkForBlackJack(){
         if( this.#dealer.handPoints === 21 ){
-            //segnalare che hai perso con blackjack
-            this.resetRound();
+            return this.#dealer;
         }else if(this.#player.handPoints === 21){
             this.#player.changeMoney(this.#plate *2.5);
-            //segnalare che hai vinto con blackjack
-            this.resetRound();
+            return this.#player;
         }
     };
 
     calculateWinner(){
         if(this.#player.handPoints > this.#dealer.handPoints ){
+            this.#player.changeMoney(this.#plate *2);
+            this.#plate=0;
+            return true;
             //segnalare che hai vinto
-            this.#player.changeMoney(this.#plate);
         }else if(this.#player.handPoints < this.#dealer.handPoints ){
+            this.#plate=0;
             //segnalare che hai perso
+            return false;
         }
-        this.resetRound();
     };
     checkBusted(user){
         if(this.#player.handPoints <= 21){
@@ -84,12 +85,7 @@ export class Game{
         user.canPlay = false;
         return true;
     };
-    resetRound(){
-        this.#dealer.resetHand();
-        this.#player.resetHand();
-        this.#plate = 0;
-        this.#player.canPlay = false;
-    };
+
 
     get player(){
         return this.#player;
@@ -99,6 +95,9 @@ export class Game{
     }
     get plate(){
         return this.#plate;
+    }
+    set plate(value){
+        this.#plate = value;
     }
     get deck(){
         return this.#deck;

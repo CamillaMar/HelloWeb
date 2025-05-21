@@ -18,7 +18,6 @@ export class Player{
         }
         const card = deck.draw();
         this.#hand.push(card);
-        console.log(card.points);
         this.#handPoints += card.points;
         return card;
     };
@@ -27,6 +26,9 @@ export class Player{
     };
     get handPoints(){
         return this.#handPoints;
+    };
+    set handPoints(points){
+        this.#handPoints = points;
     };
     get money(){
         return this.#money;

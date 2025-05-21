@@ -6,16 +6,33 @@
     <link rel="stylesheet" href="./blackJack.css">
 </head>
 <body>
-    <div id ="tavolo">
-        <div id ="playerHand"></div>
-        <div id ="dealerHand"></div>
-
-        <button id="bet10">bet</button>
-        <button id="hit">hit</button>
-        <button id="stay">stay</button>
-        <button id="retry">retry</button>
+    <p id="MessagePrompt"></p>
+    <button id="startButton">start</button>
+    <main class="disabled"> 
+        <div id="DealerSide">
+            <p id="TotalDealer"></p>
+            <div id ="DealerHand"></div>
+        </div>
+        <div id="PlayerSide">
+            <p id="TotalPlayer"></p>
+            <div id ="PlayerHand"></div>
+        </div>
+        <p id="BetPlate">0</p>
+        <p id="PlayerMoney">0</p>
+    </main>
+    <button id="startRoundButton" class="disabled">start Round</button>
+    <div id="Utilities" class="disabled">
+        <button id="HitButton">hit</button>
+        <button id="StayButton">stay</button>
+        <button id="RetryButton">retry</button>
     </div>
-    <button id="start">start</button>
+    <div id="FishZone" class="disabled">
+        <button id="Fish1" value="1">[1]</button>
+        <button id="Fish10" value="10">[10]</button>
+        <button id="Fish20" value="20">[20]</button>
+        <button id="Fish50" value="50">[50]</button>
+        <button id="Fish100" value="100">[100]</button>
+    </div>
         
     <script type="module" src ="./pageHandler.js"></script>
 </body>
