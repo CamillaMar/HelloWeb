@@ -11,7 +11,7 @@ class Player {
         this.handValueContainer = document.createElement("p");
         this.walletContainer = document.createElement("div");
         this.walletContainer.id ="wallet";
-        this.walletContainer.textContent = this.wallet;
+        this.walletContainer.textContent = this.wallet  + "$";
         this.playerContainer.appendChild(this.handContainer);
     }
 
@@ -38,8 +38,11 @@ class Player {
             }
             this.handContainer.appendChild(card.cardContainer);
         });
-
-        this.handValueContainer.textContent = `total: ${(isTotalHidden ? "??" : this.getHandValue())}`;
+        if(this.playerContainer.id == "dealer"){
+            this.handValueContainer.textContent = `Dealer total: ${(isTotalHidden ? "??" : this.getHandValue())}`;
+        } else {
+            this.handValueContainer.textContent = `Your total: ${(isTotalHidden ? "??" : this.getHandValue())}`;
+        }
         this.playerContainer.appendChild(this.handValueContainer);
     }
 
@@ -73,7 +76,7 @@ class Player {
         if (this.wallet >= amount) {
             this.betAmount += amount; 
             this.wallet -= amount;
-            this.walletContainer.textContent = this.wallet;
+            this.walletContainer.textContent = this.wallet  + "$";
             return this.wallet;
         }
     }
@@ -85,6 +88,6 @@ class Player {
         else {
             this.wallet += (amount * 2);
         }
-        this.walletContainer.textContent = this.wallet;
+        this.walletContainer.textContent = this.wallet + "$";
     }
 }

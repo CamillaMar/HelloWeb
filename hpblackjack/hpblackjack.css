@@ -8,6 +8,7 @@ body{
     color: white;
     overflow-x: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
 }
 
 #board {
@@ -40,12 +41,14 @@ button{
     text-align: center;
     padding: 5px;
     margin: 10px;
+    color: white;
 }
 
 .bet-board{
     margin: 40px;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
     padding: 1rem 2rem;
@@ -113,6 +116,7 @@ button:disabled {
 
 .hand-container{
     display: flex;
+    justify-content: center;
 }
 
 .card {
@@ -172,8 +176,12 @@ button:disabled {
 
 #wallet{
     font-size: 1.4rem;
+    font-weight: 500;
     background: rgba(255,255,255,0.1);
     padding: 0.5rem 1rem;
     border-radius: 12px;
     border: 2px solid white;
+    height: 35px; 
+    flex: 0 1 100%;
+    text-align: center;
 }

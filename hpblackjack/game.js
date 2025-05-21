@@ -2,6 +2,7 @@ const board = document.getElementById("board");
 const start = document.getElementById("start");
 const player = new Player();
 const dealer = new Player();
+dealer.playerContainer.id = "dealer";
 const btnContainer = document.createElement("div");
 btnContainer.classList.add("btn-container");
 const hitButton = document.createElement("button");
