@@ -1,0 +1,16 @@
+.disabled{
+    opacity: 0;
+}
+.hidden{
+    display: none;
+}
+
+.redSuite{
+    color:red;
+}
+.blackSuite{
+    color:black;
+}
+#PlayerSide{
+    border: 2px solid black;
+}

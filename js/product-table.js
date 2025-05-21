@@ -50,7 +50,6 @@ button.addEventListener("click", ()=>{
 
 //esercizio 2
 
-
 function renderCategorySelect(data) {
     if(data.length === 0) {
         console.log("L'array è vuoto");
@@ -82,7 +81,6 @@ loadCategories();
 
 async function loadProductByCategoryId(categoryId) {
     try {
-
         const response = await fetch("http://localhost:8080/api/product?categoryId=" + categoryId);
         const data = await response.json();
         let somma = 0;
@@ -139,7 +137,9 @@ button2.addEventListener("click", function(){
     const idValue = select.value;
     loadProductByCategoryId(idValue);
     
-}) //esercizio 3
+}) 
+
+//esercizio 3
 async function loadMostLoyalCustomer() {
     try {
         const response = await fetch("http://localhost:8080/api/customer/most-orders");
