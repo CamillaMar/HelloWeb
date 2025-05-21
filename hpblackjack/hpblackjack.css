@@ -7,8 +7,9 @@ body{
     padding: 50px;
     color: white;
     overflow-x: hidden;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     display: flex;
+    justify-content: center;
 }
 
 #board {
