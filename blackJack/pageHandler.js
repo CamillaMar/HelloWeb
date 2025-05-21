@@ -97,7 +97,6 @@ class PageHandler{
             
             this.resetRound();
             const winner = this.#game.initialize();
-            console.log(winner);
             this.#player.hand.forEach((card)=>{this.addCardToHand(this.#playerHand,card)})
             this.#dealer.hand.forEach((card)=>{this.addCardToHand(this.#dealerHand,card)})
             if(winner === true){this.#messagePrompt.textContent="BLACK JACK HAI VINTO"}
@@ -125,7 +124,8 @@ class PageHandler{
                 this.#totalDealer.textContent = this.#dealer.handPoints;
                 if(this.#dealer.handPoints>21){
                     this.#messagePrompt.textContent = "il dealer ha sforato";
-                    this.disableUtilities();                    
+                    this.disableUtilities();   
+                    //haivintoecosìvia                 
                 }
             }
             }
@@ -154,7 +154,6 @@ class PageHandler{
     }
 
     addCardToHand(Hand,card){        
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAA");
         
         let cardTarget = document.createElement("p");
         let cardTargetSuite = "";

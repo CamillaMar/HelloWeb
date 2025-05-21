@@ -6,8 +6,8 @@ export class Game{
     #deck;
     #plate = 0;
 
-    constructor(player,delaer){
-        this.#dealer = delaer;
+    constructor(player,dealer){
+        this.#dealer = dealer;
         this.#player = player;
         this.#deck = new Deck();
     };
@@ -51,7 +51,7 @@ export class Game{
     }
     bet(fishValue){
         if(this.#player.money < fishValue){
-            return; //segnalare che non ha abbastanza soldi
+            return;
         }
         this.#player.changeMoney(-fishValue);
         this.#plate += fishValue;
@@ -71,10 +71,10 @@ export class Game{
             this.#player.changeMoney(this.#plate *2);
             this.#plate=0;
             return true;
-            //segnalare che hai vinto
-        }else if(this.#player.handPoints < this.#dealer.handPoints ){
+    
+        }else if(this.#player.handPoints <= this.#dealer.handPoints ){
             this.#plate=0;
-            //segnalare che hai perso
+
             return false;
         }
     };

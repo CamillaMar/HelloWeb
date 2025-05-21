@@ -12,6 +12,7 @@ export class Player{
         return this.#money;
     };
     playerDraw(deck){
+        //da gestire con un eccezione
         if(!deck instanceof Deck){
             console.log("You didn't pass a deck object :P");
             return;

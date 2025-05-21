@@ -5,7 +5,7 @@ export class Deck{
     
     constructor(){
         ["Hearts","Diamonds","Clubs","Spades"].forEach((suite)=>{
-            for(let i = 2; i <=14; i++){
+            for(let i = 2; i <= 14; i++){
                 const card = new Card(suite, i);
                 this.#cards.push(card);
             }
