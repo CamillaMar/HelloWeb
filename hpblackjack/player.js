@@ -3,7 +3,6 @@ class Player {
         this.hand = new Array();
         this.wallet = 100;
         this.betAmount = 0; 
-        // this.lastBet = 0; 
         this.playerContainer = document.createElement("div");
         this.playerContainer.classList.add("player-container");
         this.handContainer = document.createElement("div");
@@ -48,15 +47,16 @@ class Player {
 
     getHandValue() {
         let sum = 0;
-        let hasA = false;
+        let numA = 0;
         this.hand.forEach(card => {
             if (card.value == 'A') {
-                hasA = true;
+                numA ++;
             }
             sum += card.getNumericValue();
         });
-        if (sum > 21 && hasA) {
+        while(sum > 21 && numA > 0){
             sum -= 10;
+            numA--;
         }
         return sum;
     }
@@ -66,7 +66,7 @@ class Player {
     }
 
     resetPlayer() {
-        this.hand = [];
+        this.hand = new Array();
         this.betAmount = 0; 
         this.handContainer.innerText = "";
         this.handValueContainer.innerText = "";
