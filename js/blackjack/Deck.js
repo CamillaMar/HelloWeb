@@ -46,7 +46,7 @@ class Deck{
     static #copyStandardDeck(){
         let copyDeck = [];
         Deck.#standardDeck.forEach(card => {
-            copyDeck.push(card);
+            copyDeck.push(new Card(card.getSign(), card.getNumber()));
         });
         return copyDeck;
     }

@@ -23,14 +23,14 @@ class Card {
     getSign() {
         return this.#sign;
     }
-    setSign(newSign){
-        this.#sign = newSign;
-    }
+    // setSign(newSign){
+    //     this.#sign = newSign;
+    // }
 
     getNumber() {
         return this.#number;
     }
-    setNumber(newNumber){
-        this.#number = newNumber;
-    }
+    // setNumber(newNumber){
+    //     this.#number = newNumber;
+    // }
 }

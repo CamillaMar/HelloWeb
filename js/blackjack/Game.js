@@ -75,6 +75,7 @@ class Game{
     dealStartingHands(){
         this.#player.resetHand();
         this.#house.resetHand();
+        
         this.dealCard(this.#player);
         this.dealCard(this.#house);
         this.dealCard(this.#player);
