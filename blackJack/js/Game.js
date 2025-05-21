@@ -27,6 +27,7 @@ class Game {
         }
         if (this.player.hasBusted()) {
             showGameResult("Busted!!!");
+            this.dealer.showCard(1);
         }
     }
 

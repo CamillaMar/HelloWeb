@@ -93,7 +93,7 @@ section.buttons button:nth-of-type(n) {
     width: 5.5rem;
     height: 8rem;
     border-radius: .5rem;
-    background-color: rgb(207, 135, 28);
+    background-color: rgb(84, 7, 7);
     transform: rotateY(180deg);
     position: absolute;
     backface-visibility: hidden;

@@ -1,0 +1,32 @@
+il todo deve avere
+-un titolo [form]
+-una descrizione [form]
+-una data di creazione [Auto]
+-una data di scadenza (opzionale) [form]
+-una data di completamento [Auto]
+-uno stato (completato o no) [form]
+-la categoria dell' attività [form]
+
+la form avraà 
+- un input per scrivere  (Titolo)
+- un input per scrivere  (Descrizzione)
+- un input per scrivere la data di Scadenza
+- la select dove scegliere la categoria (la select che faremo con queste categorie, può essere statica o tramite una chiamata ad un BackEnd)
+    - studio
+    - lavoro
+    - divertimento
+- button per inviare
+
+l'applicazione deve permettere di salvare delle TODO cards, deve anche permettere di 
+
+- vedere tutti i todo che sono ancora attivi, per ogniuno di questi, deve esserci un pulsante "segna come completato", che dovrà inoltre settare la data di completamento a quella odierna
+
+le TODO possono essere gestite tramite LOCALSTORANGE del browser
+il localstorange è una sorta di mappa che ha una chiave ed un valore
+
+sennò si può fare un mini backend springboot
+
+====OPZIONALE====
+
+-far vedere tutti i TODO di una categoria
+-far vedere tutti i TODO in un range di date
