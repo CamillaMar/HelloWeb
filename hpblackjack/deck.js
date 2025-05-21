@@ -6,7 +6,7 @@ class Deck{
     }
     
     createDeck(){
-        this.cards = [];
+        this.cards = new Array();
         for(let suit of Deck.suits) {
             for(let value of Deck.cardValues){
                 this.cards.push(new Card(suit, value));

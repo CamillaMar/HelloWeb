@@ -66,7 +66,6 @@ class GameManagement {
             dealer.drawCard(deck);
         };
         this.checkWin();
-        
     }
 
     endPlayerTurn() {
@@ -74,7 +73,7 @@ class GameManagement {
         standButton.disabled = true;
         const buttons = betBoard.querySelectorAll("button");
         buttons.forEach(button => {
-        button.disabled = true;
+            button.disabled = true;
         });
     }
 

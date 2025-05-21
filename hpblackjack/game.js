@@ -56,7 +56,7 @@ player.playerContainer.addEventListener("bust", () => {
 });
 
 player.playerContainer.addEventListener("blackjack", () => {
-     if(player.betAmount == 0){
+    if(player.betAmount == 0){
         alert("Devi puntare, prima di giocare")
     } else{
         gameManagement.endPlayerTurn();
