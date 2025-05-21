@@ -9,17 +9,19 @@ class GameManagement {
         standButton.disabled = false;
         this.resultContainer.textContent = "";
         this.checkAvailableButton();
+        this.resultContainer.classList.remove("result");
     }
 
     checkWin() {
         const playerValue = player.getHandValue();
         const dealerValue = dealer.getHandValue();
         let result;
-         if (playerValue > 21){
+        if (playerValue > 21){
             result = "You Busted";
         } 
         else if(player.hasNaturalBlackJack() && dealer.hasNaturalBlackJack()){
-            result = "Push";      
+            result = "Push";   
+            console.log(player.betAmount);   
             player.wallet += player.betAmount;  
         }
         else if(!player.hasNaturalBlackJack() && dealer.hasNaturalBlackJack()){
@@ -31,6 +33,7 @@ class GameManagement {
         }
         else if(playerValue === dealerValue){
             result = "Push";
+            console.log(player.betAmount);
             player.wallet += player.betAmount;
         } 
         else if(dealerValue > 21){
