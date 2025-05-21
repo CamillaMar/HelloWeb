@@ -2,41 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black Jack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
-<body>
-    <div></div>
-    <div id="tableCpu">
-        banco
-        <div name="score"></div>
-        <div name="hand"></div>
+<body class="bg-light">
+
+    <div name="table" id="tableCpu">
+        <div><strong name="table-owner">Banco</strong></div>
+        <div name="table-content">
+            <p>
+                <strong>Score:</strong> <span name="score" id="cpuScore"></span>
+            </p>
+            <div name="hand" id="cpuHand"></div>
+        </div>
+        </div>
+
+        <div name="table" id="tablePlayer">
+        <div><strong>Player</strong></div>
+        <div name="table-content">
+            <p>
+                <strong name="table-owner">Score:</strong> <span name="score" id="playerScore"></span>
+            </p>
+            <div name="hand" id="playerHand"></div>
+        </div>
     </div>
-    <br>
-    <div id="tablePlayer">
-        player
-        <div name="score"></div>
-        <div name="hand"></div>
-    </div>
+
     <div name="buttons">
-        <div>
-            <button id="start">Start game</button>
-        </div>
-        <div>
-            <button id="hit">hit</button>
-        </div>
-        <div>
-            <button id="stand">stand</button>
-        </div>
-        <div>
-            <button id="reset">RESET GAME</button>
-        </div>
+    <div><button id="start">Start game</button></div>
+    <div><button id="hit">Hit</button></div>
+    <div><button id="stand">Stand</button></div>
+    <div><button id="reset">Reset Game</button></div>
     </div>
+
+    <!-- Scripts -->
     <script src="js/blackjack/Card.js"></script>
     <script src="js/blackjack/Deck.js"></script>
     <script src="js/blackjack/Actor.js"></script>
     <script src="js/blackjack/UI.js"></script>
     <script src="js/blackjack/Game.js"></script>
     <script src="js/blackjack/Starter.js"></script>
+
 </body>
 </html>
