@@ -16,7 +16,6 @@ class Deck{
                 Deck.#standardDeck.push(new Card(sign, number))
             })
         });
-        console.log(Deck.#standardDeck);
     }
 
     shuffle(){
@@ -30,6 +29,8 @@ class Deck{
     }
 
     draw(){
+        console.log("this.#cards");
+        console.log(this.#cards);
         if(this.isEmpty()){
             this.#cards = Deck.#copyStandardDeck();
             this.shuffle();

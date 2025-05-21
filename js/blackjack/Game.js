@@ -41,6 +41,15 @@ class Game{
         cloneStandButton.addEventListener("click", () =>{
             gameObject.stand(gameObject.getPlayer());
         });
+
+        const resetButton = document.querySelector("#reset");
+
+        const cloneResetButton = resetButton.cloneNode(true);
+        resetButton.parentNode.replaceChild(cloneResetButton, resetButton);
+
+        cloneResetButton.addEventListener("click", () =>{
+            Game.resetGame();
+        });
     }
 
     start(){
@@ -123,6 +132,10 @@ class Game{
         setTimeout(function() {
             alert(msg);
         }, 1);
+    }
+
+    static resetGame(){
+        new Game();
     }
 
     getPlayer(){
