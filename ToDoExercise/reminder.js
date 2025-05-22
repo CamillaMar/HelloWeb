@@ -23,7 +23,14 @@ function createTask() {
         alert("Title and description are mandatory!");
         return;
     }
-    let task = new Task(title, description, new Date().toLocaleString(), deadline.toLocaleString(), "", "In Progress", category);
+    let task = new Task(
+        title,
+        description,
+        new Date().toLocaleString(),
+        new Date(deadline).toLocaleString(),
+        "",
+        "In Progress",
+        category);
     tasks.push(task);
     saveTasks();
     return task;
@@ -32,5 +39,21 @@ function createTask() {
 function saveTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     location.reload();
+}
+
+function renderActiveTasks() {
+    let allTaskSection = document.querySelector("#saved-tasks-section");
+    allTaskSection.replaceChildren();
+    let activeTasks = [];
+    tasks.forEach(element => {
+        if (element.isActive()) {
+            activeTasks.push(element);
+            element.render();
+        }
+    });
+    if (activeTasks.length === 0) {
+        allTaskSection.textContent = "There are no active tasks";
+    }
+    return activeTasks;
 }
 
