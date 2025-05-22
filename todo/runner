@@ -1,0 +1,6 @@
+import { manageTodo } from "./manageTodo.js";
+
+class Runner{
+const manager = new ManageTodo();
+
+}

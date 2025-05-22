@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>TODO list</title>
+</head>
+<body>
+    <h1>My TODO list</h1>
+    <form id ="toDoForm">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title"><br>
+
+    <label for="description">Description:</label><br>
+    <input type="text" id="description" name="description"><br>
+
+    <label for="deadline">Deadline:</label><br>
+    <input type="text" id="deadline" name="deadline"><br>
+
+    <label for="completed">Completed:</label><br>
+    <input type="checkbox" id="completed" name="completed"><br>
+
+    <label for="category">Category:</label><br>
+        <select id="category" name="category">
+        <option value="studio">Studio</option>
+        <option value="lavoro">Lavoro</option>
+        <option value="divertimento">Divertimento</option>      
+        </select>
+    <button input type="submit" id="button" name="button">Send Todo</button>
+    </form><br>
+
+   <script type="module" src ="./manageTodo.js"></script>
+</body>
+</body>
+</html>
