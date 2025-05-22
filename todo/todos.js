@@ -17,11 +17,12 @@ export class Todos {
 
    toJSON() {
         return {
-        title: this.title,
-        description: this.description,
-        deadline: this.deadline,
-        completed: this.completed,
-        category: this.category
+            title: this.title,
+            description: this.description,
+            deadline: this.deadline,
+            isCompleted: this.isCompleted,
+            category: this.category,
+            creationDate: this.creationDate
         }
     }
 
