@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <form method="POST">
+        <input type="text" id="title" placeholder="Insert title" required>
+        <textarea type="text" id="description" placeholder="Insert description" required></textarea>
+        <input type="date" id="due-date" name="due-date" placeholder="Select due date">
+        <select name="cateory" id="category" required>
+            <option value="">Select Category</option>
+            <option value="1">Study</option>
+            <option value="2">Work</option>
+            <option value="3">Free Time</option>
+        </select>
+        <button id="submit-btn">Add</button>
+    </form>
+    <div id="todo-list-container"></div>
+    <script src="todo.js"></script>
+    <script src="todoHandler.js"></script>
+</body>
+</html>
