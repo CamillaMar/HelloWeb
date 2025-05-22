@@ -8,26 +8,38 @@
     <body>
         <h1>La mia lista:</h1>
         <form action="/list" method="post">
-            <label for="title">Title:</label>
-            <input type="text" name="title" id="title">
-
-            <label for="description">Description:</label>
-            <input type="text" name="description" id="description">
-
-            <label for="expire-date">Expire-date:</label>
-            <input type="text" name="expire-date" id="expire-date">
-
-            <select id="category" name="category">
-                <option value="study">Study</option>
-                <option value="work">Work</option>
-                <option value="fun">Fun</option>
-            </select>
-
-            Done:<input type="checkbox" name="done"> 
-
-
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title">
+            </div>
+            <br>
+            <div>
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description">
+            </div>
+            <br>
+            <div>
+                <label for="expire-date">Expire-date:</label>
+                <input type="date" name="expire-date" id="expire-date">
+            </div>
+            <br>
+            <div>
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="study">Study</option>
+                    <option value="work">Work</option>
+                    <option value="fun">Fun</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                Done:<input type="checkbox" name="done" id="done"> 
+            </div>
+            <br>
+            <div>
+                <button id="send" type="submit">Send</button>
+            </div>
         </form>
-        
         <script src="js/listToDo.js"></script>
     </body>
 </html>
