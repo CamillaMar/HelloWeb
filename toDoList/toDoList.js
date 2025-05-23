@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     todoList.innerHTML = "";
 
     todos.forEach((todo, index) => {
-      // Cambia il filtro in base alla vista attiva
       if (showingCompleted ? todo.completed : !todo.completed) {
         const card = document.createElement("div");
         card.className = "todo-card";
@@ -71,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
           completedAt.appendChild(completedAtLabel);
           completedAt.appendChild(document.createTextNode(todo.completedAt));
           card.appendChild(completedAt);
+
         }
 
         todoList.appendChild(card);
