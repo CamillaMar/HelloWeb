@@ -153,14 +153,12 @@ class Todo{
         cardCategory.textContent = "Category: " + categoryName.categoryName;
         
         statusBtn.textContent = !this.isCompleted ? "Mark as completed" : "Mark as uncompleted";
-        statusBtn.classList.add("complete-btn");
         statusBtn.dataset.value = id;
         statusBtn.setAttribute("data-action", "complete");
         statusBtn.setAttribute("data-id", id);
 
         
         deleteBtn.textContent = "Delete Todo";
-        deleteBtn.id = `delete-btn-${id}`;
         deleteBtn.dataset.value = id;
         deleteBtn.textContent = "Delete Todo";
         deleteBtn.setAttribute("data-action", "delete");
@@ -171,16 +169,6 @@ class Todo{
             completedDate.classList.add("completed-date");
             completedDate.textContent = "Completion date: " + new Date(this.completedAt).toLocaleDateString();
         }
-
-        // statusBtn.addEventListener("click", async () =>{
-        //     await this.completeTodo(id);
-        //     await this.renderTodo(id);
-        // });
-        // deleteBtn.addEventListener("click", async () =>{
-        //     await this.deleteTodo(id);
-        //     this.todoContainer.textContent = "";
-        //     this.todoContainer.remove();
-        // })
 
         this.todoContainer.append(cardTitle, cardDescription, creationDate, deadline, cardCategory, cardStatus);
         
