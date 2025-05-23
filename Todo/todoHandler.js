@@ -2,7 +2,7 @@ class TodoHandler{
     constructor(){
         this.todos = new Array();
         this.todoListContainer = document.querySelector("#todo-list-container");
-        this.form = document.querySelector("form");
+        this.form = document.querySelector("#create-form");
         this.submitBtn = document.querySelector("#submit-btn");
         this.form.addEventListener("submit", async (event) =>{
             event.preventDefault();
