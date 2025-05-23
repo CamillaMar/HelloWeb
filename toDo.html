@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>lista di todo</title>
+    </head>
+    <body>
+        <h1>lista</h1>
+        <form action="/list" method="post">
+        <div>
+            <label for ="title">titolo:</label>
+            <input type="text" name="title" id="title">
+        </div>
+        <br>
+        <div>
+            <label for="description">Description:</label>
+            <input type="text" name="description">
+        </div>
+        <br>
+        <div>
+            <label for="expire-date">expire-date:</label>
+            <input type="date" name="expire-date" id="expire date">
+        </div>
+        <br>
+        <div>
+            <label for="category">category:</label>
+            <select id="category" name="category">
+                <option value="study">Study</option>
+                <option value="work">Work</option> 
+                <option value="fun">Fun</option> 
+            </select> 
+        </div>
+            <br>
+            <div>
+                completed<input type="checkbox" name="completed" id ="completed"
+             </div>
+             <br>
+             <div>
+                <button id="send" type="submit">send</button>
+                
+            
+                
+            
+            </div>
+            
+
+
+        </form>
+        
+        <script src="js/TODO.js"></script>
+    </body>
+</html>
