@@ -1,23 +1,23 @@
 export class Todo{
-    private _todoId: number;
+    private _todoId?: number;
     private _title: string;
     private _description: string;
-    private _createdAt: Date;
+    private _createdAt?: Date;
     private _dueDate: Date | null;
-    private _status: boolean;
+    private _status?: boolean;
     private _category: number;
-    private _completedAt: Date | null;
+    private _completedAt?: Date | null;
     todoContainer: HTMLDivElement;
 
-    constructor(title:string, description:string, dueDate: Date | null, category:number){
-        this._todoId = 0;
+    constructor(title:string, description:string, dueDate: Date | null, category:number, todoId:number = 0, createdAt:Date = new Date(), status:boolean = false, completedAt:Date = new Date()){
+        this._todoId = todoId;
         this._title = title;
         this._description = description;
-        this._createdAt = new Date();
+        this._createdAt = createdAt;
         this._dueDate = dueDate;
-        this._status = false;
+        this._status = status;
         this._category = category;
-        this._completedAt = null;
+        this._completedAt = completedAt;
         this.todoContainer = document.createElement("div");
     }
 
@@ -99,7 +99,7 @@ export class Todo{
     }
 
     async insertTodo(): Promise<any>{
-        try{
+                try{
             const response:Response = await fetch("http://localhost:8080/api/todos", {
                 method:'POST',
                 headers:  {
@@ -118,7 +118,7 @@ export class Todo{
                 throw new Error("HTTP error" + response.status);
             }
             const data:Todo = await response.json();
-            this._todoId = data._todoId;
+            this._todoId = data.todoId;
             console.log(data);
             return data;
         } catch (e:any) {
@@ -156,6 +156,22 @@ export class Todo{
         }
     }
 
+    async deleteTodo(todoId:number):Promise<void>{
+        try{
+            const response:Response = await fetch(`http://localhost:8080/api/todos/${todoId}`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error("HTTP error" + response.status + response.statusText);
+            }
+        } catch (e:any) {
+            console.error("Errore di comunicazione col server" + e);
+        }
+    }
+
     async renderTodo(id:number):Promise<void>{
         this.todoContainer.textContent = "";
         const categoryName:any = await this.getCategoryById(this._category);
@@ -171,20 +187,20 @@ export class Todo{
 
         cardTitle.textContent = "Title: " + this._title;
         cardDescription.textContent = "Description: " + this._description;
-        creationDate.textContent = "Creation date: " + this._createdAt.toLocaleDateString();
+        creationDate.textContent = "Creation date: " + (this._createdAt ? this._createdAt.toLocaleDateString() : "");
         deadline.textContent = "Due date: " + (this._dueDate ?  new Date(this._dueDate).toLocaleDateString() : "No due date");
         cardStatus.textContent = "Status: " + (this._status ? "Completed" : "Not completed");
         cardCategory.textContent = "Category: " + categoryName.categoryName;
 
         statusBtn.textContent = !this._status ? "Mark as completed" : "Mark as uncompleted";
         statusBtn.setAttribute("data-action", "complete");
-        statusBtn.setAttribute("data-id", `${id}`);
+        statusBtn.setAttribute("data-id", id.toString());
+        statusBtn.id = `status-btn-${id}`;
 
-        
-        deleteBtn.textContent = "Delete Todo";
         deleteBtn.textContent = "Delete Todo";
         deleteBtn.setAttribute("data-action", "delete");
-        deleteBtn.setAttribute("data-id", `${id}`);
+        deleteBtn.setAttribute("data-id", id.toString());
+        deleteBtn.id = `delete-btn-${id}`;
 
         const completedDate = document.createElement("p");
         if (this._status && this._completedAt) {

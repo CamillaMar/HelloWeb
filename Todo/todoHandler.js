@@ -6,7 +6,7 @@ class TodoHandler{
         this.submitBtn = document.querySelector("#submit-btn");
         this.form.addEventListener("submit", async (event) =>{
             event.preventDefault();
-            
+            console.log("addjs");
             await this.addTodoToList();
             this.renderTodoList();
         });

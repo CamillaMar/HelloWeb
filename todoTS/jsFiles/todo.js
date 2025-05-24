@@ -8,15 +8,15 @@ export class Todo {
     _category;
     _completedAt;
     todoContainer;
-    constructor(title, description, dueDate, category) {
-        this._todoId = 0;
+    constructor(title, description, dueDate, category, todoId = 0, createdAt = new Date(), status = false, completedAt = new Date()) {
+        this._todoId = todoId;
         this._title = title;
         this._description = description;
-        this._createdAt = new Date();
+        this._createdAt = createdAt;
         this._dueDate = dueDate;
-        this._status = false;
+        this._status = status;
         this._category = category;
-        this._completedAt = null;
+        this._completedAt = completedAt;
         this.todoContainer = document.createElement("div");
     }
     get title() {
@@ -115,7 +115,7 @@ export class Todo {
                 throw new Error("HTTP error" + response.status);
             }
             const data = await response.json();
-            this._todoId = data._todoId;
+            this._todoId = data.todoId;
             console.log(data);
             return data;
         }
@@ -152,6 +152,22 @@ export class Todo {
             console.error("Errore di comunicazione col server" + e);
         }
     }
+    async deleteTodo(todoId) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/todos/${todoId}`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error("HTTP error" + response.status + response.statusText);
+            }
+        }
+        catch (e) {
+            console.error("Errore di comunicazione col server" + e);
+        }
+    }
     async renderTodo(id) {
         this.todoContainer.textContent = "";
         const categoryName = await this.getCategoryById(this._category);
@@ -165,17 +181,18 @@ export class Todo {
         const deleteBtn = document.createElement("button");
         cardTitle.textContent = "Title: " + this._title;
         cardDescription.textContent = "Description: " + this._description;
-        creationDate.textContent = "Creation date: " + this._createdAt.toLocaleDateString();
+        creationDate.textContent = "Creation date: " + (this._createdAt ? this._createdAt.toLocaleDateString() : "");
         deadline.textContent = "Due date: " + (this._dueDate ? new Date(this._dueDate).toLocaleDateString() : "No due date");
         cardStatus.textContent = "Status: " + (this._status ? "Completed" : "Not completed");
         cardCategory.textContent = "Category: " + categoryName.categoryName;
         statusBtn.textContent = !this._status ? "Mark as completed" : "Mark as uncompleted";
         statusBtn.setAttribute("data-action", "complete");
-        statusBtn.setAttribute("data-id", `${id}`);
-        deleteBtn.textContent = "Delete Todo";
+        statusBtn.setAttribute("data-id", id.toString());
+        statusBtn.id = `status-btn-${id}`;
         deleteBtn.textContent = "Delete Todo";
         deleteBtn.setAttribute("data-action", "delete");
-        deleteBtn.setAttribute("data-id", `${id}`);
+        deleteBtn.setAttribute("data-id", id.toString());
+        deleteBtn.id = `delete-btn-${id}`;
         const completedDate = document.createElement("p");
         if (this._status && this._completedAt) {
             completedDate.classList.add("completed-date");

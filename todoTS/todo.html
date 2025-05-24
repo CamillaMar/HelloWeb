@@ -19,7 +19,28 @@
         </select>
         <button id="submit-btn">Add</button>
     </form>
-    
+    <nav>
+        <form id="search-form">
+            <select id="search-category" name="category">
+                <option value="">All categories</option>
+                <option value="1">Study</option>
+                <option value="2">Work</option>
+                <option value="3">Free Time</option>
+            </select>
+            
+            <select id="search-status" name="status">
+                <option value="">Any status</option>
+                <option value="true">Completed</option>
+                <option value="false">Not Completed</option>
+            </select>
+            
+            <input type="date" id="search-due-date" name="dueDate">
+            
+            <input type="date" id="search-creation-date" name="createdAt">
+            
+            <button type="submit" id="">Search</button>
+        </form>
+    </nav>
     <div id="todo-list-container"></div>
     <script src="./jsFiles/todoHandler.js" type="module"></script>
 </body>
