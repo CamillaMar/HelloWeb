@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+</head>
+<body>
+    <form>
+        <input type="text" id= "title" placeholder="insert-title" required>
+        <input type="text" id = "description" placeholder="insert-description" required>
+        <input type="date" id= "due-date">
+        <select name="category" id="category" required>
+            <option value="" disabled>Select Category</option>
+            <option value="study">Study</option>
+            <option value="work">Work</option>
+            <option value="fun">Fun</option>
+        </select>
+        <button id="submit" type="button">save ToDo</button>
+    </form>
+    <button id="load">load ToDos</button>
+
+    <div id="todosContainer"></div>
+    
+    <script src="script.js" type="module"></script>
+    
+</body>
+</html>
