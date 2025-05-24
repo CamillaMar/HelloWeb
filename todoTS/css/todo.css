@@ -1,0 +1,235 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+}
+main{
+    margin: auto;
+    padding-top: 50px;
+}
+
+#create-form {
+    background: rgb(243, 234, 246);
+    font-size: 1rem;
+    padding: 15px 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    min-width: 100%;
+    width: 800px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    flex-grow: 2;
+    flex-shrink: 0;
+    flex-basis: auto;
+    /* display: flex;
+    flex-direction: column;
+    gap: 15px; */
+    display: grid;
+    gap: 8px;
+    line-height: 1.3;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+    align-items:self-start
+    
+}
+
+#create-form > h1{
+    grid-column: 1/span 2;
+    color: indigo;
+    justify-self: Center;
+}
+
+#create-form > label:not(:first-child),
+#create-form-form [type="submit"] {
+  margin-block-start: 0;
+}
+
+#create-form > label {
+    color: indigo;
+    align-self: start;
+}
+
+#create-form > button {
+    background-color: indigo;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* grid-column: 1 / span 2; */
+    grid-column-start: 2;
+    justify-self: end;
+
+}
+
+form#create-form button:hover {
+    background-color: rgb(119, 50, 169);
+}
+
+form#create-form input[type="text"],
+form#create-form textarea,
+form#create-form input[type="date"],
+form#create-form select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    width: 100%;
+}
+
+form#create-form textarea {
+    min-height: 50px;
+}
+
+nav {
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: indigo;
+    font-family: Arial;
+    width: 100%;
+}
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    font-size: 20px;
+    border: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; 
+    margin: 0;
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+#search-form {
+    background: indigo;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 0 0 8px 8px;
+    max-width: 600px;
+    width: 250px;
+    display: flex;
+    flex-direction:column;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+form#search-form select,
+form#search-form input[type="date"] {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+form#search-form button {
+    background-color: rgb(243, 234, 246);
+    color: indigo;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+form#search-form button:hover {
+    background-color:rgb(167, 117, 184);
+}
+
+/* Container lista Todo */
+#todo-list-container {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Singolo todo card */
+div.todo-container {
+    background: rgb(243, 234, 246);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    max-width: 230px;
+    gap: 8px;
+}
+
+div.todo-container h2 {
+    margin: 0 0 5px 0;
+    font-size: 1.4rem;
+    color: #222;
+}
+
+div.todo-container p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+div.todo-container strong {
+    font-weight: 600;
+    color: #444;
+}
+
+div.todo-container button {
+    align-self: flex-end;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.25s ease;
+}
+
+div.todo-container button[data-action="complete"] {
+    background-color: indigo;
+    color: white;
+}
+
+div.todo-container button[data-action="complete"]:hover {
+    background-color: rgb(119, 50, 169);
+}
+
+div.todo-container button[data-action="delete"] {
+    background-color: rgb(42, 3, 69);
+    color: white;
+}
+
+div.todo-container button[data-action="delete"]:hover {
+    background-color: rgb(119, 50, 169);
+}

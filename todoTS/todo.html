@@ -4,44 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="css/todo.css">
 </head>
 <body>
-    <form method="POST" id="create-form">
-        <input type="text" id="title" placeholder="Insert title" required>
-        <textarea type="text" id="description" placeholder="Insert description" required></textarea>
-        <input type="date" id="due-date" name="due-date" placeholder="Select due date">
-        <select name="cateory" id="category" required>
-            <option value="">Select Category</option>
-            <option value="1">Study</option>
-            <option value="2">Work</option>
-            <option value="3">Free Time</option>
-        </select>
-        <button id="submit-btn">Add</button>
-    </form>
-    <nav>
-        <form id="search-form">
-            <select id="search-category" name="category">
-                <option value="">All categories</option>
-                <option value="1">Study</option>
-                <option value="2">Work</option>
-                <option value="3">Free Time</option>
-            </select>
-            
-            <select id="search-status" name="status">
-                <option value="">Any status</option>
-                <option value="true">Completed</option>
-                <option value="false">Not Completed</option>
-            </select>
-            
-            <input type="date" id="search-due-date" name="dueDate">
-            
-            <input type="date" id="search-creation-date" name="createdAt">
-            
-            <button type="submit" id="">Search</button>
-        </form>
+    <nav class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Search
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <form id="search-form">
+                    <label for="search-category">Category</label>
+                    <select id="search-category" name="category">
+                        <option value="">All categories</option>
+                        <option value="1">Study</option>
+                        <option value="2">Work</option>
+                        <option value="3">Free Time</option>
+                    </select>
+                    <label for="search-status">Status</label>
+                    <select id="search-status" name="status">
+                        <option value="">Any status</option>
+                        <option value="true">Completed</option>
+                        <option value="false">Not Completed</option>
+                    </select>
+                    <label for="search-creation-date">Creation Date</label>
+                    <input type="date" id="search-creation-date" name="createdAt">
+                    <label for="search-due-date">Due Date</label>
+                    <input type="date" id="search-due-date" name="dueDate">
+                    
+                    <button type="submit" id="">Search</button>
+                </form>
+            </div>
+        </div>
     </nav>
-    <div id="todo-list-container"></div>
+    <main>
+        <form method="POST" id="create-form">
+                <h1>Add New To-Do</h1>
+                <label for="title">Title</label>
+                <input type="text" id="title" placeholder="Insert title" required>
+            
+                <label for="description">Description</label>
+                <textarea type="text" id="description" placeholder="Insert description" required></textarea>
+            
+                <label for="due-date">Due date</label>
+                <input type="date" id="due-date" name="due-date" placeholder="Select due date">
+            
+                <label for="category">Category</label>
+                <select name="cateory" id="category" required>
+                    <option value="">Select Category</option>
+                    <option value="1">Study</option>
+                    <option value="2">Work</option>
+                    <option value="3">Free Time</option>
+                </select>
+            
+            <button id="submit-btn">Add</button>
+        </form>
+        <div id="todo-list-container"></div>
+    </main>
     <script src="./jsFiles/todoHandler.js" type="module"></script>
 </body>
 </html>

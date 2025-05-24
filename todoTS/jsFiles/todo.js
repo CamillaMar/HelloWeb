@@ -179,13 +179,13 @@ export class Todo {
         const cardCategory = document.createElement("strong");
         const statusBtn = document.createElement("button");
         const deleteBtn = document.createElement("button");
-        cardTitle.textContent = "Title: " + this._title;
-        cardDescription.textContent = "Description: " + this._description;
-        creationDate.textContent = "Creation date: " + (this._createdAt ? this._createdAt.toLocaleDateString() : "");
-        deadline.textContent = "Due date: " + (this._dueDate ? new Date(this._dueDate).toLocaleDateString() : "No due date");
-        cardStatus.textContent = "Status: " + (this._status ? "Completed" : "Not completed");
+        cardTitle.textContent = "Title:     " + this._title;
+        cardDescription.textContent = "Description:     " + this._description;
+        creationDate.textContent = "Creation date:    " + (this._createdAt ? this._createdAt.toLocaleDateString() : "");
+        deadline.textContent = "Due date:   " + (this._dueDate ? new Date(this._dueDate).toLocaleDateString() : "No due date");
+        cardStatus.textContent = "Status:   " + (this._status ? "Completed" : "Not completed");
         cardCategory.textContent = "Category: " + categoryName.categoryName;
-        statusBtn.textContent = !this._status ? "Mark as completed" : "Mark as uncompleted";
+        statusBtn.textContent = !this._status ? "Completed" : "Uncompleted";
         statusBtn.setAttribute("data-action", "complete");
         statusBtn.setAttribute("data-id", id.toString());
         statusBtn.id = `status-btn-${id}`;
@@ -196,7 +196,7 @@ export class Todo {
         const completedDate = document.createElement("p");
         if (this._status && this._completedAt) {
             completedDate.classList.add("completed-date");
-            completedDate.textContent = "Completion date: " + new Date(this._completedAt).toLocaleDateString();
+            completedDate.textContent = "Completed on:  " + new Date(this._completedAt).toLocaleDateString();
         }
         console.log(cardTitle);
         this.todoContainer.append(cardTitle, cardDescription, creationDate, deadline, cardCategory, cardStatus);
@@ -204,6 +204,7 @@ export class Todo {
             this.todoContainer.append(completedDate);
         }
         this.todoContainer.append(statusBtn, deleteBtn);
+        this.todoContainer.classList.add("todo-container");
     }
     async completeTodo(id) {
         this._status = !this._status;
