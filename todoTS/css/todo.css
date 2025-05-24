@@ -166,7 +166,6 @@ form#search-form button:hover {
     background-color:rgb(167, 117, 184);
 }
 
-/* Container lista Todo */
 #todo-list-container {
     max-width: 700px;
     margin: 0 auto;
@@ -175,7 +174,6 @@ form#search-form button:hover {
     gap: 10px;
 }
 
-/* Singolo todo card */
 div.todo-container {
     background: rgb(243, 234, 246);
     border-radius: 10px;
@@ -183,7 +181,7 @@ div.todo-container {
     padding: 15px 20px;
     display: flex;
     flex-direction: column;
-    max-width: 230px;
+    max-width: 225px;
     gap: 8px;
 }
 
