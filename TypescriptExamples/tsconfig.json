@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", // Ensure support for private fields
+    "module": "ES6", // Use ES6 module system
+    "outDir": "jsFiles", // Transpile output directory
+    "rootDir": "./tsFiles", // Source directory
+    "strict": true, // Enable strict type-checking options
+    "esModuleInterop": true, // Enable compatibility with CommonJS modules
+    "forceConsistentCasingInFileNames": true, // Enforce consistent file naming
+    "skipLibCheck": true // Skip type checking of declaration files
+  },
+  
+}
