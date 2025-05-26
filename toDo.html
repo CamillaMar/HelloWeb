@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/toDo.css">
+</head>
+<body>
+    <form method="post">
+        <div>
+            <label for="title">Titolo</label>
+            <input type="text"id="title" required>
+        </div>
+        <div>
+            <label for="description" required>Descrizione</label>
+            <input type="text"id="description">
+        </div>
+            <div>
+            <label for="deliveryDate">Data di consegna</label>
+            <input type="date"id="deliveryDate">
+        </div>
+        <select id="originalSelect" required>
+            <option disabled>Select Category</option>
+            <option value="Studio">Studio</option>
+            <option value="Lavoro">Lavoro</option>
+            <option value="Divertimento">Divertimento</option>
+        </select>
+        <button type="submit">Invia</button>
+    </form>
+    <button id="showTODO">Show To Do</button>
+    <button id="toDoClearer">Clear ToDos</button>
+
+    <script type="module" src="/js/handle-to-do.js"></script>
+</body>
+</html>
