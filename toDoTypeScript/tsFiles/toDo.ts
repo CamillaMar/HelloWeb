@@ -1,4 +1,6 @@
-class toDo {
+import { Category } from "./category";
+
+export class toDo {
     private _todoId: number;
     private _title: string;
     private _description: string;
@@ -77,7 +79,7 @@ class toDo {
         this._categoryId = categoryId;
     }
 
-    async insertToDo(): Promise<any> {
+    async insertToDo(): Promise<toDo | undefined> {
         try {
             const response: Response = await fetch("http://localhost:8080/api/todos", {
                 method: 'POST',
@@ -102,26 +104,26 @@ class toDo {
             console.log("data " + data.todoId);
             console.log(this);
             return data;
-        } catch (e: any) {
+        } catch (e) {
             console.error("Errore di comunicazione col server" + e);
         }
     }
 
-    async getCategoryById(categoryId: number): Promise<any> {
+    async getCategoryById(categoryId: number): Promise<Category | undefined> {
         try {
             const response: Response = await fetch(`http://localhost:8080/api/categories/${categoryId}`);
             if (!response.ok) {
                 throw new Error("HTTP error" + response.status);
             }
-            const data: any = await response.json();
-            this._todoId = data.todoId;
+            const data: Category = await response.json();
+            // this._todoId = data.todoId;
             return data;
         } catch (e: any) {
             console.error("Errore di comunicazione col server" + e);
         }
     }
 
-     async updateTodo(todoId:number):Promise<any>{
+     async updateTodo(todoId:number):Promise<toDo | undefined>{
         try{
             const response: Response = await fetch(`http://localhost:8080/api/todos/${todoId}`, {
                 method:'PUT',
@@ -167,7 +169,10 @@ class toDo {
     }
 
 
-     renderToDo(): void {
+     async renderToDo(): Promise<void> {
+        console.log("appena dentro il renderTodo");
+        console.log(this._todoId);
+        
         this.toDoContainer.textContent = "";
         const title: HTMLHeadingElement = document.createElement("h2");
         const description: HTMLParagraphElement = document.createElement("p");
@@ -175,12 +180,11 @@ class toDo {
         const dueDate: HTMLParagraphElement = document.createElement("p");
         const status: HTMLParagraphElement = document.createElement("p");
         const categoryId: HTMLParagraphElement = document.createElement("p");
-        //const category:any = await this.getCategoryById(this._categoryId);
+        const category:any = await this.getCategoryById(this._categoryId);
         const statusBtn:HTMLButtonElement = document.createElement("button");
         const deleteBtn:HTMLButtonElement = document.createElement("button");
 
-        //title.textContent = "Title: " + this._title + " " + this._todoId + " " + this.todoId;
-        title.textContent = JSON.stringify(this);
+        title.textContent = "Title: " + this._title + " " + this._todoId + " " + this.todoId;
         description.textContent = "Description: " + this._description;
         createdAt.textContent = "Created At: " + this._createdAt.toLocaleDateString();
         dueDate.textContent = "Due Date: " + (this._dueDate ? new Date(this._dueDate).toLocaleDateString() : "No dueDate");
@@ -189,12 +193,12 @@ class toDo {
 
         statusBtn.textContent = !this._status ? "Completed" : "Uncompleted";
         statusBtn.setAttribute("data-action", "complete");
-        statusBtn.setAttribute("data-id", "ciao");
+        statusBtn.setAttribute("data-id", `${this._todoId}`);
         statusBtn.id = `status-btn-${this.todoId}`;
 
         deleteBtn.textContent = "Delete Todo";
         deleteBtn.setAttribute("data-action", "delete");
-        deleteBtn.setAttribute("data-id", "hello");
+        deleteBtn.setAttribute("data-id", `${this._todoId}`);
         deleteBtn.id = `delete-btn-${this.todoId}`;
 
         const completedDate = document.createElement("p");

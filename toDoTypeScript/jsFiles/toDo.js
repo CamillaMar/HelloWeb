@@ -8,6 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.toDo = void 0;
 class toDo {
     constructor(title, description, dueDate, category, todoId = 0, createdAt = new Date(), status = false, completedAt = new Date()) {
         this._todoId = todoId;
@@ -108,7 +110,7 @@ class toDo {
                     throw new Error("HTTP error" + response.status);
                 }
                 const data = yield response.json();
-                this._todoId = data.todoId;
+                // this._todoId = data.todoId;
                 return data;
             }
             catch (e) {
@@ -165,42 +167,45 @@ class toDo {
         });
     }
     renderToDo() {
-        this.toDoContainer.textContent = "";
-        const title = document.createElement("h2");
-        const description = document.createElement("p");
-        const createdAt = document.createElement("p");
-        const dueDate = document.createElement("p");
-        const status = document.createElement("p");
-        const categoryId = document.createElement("p");
-        //const category:any = await this.getCategoryById(this._categoryId);
-        const statusBtn = document.createElement("button");
-        const deleteBtn = document.createElement("button");
-        //title.textContent = "Title: " + this._title + " " + this._todoId + " " + this.todoId;
-        title.textContent = JSON.stringify(this);
-        description.textContent = "Description: " + this._description;
-        createdAt.textContent = "Created At: " + this._createdAt.toLocaleDateString();
-        dueDate.textContent = "Due Date: " + (this._dueDate ? new Date(this._dueDate).toLocaleDateString() : "No dueDate");
-        status.textContent = "Status: " + (this.status ? "Completed" : "No Completed");
-        categoryId.textContent = "Category: " + this.categoryId;
-        statusBtn.textContent = !this._status ? "Completed" : "Uncompleted";
-        statusBtn.setAttribute("data-action", "complete");
-        statusBtn.setAttribute("data-id", "ciao");
-        statusBtn.id = `status-btn-${this.todoId}`;
-        deleteBtn.textContent = "Delete Todo";
-        deleteBtn.setAttribute("data-action", "delete");
-        deleteBtn.setAttribute("data-id", "hello");
-        deleteBtn.id = `delete-btn-${this.todoId}`;
-        const completedDate = document.createElement("p");
-        if (this._status && this._completedAt) {
-            completedDate.classList.add("completed-date");
-            completedDate.textContent = "Completed on:  " + new Date(this._completedAt).toLocaleDateString();
-        }
-        this.toDoContainer.append(title, description, createdAt, dueDate, status, categoryId);
-        if (this._status && this._completedAt) {
-            this.toDoContainer.append(completedDate);
-        }
-        this.toDoContainer.append(statusBtn, deleteBtn);
-        this.toDoContainer.classList.add("todo-container");
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("appena dentro il renderTodo");
+            console.log(this._todoId);
+            this.toDoContainer.textContent = "";
+            const title = document.createElement("h2");
+            const description = document.createElement("p");
+            const createdAt = document.createElement("p");
+            const dueDate = document.createElement("p");
+            const status = document.createElement("p");
+            const categoryId = document.createElement("p");
+            const category = yield this.getCategoryById(this._categoryId);
+            const statusBtn = document.createElement("button");
+            const deleteBtn = document.createElement("button");
+            title.textContent = "Title: " + this._title + " " + this._todoId + " " + this.todoId;
+            description.textContent = "Description: " + this._description;
+            createdAt.textContent = "Created At: " + this._createdAt.toLocaleDateString();
+            dueDate.textContent = "Due Date: " + (this._dueDate ? new Date(this._dueDate).toLocaleDateString() : "No dueDate");
+            status.textContent = "Status: " + (this.status ? "Completed" : "No Completed");
+            categoryId.textContent = "Category: " + this.categoryId;
+            statusBtn.textContent = !this._status ? "Completed" : "Uncompleted";
+            statusBtn.setAttribute("data-action", "complete");
+            statusBtn.setAttribute("data-id", `${this._todoId}`);
+            statusBtn.id = `status-btn-${this.todoId}`;
+            deleteBtn.textContent = "Delete Todo";
+            deleteBtn.setAttribute("data-action", "delete");
+            deleteBtn.setAttribute("data-id", `${this._todoId}`);
+            deleteBtn.id = `delete-btn-${this.todoId}`;
+            const completedDate = document.createElement("p");
+            if (this._status && this._completedAt) {
+                completedDate.classList.add("completed-date");
+                completedDate.textContent = "Completed on:  " + new Date(this._completedAt).toLocaleDateString();
+            }
+            this.toDoContainer.append(title, description, createdAt, dueDate, status, categoryId);
+            if (this._status && this._completedAt) {
+                this.toDoContainer.append(completedDate);
+            }
+            this.toDoContainer.append(statusBtn, deleteBtn);
+            this.toDoContainer.classList.add("todo-container");
+        });
     }
     completeTodo(id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -210,4 +215,5 @@ class toDo {
         });
     }
 }
+exports.toDo = toDo;
 //# sourceMappingURL=toDo.js.map

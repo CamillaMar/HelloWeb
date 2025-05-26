@@ -8,6 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+const toDo_1 = require("./toDo");
 class ToDoHandler {
     constructor() {
         this._toDos = new Array();
@@ -15,7 +17,7 @@ class ToDoHandler {
         this._form.addEventListener("submit", (event) => __awaiter(this, void 0, void 0, function* () {
             event.preventDefault();
             yield this.addToDoList();
-            this.renderToDoList();
+            yield this.renderToDoList();
         }));
         this._toDoListContainer = document.querySelector("#todo-list-container");
         this._toDoListContainer.addEventListener("click", (event) => __awaiter(this, void 0, void 0, function* () {
@@ -35,10 +37,13 @@ class ToDoHandler {
             const inputCategory = document.querySelector("#category").value;
             const dueDate = inputDueDate ? new Date(inputDueDate) : null;
             const categoryId = parseInt(inputCategory);
-            const newtoDo = new toDo(inputTitle, inputDescription, dueDate, categoryId);
+            const newtoDo = new toDo_1.toDo(inputTitle, inputDescription, dueDate, categoryId);
             yield newtoDo.insertToDo();
+            console.log("porca miseria " + newtoDo.todoId);
             this._toDos.push(newtoDo);
+            console.log("log dell'array:");
             console.log(JSON.stringify(this._toDos));
+            console.log(this._toDos);
         });
     }
     renderToDoList() {
@@ -47,8 +52,9 @@ class ToDoHandler {
             console.log(JSON.stringify(this._toDos));
             for (const todo of this._toDos) {
                 if (todo.todoId != undefined && todo.todoId !== 0) {
+                    console.log("questo è il todo prima di chiamare renderTodo");
                     console.log(JSON.stringify(todo));
-                    todo.renderToDo(); // che togliendo l'async ci da il todoId
+                    yield todo.renderToDo(); // che togliendo l'async ci da il todoId
                     this._toDoListContainer.appendChild(todo.toDoContainer);
                 }
             }

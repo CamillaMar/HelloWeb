@@ -1,3 +1,5 @@
+import { toDo } from "./toDo";
+
 class ToDoHandler {
     private _toDos: toDo[];
     private _toDoListContainer: HTMLDivElement;
@@ -9,7 +11,7 @@ class ToDoHandler {
         this._form.addEventListener("submit", async (event) => {
             event.preventDefault();
             await this.addToDoList();
-            this.renderToDoList();
+            await this.renderToDoList();
             
         });
 
@@ -32,11 +34,17 @@ class ToDoHandler {
         const dueDate: Date | null = inputDueDate ? new Date(inputDueDate) : null;
 
         const categoryId: number = parseInt(inputCategory);
-        const newtoDo = new toDo(inputTitle, inputDescription, dueDate, categoryId);
+        const newtoDo: toDo = new toDo(inputTitle, inputDescription, dueDate, categoryId);
         await newtoDo.insertToDo();
+        console.log("porca miseria " + newtoDo.todoId);
+        
 
         this._toDos.push(newtoDo);
+        console.log("log dell'array:");
+        
         console.log(JSON.stringify(this._toDos));
+        console.log(this._toDos);
+        
 
     }
 
@@ -45,15 +53,16 @@ class ToDoHandler {
     console.log(JSON.stringify(this._toDos));
     for (const todo of this._toDos) {
         if (todo.todoId != undefined && todo.todoId !== 0) {
+            console.log("questo è il todo prima di chiamare renderTodo");            
             console.log(JSON.stringify(todo));
-             todo.renderToDo(); // che togliendo l'async ci da il todoId
+            await todo.renderToDo(); // che togliendo l'async ci da il todoId
             this._toDoListContainer.appendChild(todo.toDoContainer);
         }
     }
 }
 
 
-        async editTodo(id:number, action:string):Promise<void>{
+    async editTodo(id:number, action:string):Promise<void>{
         console.log(this._toDos)
         const todo = this._toDos.find(t => t.todoId == id);
         if(!todo) return;
