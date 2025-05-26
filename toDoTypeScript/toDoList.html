@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <form method="POST" id="create-form">
+        <input type="text" id="title" placeholder="Insert title" required>
+        <textarea type="text" id="description" placeholder="Insert description" required></textarea>
+        <input type="date" id="due-date" name="due-date" placeholder="Select due date">
+        <select name="category" id="category" required>
+            <option value="">Select Category</option>
+            <option value="1">Study</option>
+            <option value="2">Work</option>
+            <option value="3">Free Time</option>
+        </select>
+        <button id="submit-btn">Add</button>
+    </form>
+    <nav>
+        <form id="search-form">
+            <select id="search-category">
+                <option value="">All categories</option>
+                <option value="1">Study</option>
+                <option value="2">Work</option>
+                <option value="3">Free Time</option>
+            </select>
+
+            <select id="search-status">
+                <option value="">Any status</option>
+                <option value="completed">Completed</option>
+                <option value="not-completed">Not Completed</option>
+            </select>
+
+            <input type="date" id="search-due-date">
+
+            <input type="date" id="search-creation-date">
+
+            <button type="submit" id="">Search</button>
+        </form>
+    </nav>
+    <div id="message-container"></div>
+    <div id="todo-list-container"></div>
+    <script src="jsFiles/toDo.js"></script>
+    <script src="jsFiles/toDoHandler.js"></script>
+</body>
+</html>

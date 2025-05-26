@@ -14,12 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
         todoList.innerHTML = "";
 
         todos.forEach((todo, index) => {
-            if ( !todo.completed) {
+            if (!todo.completed) {
                 const card = document.createElement("div");
                 card.className = "todo-card";
 
                 const title = document.createElement("p")
-                const titleLabel= document.createElement("strong");
+                const titleLabel = document.createElement("strong");
                 titleLabel.textContent = "Title: ";
                 title.appendChild(titleLabel);
                 title.appendChild(document.createTextNode(todo.title));
@@ -60,9 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const buttonDelete = document.createElement("button");
                 buttonDelete.textContent = "Delete";
+                buttonDelete.className = "delete-btn"
                 buttonDelete.setAttribute("data-index", index);
 
-                
+
                 card.appendChild(category);
                 card.appendChild(button);
                 card.appendChild(buttonDelete);
@@ -90,16 +91,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     todoList.addEventListener("click", (e) => {
-   const index = e.target.dataset.index;
-   if (e.target.tagName === "BUTTON") {
-    if (e.target.className === "delete-btn") {
-      todos.splice(index, 1);
-    } else {
-      todos[index].completed = true;
-      todos[index].completedAt = new Date().toLocaleDateString();
-    }
-    saveToDoList();
-    renderTodos();
-  }
-});
+        const index = e.target.dataset.index;
+        if (e.target.tagName === "BUTTON") {
+            if (e.target.className === "delete-btn") {
+                todos.splice(index, 1);
+            } else {
+                todos[index].completed = true;
+                todos[index].completedAt = new Date().toLocaleDateString();
+            }
+            saveToDoList();
+            renderTodos();
+        }
+    });
 });

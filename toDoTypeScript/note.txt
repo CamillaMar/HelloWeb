@@ -1,0 +1,5 @@
+npm install -g typescript
+
+tsc --init --outDir jsFiles --rootDir tsFiles --sourceMap 
+
+tsc --watch
