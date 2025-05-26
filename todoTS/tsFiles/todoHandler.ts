@@ -9,22 +9,35 @@ class TodoHandler{
 
     constructor(){
         this._todos = new Array();
+
         this._form = <HTMLFormElement>document.querySelector("#create-form");
         this._form.addEventListener("submit", async (event) =>{
             event.preventDefault();
+
             await this.addTodoToList();
             this.renderTodoList();
         });
+
         this._todoListContainer = <HTMLDivElement>document.querySelector("#todo-list-container");
         this._todoListContainer.addEventListener("click", async (event:MouseEvent) => {
             const btnId: string = <string>(<HTMLElement>event.target).dataset.id;
             const action: string = <string>(<HTMLElement>event.target).dataset.action;
             const id: number = parseInt(btnId);
-            await this.editTodo(id, action);
+
+            const todo = this._todos.find(t => t.todoId == id);
+
+            if(todo != undefined && action == "complete"){
+                await this.editTodo(todo);
+            }
+            if(todo != undefined && action == "delete"){
+                await this.removeTodo(todo);
+            }
         });
+
         this._searchForm = document.getElementById('search-form') as HTMLFormElement;
         this._searchForm.addEventListener('submit', async (e) => {
-            e.preventDefault();    
+            e.preventDefault();   
+
             await this.addFilteredTodo();
             this.renderTodoList();
         });
@@ -49,27 +62,25 @@ class TodoHandler{
         this._todoListContainer.textContent = "";
         this._todos.forEach(todo =>{ 
             if(todo.todoId != undefined){
-                todo.renderTodo(todo.todoId);
+                todo.renderTodo();
                 this._todoListContainer.appendChild(todo.todoContainer);
             }
         });
-        console.log(this._todos);
     }
 
-    async editTodo(id:number, action:string):Promise<void>{
-        const todo = this._todos.find(t => t.todoId == id);
+    async editTodo(todo: Todo):Promise<void>{
         if(!todo) return;
         
-        if (action === "complete") {
-            await todo.completeTodo(id);
-            await todo.renderTodo(id);
-        }
-        
-        if (action === "delete") {
-            await todo.deleteTodo(id);
-            todo.todoContainer.remove();
-            this._todos = this._todos.filter(t => t.todoId != id);
-        }
+        await todo.completeTodo();
+        await todo.renderTodo();
+    }
+
+    async removeTodo(todo: Todo):Promise<void>{
+        if(!todo) return;
+
+        await todo.deleteTodo();
+        todo.todoContainer.remove();
+        this._todos = this._todos.filter(t => t.todoId != todo.todoId);
     }
 
     async getTodosByFilter() :Promise<Todo[]>{

@@ -17,7 +17,13 @@ class TodoHandler {
             const btnId = event.target.dataset.id;
             const action = event.target.dataset.action;
             const id = parseInt(btnId);
-            await this.editTodo(id, action);
+            const todo = this._todos.find(t => t.todoId == id);
+            if (todo != undefined && action == "complete") {
+                await this.editTodo(todo);
+            }
+            if (todo != undefined && action == "delete") {
+                await this.removeTodo(todo);
+            }
         });
         this._searchForm = document.getElementById('search-form');
         this._searchForm.addEventListener('submit', async (e) => {
@@ -41,25 +47,23 @@ class TodoHandler {
         this._todoListContainer.textContent = "";
         this._todos.forEach(todo => {
             if (todo.todoId != undefined) {
-                todo.renderTodo(todo.todoId);
+                todo.renderTodo();
                 this._todoListContainer.appendChild(todo.todoContainer);
             }
         });
-        console.log(this._todos);
     }
-    async editTodo(id, action) {
-        const todo = this._todos.find(t => t.todoId == id);
+    async editTodo(todo) {
         if (!todo)
             return;
-        if (action === "complete") {
-            await todo.completeTodo(id);
-            await todo.renderTodo(id);
-        }
-        if (action === "delete") {
-            await todo.deleteTodo(id);
-            todo.todoContainer.remove();
-            this._todos = this._todos.filter(t => t.todoId != id);
-        }
+        await todo.completeTodo();
+        await todo.renderTodo();
+    }
+    async removeTodo(todo) {
+        if (!todo)
+            return;
+        await todo.deleteTodo();
+        todo.todoContainer.remove();
+        this._todos = this._todos.filter(t => t.todoId != todo.todoId);
     }
     async getTodosByFilter() {
         const formData = new FormData(this._searchForm);

@@ -1,12 +1,12 @@
 export class Todo{
-    private _todoId?: number;
+    private _todoId: number;
     private _title: string;
     private _description: string;
-    private _createdAt?: Date;
+    private _createdAt: Date;
     private _dueDate: Date | null;
-    private _status?: boolean;
+    private _status: boolean;
     private _category: number;
-    private _completedAt?: Date | null;
+    private _completedAt: Date | null;
     todoContainer: HTMLDivElement;
 
     constructor(title:string, description:string, dueDate: Date | null, category:number, todoId:number = 0, createdAt:Date = new Date(), status:boolean = false, completedAt:Date = new Date()){
@@ -126,9 +126,9 @@ export class Todo{
         }
     }
 
-    async updateTodo(todoId:number):Promise<any>{
+    async updateTodo():Promise<any>{
         try{
-            const response: Response = await fetch(`http://localhost:8080/api/todos/${todoId}`, {
+            const response: Response = await fetch(`http://localhost:8080/api/todos/${this._todoId}`, {
                 method:'PUT',
                 body: JSON.stringify({
                     todoId: this._todoId,
@@ -156,9 +156,9 @@ export class Todo{
         }
     }
 
-    async deleteTodo(todoId:number):Promise<void>{
+    async deleteTodo():Promise<void>{
         try{
-            const response:Response = await fetch(`http://localhost:8080/api/todos/${todoId}`, {
+            const response:Response = await fetch(`http://localhost:8080/api/todos/${this._todoId}`, {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json'
@@ -172,7 +172,7 @@ export class Todo{
         }
     }
 
-    async renderTodo(id:number):Promise<void>{
+    async renderTodo():Promise<void>{
         this.todoContainer.textContent = "";
         const categoryName:any = await this.getCategoryById(this._category);
 
@@ -194,13 +194,13 @@ export class Todo{
 
         statusBtn.textContent = !this._status ? "Completed" : "Uncompleted";
         statusBtn.setAttribute("data-action", "complete");
-        statusBtn.setAttribute("data-id", id.toString());
-        statusBtn.id = `status-btn-${id}`;
-
+        statusBtn.setAttribute("data-id", this._todoId.toString());
+        statusBtn.id = `status-btn-${this._todoId}`;
+    
         deleteBtn.textContent = "Delete Todo";
         deleteBtn.setAttribute("data-action", "delete");
-        deleteBtn.setAttribute("data-id", id.toString());
-        deleteBtn.id = `delete-btn-${id}`;
+        deleteBtn.setAttribute("data-id", this._todoId.toString());
+        deleteBtn.id = `delete-btn-${this._todoId}`;
 
         const completedDate = document.createElement("p");
         if (this._status && this._completedAt) {
@@ -208,7 +208,6 @@ export class Todo{
             completedDate.textContent = "Completed on:  " + new Date(this._completedAt).toLocaleDateString();
         }
         
-        console.log(cardTitle);
         this.todoContainer.append(cardTitle, cardDescription, creationDate, deadline, cardCategory, cardStatus);
         
         if (this._status && this._completedAt) {
@@ -219,9 +218,9 @@ export class Todo{
         this.todoContainer.classList.add("todo-container");
     }
 
-    async completeTodo(id:number):Promise<void>{
+    async completeTodo():Promise<void>{
         this._status = !this._status;
         this._completedAt = this._status ? new Date() : null;
-        await this.updateTodo(id);
+        await this.updateTodo();
     }
 }
