@@ -1,14 +1,17 @@
 import { Todo } from "./todo.js";
 import { SearchTodo } from "./searchTodo.js";
+import { DataService } from "./dataService.js";
 
-class TodoHandler{
+export class TodoHandler{
     private _todos:Todo[];
     private _todoListContainer: HTMLDivElement;
     private _form: HTMLFormElement;
     private _searchForm: HTMLFormElement;
+    private _dataService: DataService;
 
     constructor(){
         this._todos = new Array();
+        this._dataService = new DataService();
 
         this._form = <HTMLFormElement>document.querySelector("#create-form");
         this._form.addEventListener("submit", async (event) =>{
@@ -50,11 +53,11 @@ class TodoHandler{
         const selectedCategory:string = (<HTMLSelectElement>document.querySelector("#category")).value;
 
         const dueDate: Date | null = inputDueDate ? new Date(inputDueDate) : null;
-        const categoryId : number = parseInt(selectedCategory)
+        const categoryId : number = parseInt(selectedCategory);
 
         const newTodo:Todo = new Todo(inputTitle, inputDescription, dueDate, categoryId);
         
-        await newTodo.insertTodo();
+        await this._dataService.insertTodo(newTodo);
         this._todos.push(newTodo);
     }
     
@@ -78,57 +81,22 @@ class TodoHandler{
     async removeTodo(todo: Todo):Promise<void>{
         if(!todo) return;
 
-        await todo.deleteTodo();
+        await this._dataService.deleteTodo(todo);
         todo.todoContainer.remove();
         this._todos = this._todos.filter(t => t.todoId != todo.todoId);
     }
 
-    async getTodosByFilter() :Promise<Todo[]>{
-        const formData: FormData = new FormData(this._searchForm);
-        const params:URLSearchParams = new URLSearchParams();
-
-        for (const [key, value] of formData.entries()) {
-            if (value) {
-                params.append(key, value.toString());
-            }
-            console.log(key);
-            console.log(value); 
-            console.log(`http://localhost:8080/api/todos?${params.toString()}`);
-        }
-        
-
-        try {
-            const response = await fetch(`http://localhost:8080/api/todos?${params.toString()}`);
-            if (!response.ok) {
-                throw new Error("HTTP error" + response.status);
-            }
-            const data = await response.json();
-            console.log(data);
-
-            return data.map((item: any) => new Todo(
-                item.title,
-                item.description,
-                item.dueDate ? new Date(item.dueDate) : null,
-                item.categoryId,
-                item.todoId,
-                item.createdAt ? new Date(item.createdAt) : new Date(),
-                item.status,
-                item.completedAt ? new Date(item.completedAt) : new Date()
-            ));
-        } catch (e) {
-            console.error("Errore di comunicazione col server" + e);
-            return [];
-        }
-    }
-    
     async addFilteredTodo(): Promise<void>{
         this._todos.length = 0;
-        const todos = await this.getTodosByFilter();
+        const todos = await this._dataService.getTodosByFilter(this);
         todos.forEach(todo =>{
             this._todos.push(todo);
         })
     }
 
+    get searchForm(){
+        return this._searchForm;
+    }
 }
 
 const handler:TodoHandler = new TodoHandler();

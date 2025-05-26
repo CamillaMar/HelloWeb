@@ -1,3 +1,6 @@
+import { Category } from "./category";
+import { DataService } from "./dataService";
+
 export class Todo{
     private _todoId: number;
     private _title: string;
@@ -8,8 +11,9 @@ export class Todo{
     private _category: number;
     private _completedAt: Date | null;
     todoContainer: HTMLDivElement;
+    private _dataService: DataService;
 
-    constructor(title:string, description:string, dueDate: Date | null, category:number, todoId:number = 0, createdAt:Date = new Date(), status:boolean = false, completedAt:Date = new Date()){
+    constructor(title: string, description: string, dueDate: Date | null, category: number, todoId: number = 0, createdAt: Date = new Date(), status: boolean = false, completedAt: Date = new Date()){
         this._todoId = todoId;
         this._title = title;
         this._description = description;
@@ -19,6 +23,7 @@ export class Todo{
         this._category = category;
         this._completedAt = completedAt;
         this.todoContainer = document.createElement("div");
+        this._dataService = new DataService();
     }
 
     get title(){
@@ -70,111 +75,10 @@ export class Todo{
         this._todoId = todoId;
     }
 
-    async getTodoById(todoId:number):Promise<any>{
-        try {
-            const response:Response = await fetch(`http://localhost:8080/api/todos/${todoId}`);
-            if (!response.ok) {
-                    throw new Error("HTTP error" + response.status);
-            }
-            const data:Todo = await response.json();
-            console.log(data);
-            return data;
-        } catch (e:any) {
-            console.error("Errore di comunicazione col server" + e);
-        }
-    }
-
-    async getCategoryById(categoryId:number):Promise<any>{
-        try {
-            const response:Response = await fetch(`http://localhost:8080/api/categories/${categoryId}`);
-            if (!response.ok) {
-                throw new Error("HTTP error" + response.status);
-            }
-            const data:any = await response.json();
-            console.log(data);
-            return data;
-        } catch (e:any) {
-            console.error("Errore di comunicazione col server" + e);
-        } 
-    }
-
-    async insertTodo(): Promise<any>{
-                try{
-            const response:Response = await fetch("http://localhost:8080/api/todos", {
-                method:'POST',
-                headers:  {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title : this._title,
-                    description: this._description,
-                    createdAt: this._createdAt,
-                    dueDate: this._dueDate,
-                    status: this._status,
-                    categoryId: this._category,
-                })
-            });
-            if (!response.ok) {
-                throw new Error("HTTP error" + response.status);
-            }
-            const data:Todo = await response.json();
-            this._todoId = data.todoId;
-            console.log(data);
-            return data;
-        } catch (e:any) {
-            console.error("Errore di comunicazione col server" + e);
-        }
-    }
-
-    async updateTodo():Promise<any>{
-        try{
-            const response: Response = await fetch(`http://localhost:8080/api/todos/${this._todoId}`, {
-                method:'PUT',
-                body: JSON.stringify({
-                    todoId: this._todoId,
-                    title: this._title,
-                    description: this._description,
-                    createdAt: this._createdAt,
-                    dueDate: this._dueDate,
-                    completedAt: this._completedAt,
-                    status: this._status,
-                    categoryId: this._category
-                }),
-                headers:  {
-                    'Content-Type': 'application/json'
-                }
-            });
-            
-            if (!response.ok) {
-                throw new Error("HTTP error" + response.status + response.statusText);
-            }
-            const data:Todo = await response.json();
-            console.log(data);
-            return data;
-        } catch (e:any) {
-            console.error("Errore di comunicazione col server" + e);
-        }
-    }
-
-    async deleteTodo():Promise<void>{
-        try{
-            const response:Response = await fetch(`http://localhost:8080/api/todos/${this._todoId}`, {
-                method: "DELETE",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (!response.ok) {
-                throw new Error("HTTP error" + response.status + response.statusText);
-            }
-        } catch (e:any) {
-            console.error("Errore di comunicazione col server" + e);
-        }
-    }
-
     async renderTodo():Promise<void>{
         this.todoContainer.textContent = "";
-        const categoryName:any = await this.getCategoryById(this._category);
+        
+        const category: Category | undefined = await this._dataService.getCategoryById(this._category);
 
         const cardTitle:HTMLHeadingElement = document.createElement("h2");
         const cardDescription:HTMLParagraphElement = document.createElement("p");
@@ -190,7 +94,9 @@ export class Todo{
         creationDate.textContent = "Creation date:    " + (this._createdAt ? this._createdAt.toLocaleDateString() : "");
         deadline.textContent = "Due date:   " + (this._dueDate ?  new Date(this._dueDate).toLocaleDateString() : "No due date");
         cardStatus.textContent = "Status:   " + (this._status ? "Completed" : "Not completed");
-        cardCategory.textContent = "Category: " + categoryName.categoryName;
+        if(category != undefined){
+            cardCategory.textContent = "Category: " + category.categoryName;
+        }
 
         statusBtn.textContent = !this._status ? "Completed" : "Uncompleted";
         statusBtn.setAttribute("data-action", "complete");
@@ -221,6 +127,6 @@ export class Todo{
     async completeTodo():Promise<void>{
         this._status = !this._status;
         this._completedAt = this._status ? new Date() : null;
-        await this.updateTodo();
+        await this._dataService.updateTodo(this);
     }
 }
