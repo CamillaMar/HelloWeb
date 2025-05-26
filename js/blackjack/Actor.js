@@ -1,5 +1,4 @@
 class Actor {
-   
     #hand;
     #score;
     #limit;

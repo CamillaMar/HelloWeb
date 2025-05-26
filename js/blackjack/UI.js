@@ -1,17 +1,17 @@
 class UI{
     #HandDivName;
     #ScoreDivName;
-    static #styleIsAlreadyInitialized
+    static styleIsAlreadyInitialized;
 
     constructor(HandDivName = "hand", ScoreDivName = "score"){
         this.#HandDivName = HandDivName;
         this.#ScoreDivName = ScoreDivName;
-        if(!UI.#styleIsAlreadyInitialized)
+        if(!UI.styleIsAlreadyInitialized)
         {
             console.log("HO STAMPATO TUTTO");
             this.initPageStyle();
         }
-        UI.#styleIsAlreadyInitialized = true;
+        UI.styleIsAlreadyInitialized = true;
     }
 
     initPageStyle(){

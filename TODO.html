@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TODO list</title>
+    </head>
+    <body>
+        <h1>My TODO list</h1>
+        <form>
+            <div class="form-group">
+                <label for="titolo">Titolo</label>
+                <input type="text" class="form-control" id="input-titolo" name="input-titolo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descrizione">Descrizione</label>
+                <textarea class="form-control" id="input-descrizione" name="input-descrizione" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="dataScadenza">Data di scadenza (opzionale)</label>
+                <input type="date" class="form-control" id="input-data-scadenza" name="input-data-scadenza">
+            </div>
+
+            <!-- <div class="form-group">
+                <input type="checkbox" class="form-check-input" id="input-stato" name="stato" value="true">
+                <label class="form-check-label" for="input-stato">Completato</label>
+            </div> -->
+
+            <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <select class="form-control" id="input-categoria" name="input-categoria" required>
+                    <option value="Studio">Studio</option>
+                    <option value="Lavoro">Lavoro</option>
+                    <option value="Lavoro">Lavoro</option>
+                </select>
+            </div>
+
+            <button type="button" id="save-button" class="btn btn-primary">Salva</button>
+        </form>
+        <div id="todo-container">
+
+        </div>
+
+        <script src="js/TODO/ToDo.js"></script>
+        <script src="js/TODO/DataManager.js"></script>
+        <script src="js/TODO/UI.js"></script>
+        <script src="js/TODO/Starter.js"></script>
+    </body>
+</html>

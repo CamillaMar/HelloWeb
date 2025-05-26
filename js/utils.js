@@ -44,7 +44,7 @@ function getUrl({ controller, method = "GET", pathVariables = [], params = {} })
 function getFetchOptions({ method = "GET", params = {} }) {
   const options = { method: method.toUpperCase() };
 
-  const hasBody = ["POST", "PUT", "PATCH", "DELETE"].includes(options.method);
+  const hasBody = ["POST", "PUT", "PATCH"].includes(options.method);
 
   if (hasBody && params && Object.keys(params).length > 0) {
     options.headers = {
